@@ -1,0 +1,93 @@
+{
+    "schemaVersion":  1,
+    "runtimeVersion":  "verilecture-asr-runtime/0.3.0-alpha.1",
+    "platform":  "windows-x86_64",
+    "runtimeFlavor":  "cpu-fun",
+    "cudaBuild":  false,
+    "entrypoint":  "verilecture-asr-runtime.exe",
+    "sourceEntrypoint":  "verilecture_asr_runtime.py",
+    "pythonExecutable":  "embedded-in-executable",
+    "files":  [
+                  {
+                      "path":  "llama-funasr-cli.exe",
+                      "bytes":  3547648,
+                      "sha256":  "6953f36043616f7a9fa2daf7aec1fa9db4d5348e327358b66761dd4d5bfa2105"
+                  },
+                  {
+                      "path":  "verilecture-asr-runtime.exe",
+                      "bytes":  1733592,
+                      "sha256":  "e0eefe3fb05649f9f89eeef37efacfdaea0f1287d5a99dae7a9be847cc02e880"
+                  },
+                  {
+                      "path":  "_internal/base_library.zip",
+                      "bytes":  1333490,
+                      "sha256":  "cefefef2d1c5975d188c748f5071a61c0099f90d056abfe0346b8b3d7b50cfad"
+                  },
+                  {
+                      "path":  "_internal/libcrypto-3-x64.dll",
+                      "bytes":  7976960,
+                      "sha256":  "e3575b8d13adfa7693ca7f8b7e4f94f24df33c8d64085972e28c213e225ddcb0"
+                  },
+                  {
+                      "path":  "_internal/python312.dll",
+                      "bytes":  6971904,
+                      "sha256":  "960a3863c9cb129f946bbc28947ebcdc9ebaec16afee2c10764bdfed61416556"
+                  },
+                  {
+                      "path":  "_internal/select.pyd",
+                      "bytes":  18944,
+                      "sha256":  "b241c5d193e5723ac56a2ac070123c78f5c515fb5ee252aca57b0874257e5b1b"
+                  },
+                  {
+                      "path":  "_internal/unicodedata.pyd",
+                      "bytes":  1126400,
+                      "sha256":  "c3e10e814e4e36b5f6f66231ccbb80edd6fd219994406b383ecfa44d57efc537"
+                  },
+                  {
+                      "path":  "_internal/VCRUNTIME140.dll",
+                      "bytes":  124544,
+                      "sha256":  "d5e4d9a3e835fa679450145d6a7d94e36573a509317111904d9b3712c30d9066"
+                  },
+                  {
+                      "path":  "_internal/VCRUNTIME140_1.dll",
+                      "bytes":  49792,
+                      "sha256":  "1f2d41c4aa5db0bc33ebf7b66d72943a817d7ce6cbe880502a9403823633093f"
+                  },
+                  {
+                      "path":  "_internal/_bz2.pyd",
+                      "bytes":  73216,
+                      "sha256":  "969b76222584b7ad1da3e8e1a4bc45f1f892dc47f2996e883dde5feb398a91a8"
+                  },
+                  {
+                      "path":  "_internal/_decimal.pyd",
+                      "bytes":  246272,
+                      "sha256":  "fcdc8bc61ee2dac17fbb9a8eea45242e22a34d1a71abac9bee7f732dc3f8b79f"
+                  },
+                  {
+                      "path":  "_internal/_hashlib.pyd",
+                      "bytes":  54784,
+                      "sha256":  "f0a3f3c8ced4be5efc3cb47e4de8320a0c59852b52310e1cb0541a56b0cc42ba"
+                  },
+                  {
+                      "path":  "_internal/_lzma.pyd",
+                      "bytes":  152576,
+                      "sha256":  "fc151659d1083706c7cc76d459b8cb9393d3b37897bba398928f410791f38f9b"
+                  },
+                  {
+                      "path":  "_internal/_socket.pyd",
+                      "bytes":  71680,
+                      "sha256":  "762e124059728986555e815698fb9ce0cf3c50e84adb6ba0df4a96d324079a93"
+                  },
+                  {
+                      "path":  "_internal/_uuid.pyd",
+                      "bytes":  13824,
+                      "sha256":  "dc53e95f037f17c5665fb4aa729e273e3c6dc49017f3df7f8d7ecb631e04495c"
+                  },
+                  {
+                      "path":  "_internal/_wmi.pyd",
+                      "bytes":  25600,
+                      "sha256":  "7399862a3be13b981553b7fa2e1a64b2f8cda92c15c5966faf81a514d36210f1"
+                  }
+              ],
+    "policy":  "release builds must ship the exact embedded runtime; do not fall back to PATH Python"
+}

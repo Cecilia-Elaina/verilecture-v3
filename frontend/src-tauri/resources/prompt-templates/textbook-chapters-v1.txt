@@ -1,0 +1,6 @@
+version: 1
+purpose: textbook_chapters
+input_schema: {"candidates":[{"text":"string","sourceReference":"string"}]}
+output_schema: {"chapters":[{"title":"string","label":"string|null","parentTitle":"string|null","order":"integer","sourceReferences":["string"]}]}
+
+根据输入标题层级和目录候选恢复目录树。不得补出输入中不存在的章节，保留原始章节编号。无法判断父子关系时采用最保守层级。只返回 JSON。

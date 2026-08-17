@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "2026-07-31",
+  "profiles": {
+    "qwen3-asr-1.7b": {
+      "minimumRamBytes": 17179869184,
+      "minimumNvidiaVramBytes": 8589934592,
+      "requiresNvidia": true,
+      "requiresCudaProbe": true,
+      "requiresAvx2": false
+    },
+    "qwen3-asr-0.6b": {
+      "minimumRamBytes": 17179869184,
+      "minimumNvidiaVramBytes": 6442450944,
+      "requiresNvidia": true,
+      "requiresCudaProbe": true,
+      "requiresAvx2": false
+    },
+    "fun-asr-nano-2512": {
+      "minimumRamBytes": 8589934592,
+      "minimumNvidiaVramBytes": 0,
+      "requiresNvidia": false,
+      "requiresCudaProbe": false,
+      "requiresAvx2": false
+    }
+  },
+  "diskFormula": "verified artifact bytes + installed runtime bytes + 20% temporary space + 2 GiB workspace"
+}

@@ -1,0 +1,6 @@
+version: 1
+purpose: lexicon_terms
+input_schema: {"candidates":[{"text":"string","context":"string","chapterTitle":"string|null","sourceReferences":["string"]}]}
+output_schema: {"terms":[{"canonicalTerm":"string","aliases":["string"],"abbreviation":"string|null","englishName":"string|null","definition":"string|null","chapterTitles":["string"],"commonAsrErrors":["string"],"sourceReferences":["string"]}]}
+
+输入是本地算法选出的术语候选和短上下文，不是完整教材。清除普通词、句子碎片和重复词，输出规范名称、别名、缩写、英文名、简短定义、章节关联和可能的 ASR 错写。不得引入没有文本依据的新术语。只返回 JSON。

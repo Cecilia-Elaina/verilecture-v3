@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "registryVersion": "0.3.0-alpha.1",
+  "generatedAt": "2026-08-01",
+  "defaultChannel": "alpha",
+  "runtimes": [
+    {
+      "id": "cuda-qwen-fun",
+      "version": "0.3.0-alpha.1",
+      "channel": "alpha",
+      "platform": "windows",
+      "architecture": "x86_64",
+      "artifactName": "verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip",
+      "compressedBytes": 4617121514,
+      "installedBytes": 4615546066,
+      "sha256": "4eafd198228821c9f5ca36ebd62a4ded53df6083ff1c3f8283127a8f9bc9a665",
+      "cudaVersion": "12.6",
+      "models": [
+        "qwen3-asr-1.7b",
+        "qwen3-asr-0.6b"
+      ],
+      "requirements": {
+        "nvidia": true,
+        "minVramBytes": 6442450944,
+        "minRamBytes": 17179869184
+      },
+      "status": "pending-publication",
+      "mirrors": [
+        {
+          "id": "github-release",
+          "priority": 10,
+          "url": "https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/runtime/verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip",
+          "status": "pending-publication"
+        }
+      ]
+    }
+  ]
+}

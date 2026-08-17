@@ -1,0 +1,38 @@
+{
+  "date": "2026-08-02",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "vramBytes": 12884901888,
+    "driver": "596.36",
+    "computeCapability": "8.6"
+  },
+  "cudaProbe": {
+    "usable": true,
+    "cudaVersion": "12.6",
+    "exitCode": 0
+  },
+  "qwen17b": {
+    "modelId": "qwen3-asr-1.7b",
+    "load": true,
+    "executionDevice": "CUDA",
+    "detectedLanguage": "Chinese",
+    "timestampedChineseSegments": true,
+    "transcribe": true,
+    "unload": true,
+    "elapsedSeconds": 60.11
+  },
+  "funCpu": {
+    "modelId": "fun-asr-nano-2512",
+    "load": true,
+    "executionDevice": "CPU",
+    "detectedLanguage": "zh",
+    "timestampedSegments": true,
+    "transcribe": true,
+    "unload": true,
+    "elapsedSeconds": 13.21
+  },
+  "qwen06b": {
+    "tested": false,
+    "reason": "Not repeated in this final run by acceptance scope; shares the validated CUDA Runtime, ForcedAligner and sidecar protocol."
+  }
+}

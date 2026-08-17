@@ -1,0 +1,6 @@
+# This file is the small/portable CPU development environment. The Qwen
+# release build must use requirements-windows-cuda.txt instead; first launch
+# must never pip-install silently.
+numpy==2.2.4
+torch==2.7.1
+qwen-asr==0.0.6

@@ -1,0 +1,3 @@
+PyInstaller is distributed under its own license and GPL exception. The
+exact PyInstaller version used for the CPU sidecar is recorded in the local
+build environment and its upstream license must accompany any redistribution.

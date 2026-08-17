@@ -1,0 +1,7 @@
+# CUDA-capable Windows build environment for the Qwen sidecar.
+# The default PyPI torch wheel is CPU-only on this platform and must not be
+# used for a Qwen release runtime.
+--extra-index-url https://download.pytorch.org/whl/cu126
+numpy==2.2.4
+torch==2.7.1+cu126
+qwen-asr==0.0.6

@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verilecture.local/schemas/runtime-registry-v1.json",
+  "title": "VeriLecture Runtime Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "registryVersion",
+    "generatedAt",
+    "defaultChannel",
+    "runtimes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "registryVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "defaultChannel": {
+      "type": "string",
+      "enum": ["alpha", "stable"]
+    },
+    "runtimes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/runtime"
+      }
+    }
+  },
+  "$defs": {
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "channel",
+        "platform",
+        "architecture",
+        "artifactName",
+        "compressedBytes",
+        "installedBytes",
+        "sha256",
+        "cudaVersion",
+        "models",
+        "requirements",
+        "status",
+        "mirrors"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]+$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "channel": {
+          "type": "string",
+          "enum": ["alpha", "stable"]
+        },
+        "platform": {
+          "const": "windows"
+        },
+        "architecture": {
+          "const": "x86_64"
+        },
+        "artifactName": {
+          "type": "string",
+          "pattern": "^[^\\\\/]+\\.zip$"
+        },
+        "compressedBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "installedBytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "cudaVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "models": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "requirements": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nvidia", "minVramBytes", "minRamBytes"],
+          "properties": {
+            "nvidia": {
+              "const": true
+            },
+            "minVramBytes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "minRamBytes": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["published", "pending-publication", "disabled"]
+        },
+        "mirrors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/mirror"
+          }
+        }
+      }
+    },
+    "mirror": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "priority", "url", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]+$"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https?://.+"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["published", "pending-publication", "disabled"]
+        }
+      }
+    }
+  }
+}

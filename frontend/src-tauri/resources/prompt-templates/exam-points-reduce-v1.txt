@@ -1,0 +1,6 @@
+version: 1
+purpose: exam_points_reduce
+input_schema: {"candidates":[{"chapterId":"string|null","chapterTitle":"string","title":"string","detail":"string","segmentIds":["string"],"startMs":"integer","endMs":"integer"}],"chapters":[{"id":"string","title":"string"}]}
+output_schema: {"examPoints":[{"chapterId":"string|null","chapterTitle":"string","title":"string","detail":"string","kind":"explicit|emphasis|inferred|textbook","segmentIds":["string"]}]}
+
+合并候选知识点，去重并按给定教材章节组织。不得添加候选中没有依据的新知识点。输出定义、原理、步骤、公式、比较、条件或结论，保留有效 Segment ID。顶层键必须是 examPoints，且只返回 JSON。

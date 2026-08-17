@@ -1,0 +1,6 @@
+version: 1
+purpose: exam_points_map
+input_schema: {"transcript":{"segments":[{"id":"string","startMs":"integer","endMs":"integer","text":"string"}]},"lexicon":{"terms":[{"canonicalTerm":"string","chapterIds":["string"]}]},"chapters":[{"id":"string","title":"string"}]}
+output_schema: {"examPoints":[{"chapterId":"string|null","chapterTitle":"string","title":"string","detail":"string","kind":"explicit|emphasis|inferred|textbook","segmentIds":["string"]}]}
+
+从给定课堂转录块中提取可直接复习的知识点。只依据转录，结构化词库仅用于术语规范和章节映射。不要输出课堂总结、学习建议、概率、推理过程或“老师可能会考”等措辞。每个知识点必须引用真实 Segment ID。顶层键必须是 examPoints，且只返回 JSON。
