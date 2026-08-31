@@ -25,7 +25,9 @@
 
 Lecture notes should not end as an opaque summary that nobody can verify. VeriLecture turns the study workflow into an evidence chain:
 
-**Import or record audio → transcribe locally → preserve the raw transcript → calibrate and version edits → generate review points → return to the source audio whenever needed.**
+<p align="center">
+  <a href="./docs/diagrams/evidence-chain-en.svg"><img src="./docs/diagrams/evidence-chain-en.svg" alt="VeriLecture evidence chain flow" width="900" /></a>
+</p>
 
 It is built for students, teachers, and researchers who want AI-assisted speed without giving up control of source material, privacy, or academic judgment.
 
@@ -39,8 +41,6 @@ It is built for students, teachers, and researchers who want AI-assisted speed w
 - **Optional text-model step**: review-point generation is separate and user-controlled; it is not required for local transcription.
 
 ## Product preview
-
-The gallery is normalized to a consistent 3:2 ratio so the screenshots read as a clean, even product tour on GitHub. Select any image to open its full-size source file.
 
 <table>
 <tr>
@@ -103,7 +103,7 @@ The Qwen tiers share a CUDA Runtime and ForcedAligner. The approximately 4.6 GiB
 - Source excerpts and structured lexicon content are sent only when the matching permission is enabled.
 - Raw material is immutable; edits create new versions with provenance.
 
-See [Privacy and Security](./docs/PRIVACY_AND_SECURITY.md), [Data Model](./docs/DATA_MODEL.md), and [Third-party notices](./THIRD_PARTY_NOTICES.md).
+See [Privacy and Security](./docs/PRIVACY_AND_SECURITY.md), [Model Sources](./docs/MODEL_REGISTRY.md), and [Third-party notices](./THIRD_PARTY_NOTICES.md).
 
 ## Download and run
 
@@ -120,7 +120,7 @@ Choose **Fun-ASR-Nano-2512** when no usable NVIDIA GPU is available. For Qwen, w
 
 ## Build from source
 
-The supported application lives under `frontend/`; `backend/` is retained only as an archived upstream reference. Generated build output stays outside Git.
+The supported application source lives under `frontend/`; generated build output stays outside Git.
 
 ```powershell
 Set-Location .\frontend
@@ -131,13 +131,13 @@ pnpm build
 pnpm tauri:build
 ```
 
-FFmpeg is fetched and verified with SHA-256 at build time rather than committed as a large third-party binary. Keep development caches on D: according to the project environment rules.
+FFmpeg is fetched and verified with SHA-256 at build time rather than committed as a large third-party binary.
 
 ## Status and license
 
 `v0.3.0-alpha.1` is the first public V3 milestone, not a final stable release. The core local workflow, onboarding, hardware routing, CPU path, and representative CUDA path are in place. Remaining work focuses on public CUDA Runtime hosting, clean-machine Qwen installation, and broader Windows hardware coverage.
 
-Read [Progress](./docs/PROGRESS.md), [Acceptance Tests](./docs/ACCEPTANCE_TESTS.md), and [Known Limitations](./docs/KNOWN_LIMITATIONS.md).
+Read [Known Limitations](./docs/KNOWN_LIMITATIONS.md).
 
 VeriLecture is released under the [MIT License](./LICENSE). Meetily upstream attribution and third-party licenses remain visible in [NOTICE](./NOTICE) and [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).
 

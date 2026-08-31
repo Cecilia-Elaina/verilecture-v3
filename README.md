@@ -25,7 +25,9 @@
 
 课堂笔记不应该只剩下一段无法核对的摘要。课溯把学习流程整理成一条可回溯的证据链：
 
-**导入或录制音频 → 本地语音识别 → 保留原始转写 → 校准与版本化 → 生成重点 → 随时回到原音频核对。**
+<p align="center">
+  <a href="./docs/diagrams/evidence-chain-zh.svg"><img src="./docs/diagrams/evidence-chain-zh.svg" alt="课溯可回溯证据链流程图" width="900" /></a>
+</p>
 
 它面向学生、教师和研究者：获得 AI 辅助的效率，同时保留对原始材料、隐私和学习判断的控制权。
 
@@ -39,8 +41,6 @@
 - **文本模型可选**：重点整理是独立且由用户控制的步骤，不影响本地转写。
 
 ## 产品预览
-
-展示截图统一裁剪为 3:2 比例，适合在 GitHub 页面中整齐浏览。点击图片可查看原尺寸文件。
 
 <table>
 <tr>
@@ -103,7 +103,7 @@ Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GiB 的 Runtime 不�
 - 只有在对应权限开启后，源文本片段或结构化词库内容才会发送。
 - 原始材料不可变；编辑会创建带来源的新版本。
 
-详见 [隐私与安全](./docs/PRIVACY_AND_SECURITY.md)、[数据模型](./docs/DATA_MODEL.md) 和 [第三方声明](./THIRD_PARTY_NOTICES.md)。
+详见 [隐私与安全](./docs/PRIVACY_AND_SECURITY.md)、[模型来源](./docs/MODEL_REGISTRY.md) 和 [第三方声明](./THIRD_PARTY_NOTICES.md)。
 
 ## 下载与运行
 
@@ -120,7 +120,7 @@ Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GiB 的 Runtime 不�
 
 ## 从源码构建
 
-受支持的应用位于 `frontend/`，`backend/` 仅保留为归档的上游参考。Windows 构建会把生成物放在 Git 之外。
+受支持的应用源码位于 `frontend/`，Windows 构建生成物不会进入 Git。
 
 ```powershell
 Set-Location .\frontend
@@ -131,13 +131,13 @@ pnpm build
 pnpm tauri:build
 ```
 
-FFmpeg 会在构建时获取并进行 SHA-256 校验，不会把大体积第三方二进制提交进 Git。开发缓存请按项目约定保留在 D: 盘。
+FFmpeg 会在构建时获取并进行 SHA-256 校验，不会把大体积第三方二进制提交进 Git。
 
-## 项目状态与许可
+## 版本状态与许可
 
 `v0.3.0-alpha.1` 是 V3 的第一个公开里程碑，不是最终稳定版。核心本地工作流、引导、硬件路由、CPU 路径和代表性 CUDA 路径已完成；后续重点是公开 CUDA Runtime、干净环境下的 Qwen 安装验证，以及更多 Windows 硬件覆盖。
 
-查看 [开发进度](./docs/PROGRESS.md)、[验收测试](./docs/ACCEPTANCE_TESTS.md) 和 [已知限制](./docs/KNOWN_LIMITATIONS.md)。
+查看 [已知限制](./docs/KNOWN_LIMITATIONS.md)。
 
 课溯采用 [MIT License](./LICENSE)。项目保留 Meetily 上游归属和第三方软件许可，请阅读 [NOTICE](./NOTICE) 与 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
 

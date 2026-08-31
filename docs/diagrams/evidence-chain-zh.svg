@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title id="title">课溯可回溯证据链</title>
+  <desc id="desc">从导入或录制音频，到本地识别、保留原始转写、校准版本化、生成学习重点并回到原音频核对的六步流程。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#e56b35" />
+    </marker>
+    <style>
+      .serif { font-family: Georgia, "Noto Serif SC", "Songti SC", SimSun, serif; }
+      .sans { font-family: "Segoe UI", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+      .step { font: 700 20px "Segoe UI", "Microsoft YaHei", sans-serif; letter-spacing: 2px; fill: #e56b35; }
+      .title { font: 700 27px "Segoe UI", "Microsoft YaHei", sans-serif; fill: #123f37; }
+      .note { font: 500 18px "Segoe UI", "Microsoft YaHei", sans-serif; fill: #6d8079; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="700" rx="30" fill="#f6f1e8" />
+  <circle cx="1280" cy="96" r="135" fill="none" stroke="#efcdbb" stroke-width="10" opacity="0.7" />
+  <text x="70" y="78" class="sans" font-size="18" font-weight="700" letter-spacing="5" fill="#e56b35">LOCAL-FIRST STUDY FLOW</text>
+  <text x="70" y="128" class="serif" font-size="42" font-weight="700" fill="#123f37">课溯 · 可回溯证据链</text>
+  <text x="70" y="158" class="sans" font-size="18" fill="#6d8079">每一步都保留来源、版本与回听入口</text>
+
+  <g fill="none" stroke="#e56b35" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)">
+    <line x1="410" y1="275" x2="460" y2="275" />
+    <line x1="820" y1="275" x2="870" y2="275" />
+    <line x1="1060" y1="365" x2="1060" y2="425" />
+    <line x1="890" y1="540" x2="840" y2="540" />
+    <line x1="480" y1="540" x2="430" y2="540" />
+  </g>
+
+  <g>
+    <rect x="70" y="190" width="340" height="170" rx="18" fill="#fffdf9" stroke="#d9d0c2" stroke-width="2" />
+    <rect x="70" y="190" width="340" height="7" rx="3" fill="#e56b35" />
+    <text x="100" y="240" class="step">01</text>
+    <text x="100" y="282" class="title">导入或录制音频</text>
+    <text x="100" y="320" class="note">WAV · MP3 · M4A</text>
+  </g>
+  <g>
+    <rect x="480" y="190" width="340" height="170" rx="18" fill="#fffdf9" stroke="#d9d0c2" stroke-width="2" />
+    <rect x="480" y="190" width="340" height="7" rx="3" fill="#1f5f4f" />
+    <text x="510" y="240" class="step">02</text>
+    <text x="510" y="282" class="title">本地语音识别</text>
+    <text x="510" y="320" class="note">音频不离开本机</text>
+  </g>
+  <g>
+    <rect x="890" y="190" width="340" height="170" rx="18" fill="#fffdf9" stroke="#d9d0c2" stroke-width="2" />
+    <rect x="890" y="190" width="340" height="7" rx="3" fill="#e56b35" />
+    <text x="920" y="240" class="step">03</text>
+    <text x="920" y="282" class="title">保留原始转写</text>
+    <text x="920" y="320" class="note">原始记录不可覆盖</text>
+  </g>
+  <g>
+    <rect x="890" y="445" width="340" height="170" rx="18" fill="#fffdf9" stroke="#d9d0c2" stroke-width="2" />
+    <rect x="890" y="445" width="340" height="7" rx="3" fill="#1f5f4f" />
+    <text x="920" y="495" class="step">04</text>
+    <text x="920" y="537" class="title">校准与版本化</text>
+    <text x="920" y="575" class="note">编辑保留来源</text>
+  </g>
+  <g>
+    <rect x="480" y="445" width="340" height="170" rx="18" fill="#fffdf9" stroke="#d9d0c2" stroke-width="2" />
+    <rect x="480" y="445" width="340" height="7" rx="3" fill="#e56b35" />
+    <text x="510" y="495" class="step">05</text>
+    <text x="510" y="537" class="title">生成学习重点</text>
+    <text x="510" y="575" class="note">按权限使用文本模型</text>
+  </g>
+  <g>
+    <rect x="70" y="445" width="340" height="170" rx="18" fill="#fffdf9" stroke="#d9d0c2" stroke-width="2" />
+    <rect x="70" y="445" width="340" height="7" rx="3" fill="#1f5f4f" />
+    <text x="100" y="495" class="step">06</text>
+    <text x="100" y="537" class="title">回到原音频核对</text>
+    <text x="100" y="575" class="note">随时回听与追溯</text>
+  </g>
+</svg>

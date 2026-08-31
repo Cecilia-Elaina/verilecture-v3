@@ -4,7 +4,7 @@ VeriLecture V3 is distributed under the MIT license. The application does
 not bundle multi-gigabyte model weights; the model manager downloads the
 following pinned artifacts only after the user starts installation. The
 license text for redistribution-sensitive components is kept in
-`src-tauri/resources/licenses/`.
+`frontend/src-tauri/resources/licenses/`.
 
 | Component | Use | License / source |
 | --- | --- | --- |
@@ -19,5 +19,5 @@ license text for redistribution-sensitive components is kept in
 | Meetily Community Edition | Historical architecture reference only | MIT attribution retained; not the current maintainer or product |
 
 Upstream project pages and immutable model revisions are recorded in
-`docs/MODEL_REGISTRY.md` and `docs/THIRD_PARTY_ATTRIBUTION.md`. This file is a
-notice index, not a replacement for the upstream license texts.
+`docs/MODEL_REGISTRY.md`. This file is a notice index, not a replacement for
+the upstream license texts.
