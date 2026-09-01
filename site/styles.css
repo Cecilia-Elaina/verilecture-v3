@@ -276,6 +276,12 @@ html[lang="en"] .lang-en {
   stroke-linejoin: round;
 }
 
+.button .button-icon-github {
+  width: 18px;
+  fill: currentColor;
+  stroke: none;
+}
+
 .button:hover {
   transform: translateY(2px);
 }
@@ -573,31 +579,39 @@ html[lang="en"] .lang-en {
 }
 
 .section-heading {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
+  display: block;
 }
 
 .section-heading > div {
   min-width: 0;
 }
 
+.section-heading-top {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 11px 17px;
+  margin-bottom: 22px;
+}
+
 .chapter-mark {
   flex: 0 0 auto;
-  margin-top: 7px;
+  margin: 0;
   color: var(--terracotta);
   font-family: var(--serif);
-  font-size: 15px;
+  font-size: clamp(1.15rem, 1.65vw, 1.65rem);
   font-weight: 900;
   letter-spacing: 0.08em;
+  line-height: 1;
 }
 
 .section-kicker {
-  margin: 0 0 14px;
+  margin: 0;
   color: var(--sage-deep);
   font-family: var(--hand);
-  font-size: 15px;
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .section-heading h2,
@@ -1121,9 +1135,7 @@ html[lang="en"] .lang-en {
 }
 
 .alpha-copy {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: 0;
+  display: block;
 }
 
 .alpha-copy h2 {
@@ -1271,41 +1283,44 @@ html[lang="en"] .lang-en {
 }
 
 .site-footer {
-  padding: 70px 0 24px;
+  padding: 48px 0 20px;
   border-top: 1px solid var(--stone-200);
   background: var(--paper);
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(300px, 1.5fr) repeat(2, minmax(150px, 0.5fr));
-  gap: 80px;
+  grid-template-columns: minmax(280px, 1.35fr) repeat(2, minmax(170px, 0.75fr));
+  gap: 34px;
 }
 
 .footer-brand > p {
   max-width: 420px;
-  margin: 20px 0 0;
+  margin: 16px 0 0;
   color: var(--stone-600);
   font-size: 13px;
 }
 
 .footer-links {
-  display: grid;
-  align-content: start;
-  gap: 9px;
+  display: flex;
+  align-content: flex-start;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 18px;
 }
 
 .footer-links h3 {
-  margin: 0 0 7px;
+  margin: 0 8px 0 0;
   color: var(--earth);
   font-family: var(--serif);
   font-size: 17px;
 }
 
 .footer-links a {
-  min-height: 34px;
+  min-height: 0;
   color: var(--stone-600);
   font-size: 13px;
+  line-height: 1.5;
   text-decoration: none;
   transition: color 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
@@ -1318,8 +1333,8 @@ html[lang="en"] .lang-en {
 .footer-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 58px;
-  padding-top: 20px;
+  margin-top: 32px;
+  padding-top: 15px;
   border-top: 1px solid var(--stone-200);
   color: var(--stone-500);
   font-size: 11px;
