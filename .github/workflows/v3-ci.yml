@@ -12,7 +12,77 @@ permissions:
   contents: read
 
 jobs:
+  changes:
+    name: Detect change scope
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.scope.outputs.app }}
+      site: ${{ steps.scope.outputs.site }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: scope
+        name: Classify changed paths
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            base="$BASE_SHA"
+            head="$HEAD_SHA"
+          else
+            base="$BEFORE_SHA"
+            head="$HEAD_SHA"
+          fi
+
+          if [ -n "$base" ] && [ "$base" != "0000000000000000000000000000000000000000" ] && git cat-file -e "$base^{commit}" 2>/dev/null; then
+            files="$(git diff --name-only "$base" "$head")"
+          else
+            files="$(git ls-tree -r --name-only "$head")"
+          fi
+
+          app=false
+          site=false
+          while IFS= read -r path; do
+            [ -z "$path" ] && continue
+            case "$path" in
+              site/*)
+                site=true
+                ;;
+              .github/workflows/pages.yml)
+                site=true
+                ;;
+              docs/*|*.md)
+                ;;
+              *)
+                app=true
+                ;;
+            esac
+          done <<< "$files"
+
+          echo "app=$app" >> "$GITHUB_OUTPUT"
+          echo "site=$site" >> "$GITHUB_OUTPUT"
+
+  site:
+    name: Verify product site
+    needs: changes
+    if: needs.changes.outputs.site == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Check site JavaScript
+        run: node --check site/script.js
+
   verify:
+    needs: changes
+    if: needs.changes.outputs.app == 'true'
     name: Verify (${{ matrix.platform }})
     runs-on: ${{ matrix.os }}
     strategy:

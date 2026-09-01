@@ -111,3 +111,15 @@ frontend/src-tauri/binaries/
 
 # Local design material supplied during development
 /sheji.docx
+.env.*
+!.env.example
+.claude/
+
+# AI/editor process material is local working state, not product source.
+/.ai-work/
+/.agent-work/
+/agent-notes/
+/scratch/
+/work/
+/*_handoff.md
+/*_transcript.md
