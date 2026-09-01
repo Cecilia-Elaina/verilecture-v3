@@ -1,6 +1,6 @@
 [package]
 name = "verilecture-v3"
-version = "0.3.0-alpha.2"
+version = "0.3.0-alpha.3"
 description = "VeriLecture / 课溯 local-first audio study tool"
 authors = ["Cecilia-Elaina"]
 edition = "2021"

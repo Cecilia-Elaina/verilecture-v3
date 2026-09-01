@@ -162,6 +162,9 @@ jobs:
       - name: Install JavaScript dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Generate native app icons
+        run: pnpm exec tauri icon src-tauri/icons/icon.png
+
       - name: Typecheck
         run: pnpm typecheck
 

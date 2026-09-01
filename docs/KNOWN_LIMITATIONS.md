@@ -1,6 +1,6 @@
 # Known limitations
 
-- `v0.3.0-alpha.2` is an Alpha release with native Windows, Linux, and macOS
+- `v0.3.0-alpha.3` is an Alpha release with native Windows, Linux, and macOS
   desktop packages.
 - The bundled Fun-ASR and CUDA sidecars are currently Windows x64 only. Linux and
   macOS packages can build and launch the desktop shell, but local ASR remains

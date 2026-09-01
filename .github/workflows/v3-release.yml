@@ -67,7 +67,6 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Generate native app icons
-        if: matrix.platform != 'windows'
         run: pnpm exec tauri icon src-tauri/icons/icon.png
 
       - name: Fetch and verify Windows FFmpeg resource
