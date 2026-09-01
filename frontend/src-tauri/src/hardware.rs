@@ -57,7 +57,7 @@ pub fn scan(model_dir: &Path) -> Result<HardwareProfile, String> {
         architecture: std::env::consts::ARCH.to_string(),
         cpu_name,
         logical_cores,
-        avx2: std::is_x86_feature_detected!("avx2"),
+        avx2: host_supports_avx2(),
         total_ram_bytes: system.total_memory(),
         available_ram_bytes: system.available_memory(),
         disk_free_bytes,
@@ -74,6 +74,17 @@ pub fn scan(model_dir: &Path) -> Result<HardwareProfile, String> {
         model_directory_writable,
         scanned_at: Utc::now().to_rfc3339(),
     })
+}
+
+fn host_supports_avx2() -> bool {
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    {
+        std::is_x86_feature_detected!("avx2")
+    }
+    #[cfg(not(any(target_arch = "x86", target_arch = "x86_64")))]
+    {
+        false
+    }
 }
 
 fn probe_os_version() -> String {
