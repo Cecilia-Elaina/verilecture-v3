@@ -76,7 +76,12 @@ jobs:
         run: .\scripts\fetch_ffmpeg.ps1
 
       - name: Build native installer
+        if: matrix.platform == 'windows'
         run: pnpm exec tauri build --ci --bundles ${{ matrix.bundle }}
+
+      - name: Build native installer (Linux or macOS config)
+        if: matrix.platform != 'windows'
+        run: pnpm exec tauri build --ci --config src-tauri/tauri.${{ matrix.platform }}.conf.json --bundles ${{ matrix.bundle }}
 
       - name: Collect Windows installer and checksum
         if: matrix.platform == 'windows'

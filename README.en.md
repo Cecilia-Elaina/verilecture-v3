@@ -145,8 +145,8 @@ pnpm typecheck
 pnpm test
 pnpm build
 pnpm exec tauri build --ci --bundles nsis      # Windows
-# pnpm exec tauri build --ci --bundles appimage # Linux
-# pnpm exec tauri build --ci --bundles dmg      # macOS
+# pnpm exec tauri build --ci --config src-tauri/tauri.linux.conf.json --bundles appimage # Linux
+# pnpm exec tauri build --ci --config src-tauri/tauri.macos.conf.json --bundles dmg      # macOS
 ```
 
 Linux builds need Tauri's WebKitGTK development dependencies, and macOS builds need Xcode Command Line Tools; see the [Tauri prerequisites](https://tauri.app/start/prerequisites/) and [platform build notes](./docs/PLATFORM_BUILD.md). Windows fetches and verifies FFmpeg at build time; Linux/macOS currently use a system `ffmpeg` and do not commit a large third-party binary.

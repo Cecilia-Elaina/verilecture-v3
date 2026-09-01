@@ -25,8 +25,8 @@ pnpm typecheck
 pnpm test
 pnpm build
 pnpm exec tauri build --ci --bundles nsis      # Windows
-pnpm exec tauri build --ci --bundles appimage # Linux
-pnpm exec tauri build --ci --bundles dmg      # macOS
+pnpm exec tauri build --ci --config src-tauri/tauri.linux.conf.json --bundles appimage # Linux
+pnpm exec tauri build --ci --config src-tauri/tauri.macos.conf.json --bundles dmg      # macOS
 ```
 
 Windows packages fetch and verify the pinned FFmpeg binary during the release

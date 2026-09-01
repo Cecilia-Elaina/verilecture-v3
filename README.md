@@ -145,8 +145,8 @@ pnpm typecheck
 pnpm test
 pnpm build
 pnpm exec tauri build --ci --bundles nsis      # Windows
-# pnpm exec tauri build --ci --bundles appimage # Linux
-# pnpm exec tauri build --ci --bundles dmg      # macOS
+# pnpm exec tauri build --ci --config src-tauri/tauri.linux.conf.json --bundles appimage # Linux
+# pnpm exec tauri build --ci --config src-tauri/tauri.macos.conf.json --bundles dmg      # macOS
 ```
 
 Linux 构建需要 Tauri 的 WebKitGTK 开发依赖，macOS 构建需要 Xcode Command Line Tools；具体依赖见 [Tauri prerequisites](https://tauri.app/start/prerequisites/) 和 [平台构建说明](./docs/PLATFORM_BUILD.md)。Windows 构建会在构建时获取并校验 FFmpeg；Linux/macOS 当前使用系统 `ffmpeg`，不会把大体积第三方二进制提交进 Git。

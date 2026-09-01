@@ -84,4 +84,9 @@ jobs:
         run: cargo test --manifest-path src-tauri/Cargo.toml
 
       - name: Verify Tauri compilation without bundling
+        if: matrix.platform == 'windows'
         run: pnpm exec tauri build --no-bundle --ci
+
+      - name: Verify Tauri compilation without bundling (Linux or macOS config)
+        if: matrix.platform != 'windows'
+        run: pnpm exec tauri build --no-bundle --ci --config src-tauri/tauri.${{ matrix.platform }}.conf.json
