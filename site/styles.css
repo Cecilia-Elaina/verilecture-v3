@@ -575,6 +575,12 @@ html[lang="en"] .lang-en {
   padding: 120px 0;
 }
 
+#why,
+#workflow,
+#showcase {
+  scroll-margin-top: -88px;
+}
+
 .story-section {
   border-top: 1px solid var(--stone-200);
   background-color: var(--paper);
@@ -1301,7 +1307,7 @@ html[lang="en"] .lang-en {
 }
 
 .site-footer {
-  padding: 38px 0 18px;
+  padding: 28px 0 12px;
   border-top: 1px solid var(--stone-200);
   background: var(--paper);
 }
@@ -1323,8 +1329,11 @@ html[lang="en"] .lang-en {
 .footer-nav {
   display: grid;
   align-content: start;
-  gap: 12px;
-  padding-top: 3px;
+  justify-self: end;
+  width: max-content;
+  max-width: 100%;
+  gap: 7px;
+  padding-top: 0;
 }
 
 .footer-links {
@@ -1332,7 +1341,7 @@ html[lang="en"] .lang-en {
   align-content: flex-start;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 6px 18px;
+  gap: 2px 16px;
 }
 
 .footer-links h3 {
@@ -1359,8 +1368,8 @@ html[lang="en"] .lang-en {
 .footer-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 26px;
-  padding-top: 13px;
+  margin-top: 18px;
+  padding-top: 10px;
   border-top: 1px solid var(--stone-200);
   color: var(--stone-500);
   font-size: 11px;
@@ -1898,6 +1907,9 @@ html[lang="en"] .lang-en {
   }
 
   .footer-nav {
+    justify-self: stretch;
+    width: auto;
+    max-width: none;
     gap: 10px;
   }
 
