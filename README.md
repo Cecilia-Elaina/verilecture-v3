@@ -6,7 +6,7 @@
 
 `Trace every key point back to the lecture.`
 
-[![版本](https://img.shields.io/badge/版本-0.3.0--alpha.3-e56b35?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.3)
+[![版本](https://img.shields.io/badge/版本-0.3.0--alpha.4-e56b35?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.4)
 [![平台](https://img.shields.io/badge/平台-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases)
 [![隐私](https://img.shields.io/badge/隐私-本地优先-2d8065?style=flat-square)](#隐私设计)
 [![许可证](https://img.shields.io/badge/许可证-MIT-5a716b?style=flat-square)](./LICENSE)
@@ -56,7 +56,7 @@
 
 ## 平台状态
 
-`v0.3.0-alpha.3` 已发布 Windows、Linux 和 macOS 桌面安装包。Linux 和 macOS 包先提供桌面应用；原生本地转写运行时仍待单独验证后发布。
+`v0.3.0-alpha.4` 已发布 Windows、Linux 和 macOS 桌面安装包。Linux 和 macOS 包先提供桌面应用；原生本地转写运行时仍待单独验证后发布。
 
 | 平台 | 安装包 | 当前本地转写状态 |
 | --- | --- | --- |
@@ -111,7 +111,7 @@
 
 ## 本地转写档位
 
-| 档位 | 适用场景 | 加速方式 | `v0.3.0-alpha.3` 状态 |
+| 档位 | 适用场景 | 加速方式 | `v0.3.0-alpha.4` 状态 |
 | --- | --- | --- | --- |
 | **Fun-ASR-Nano-2512** | 没有可用 NVIDIA CUDA 的机器 | CPU | CPU 安装和运行路径已完成代表性验证 |
 | **Qwen3-ASR-0.6B** | 显存较小的 CUDA 机器 | NVIDIA CUDA | 注册表和安装路径已准备，独立 GPU 复测暂缓 |
@@ -131,7 +131,7 @@ Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GB（约 4.3 GiB）�
 
 ## 下载与运行
 
-从 [V3 预发布版](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.3) 下载 Windows x64 NSIS、Linux x64 AppImage 或 macOS DMG。这是 Alpha 版本，请先备份重要录音。
+从 [V3 预发布版](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.4) 下载 Windows x64 NSIS、Linux x64 AppImage 或 macOS DMG。这是 Alpha 版本，请先备份重要录音。
 
 首次启动：
 
@@ -161,7 +161,7 @@ Linux 构建需要 Tauri 的 WebKitGTK 开发依赖，macOS 构建需要 Xcode C
 
 ## 版本状态与许可
 
-`v0.3.0-alpha.3` 是 V3 的第二个公开里程碑，不是最终稳定版。Windows、Linux 和 macOS 桌面安装包已由发布工作流生成。Windows x64 的本地工作流、引导、硬件路由、CPU 路径和代表性 CUDA 路径已完成；Linux/macOS 的本地转写运行时、CUDA Runtime 公共托管和干净环境安装仍需单独验收。
+`v0.3.0-alpha.4` 是 V3 的第二个公开里程碑，不是最终稳定版。Windows、Linux 和 macOS 桌面安装包已由发布工作流生成。Windows x64 的本地工作流、引导、硬件路由、CPU 路径和代表性 CUDA 路径已完成；Linux/macOS 的本地转写运行时、CUDA Runtime 公共托管和干净环境安装仍需单独验收。
 
 查看 [已知限制](./docs/KNOWN_LIMITATIONS.md)。
 

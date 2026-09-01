@@ -89,9 +89,12 @@ jobs:
           $bundle = Get-ChildItem -LiteralPath 'src-tauri\target\release\bundle\nsis' -Filter '*.exe' -File | Select-Object -First 1
           if ($null -eq $bundle) { throw 'The Tauri NSIS installer was not produced.' }
           New-Item -ItemType Directory -Force -Path 'release-assets' | Out-Null
-          Copy-Item -LiteralPath $bundle.FullName -Destination 'release-assets'
-          $hash = (Get-FileHash -LiteralPath $bundle.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
-          "$hash  $($bundle.Name)" | Set-Content -LiteralPath "release-assets\SHA256SUMS-windows-${{ github.ref_name }}.txt" -Encoding utf8
+          $version = '${{ github.ref_name }}' -replace '^v', ''
+          $assetName = "VeriLecture_${version}_x64-setup.exe"
+          $assetPath = Join-Path 'release-assets' $assetName
+          Copy-Item -LiteralPath $bundle.FullName -Destination $assetPath
+          $hash = (Get-FileHash -LiteralPath $assetPath -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  $assetName" | Set-Content -LiteralPath "release-assets\SHA256SUMS-windows-${{ github.ref_name }}.txt" -Encoding utf8
 
       - name: Collect Linux or macOS installer and checksum
         if: matrix.platform != 'windows'
@@ -102,8 +105,14 @@ jobs:
           bundle="$(find "$bundle_dir" -maxdepth 1 -type f \( -name '*.AppImage' -o -name '*.dmg' \) -print -quit)"
           test -n "$bundle"
           mkdir -p release-assets
-          cp "$bundle" release-assets/
-          shasum -a 256 "release-assets/$(basename "$bundle")" > "release-assets/SHA256SUMS-${{ matrix.platform }}-${{ github.ref_name }}.txt"
+          version="${GITHUB_REF_NAME#v}"
+          case "${{ matrix.platform }}" in
+            linux) asset_name="VeriLecture_${version}_amd64.AppImage" ;;
+            macos) asset_name="VeriLecture_${version}_aarch64.dmg" ;;
+            *) echo "Unsupported platform: ${{ matrix.platform }}" >&2; exit 1 ;;
+          esac
+          cp "$bundle" "release-assets/$asset_name"
+          (cd release-assets && shasum -a 256 "$asset_name") > "release-assets/SHA256SUMS-${{ matrix.platform }}-${{ github.ref_name }}.txt"
 
       - name: Upload platform artifact
         uses: actions/upload-artifact@v4
