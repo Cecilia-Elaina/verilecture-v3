@@ -18,6 +18,7 @@ jobs:
     outputs:
       app: ${{ steps.scope.outputs.app }}
       site: ${{ steps.scope.outputs.site }}
+      writing: ${{ steps.scope.outputs.writing }}
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -49,16 +50,19 @@ jobs:
 
           app=false
           site=false
+          writing=false
           while IFS= read -r path; do
             [ -z "$path" ] && continue
             case "$path" in
               site/*)
                 site=true
+                writing=true
                 ;;
               .github/workflows/pages.yml)
                 site=true
                 ;;
-              docs/*|*.md)
+              docs/*|*.md|frontend/src/*|writing/*|styles/*|.vale.ini)
+                writing=true
                 ;;
               *)
                 app=true
@@ -68,6 +72,26 @@ jobs:
 
           echo "app=$app" >> "$GITHUB_OUTPUT"
           echo "site=$site" >> "$GITHUB_OUTPUT"
+          echo "writing=$writing" >> "$GITHUB_OUTPUT"
+
+  writing:
+    name: Verify writing quality
+    needs: changes
+    if: needs.changes.outputs.writing == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Run Vale on product text
+        uses: vale-cli/vale-action@v3
+        with:
+          version: 3.19.0
+          files: '["README.md", "README.en.md", "docs", "site", "frontend/src"]'
+          sync: false
+          fail_level: warning
 
   site:
     name: Verify product site

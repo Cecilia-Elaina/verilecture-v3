@@ -199,7 +199,7 @@ function demoModels(): ModelOption[] {
     {
       id: "qwen3-asr-1.7b",
       name: "Qwen3-ASR-1.7B",
-      description: "高质量本地识别，配套 Forced Aligner 时间戳",
+      description: "高质量本地转写，带 Forced Aligner 时间戳",
       runtime: "NVIDIA CUDA",
       downloadBytes: 6_543_068_817,
       diskBytes: 7_500_000_000,
@@ -213,7 +213,7 @@ function demoModels(): ModelOption[] {
     {
       id: "qwen3-asr-0.6b",
       name: "Qwen3-ASR-0.6B",
-      description: "较低显存占用，配套 Forced Aligner 时间戳",
+      description: "较低显存占用，带 Forced Aligner 时间戳",
       runtime: "NVIDIA CUDA",
       downloadBytes: 3_720_574_187,
       diskBytes: 4_300_000_000,
@@ -227,7 +227,7 @@ function demoModels(): ModelOption[] {
     {
       id: "fun-asr-nano-2512",
       name: "Fun-ASR-Nano-2512",
-      description: "无可用 NVIDIA CUDA 时的 CPU 本地档位",
+      description: "没有可用 NVIDIA CUDA 时使用的 CPU 转写档位",
       runtime: "CPU",
       downloadBytes: 1_280_490_277,
       diskBytes: 1_600_000_000,
@@ -236,7 +236,7 @@ function demoModels(): ModelOption[] {
       status: "not_installed",
       supported: true,
       recommended: true,
-      reason: "支持 CPU 推理；速度通常较慢",
+      reason: "支持 CPU 转写；速度通常较慢",
     },
   ];
 }
@@ -367,7 +367,7 @@ function makeDemoRecord(
       id: "demo-segment-1",
       startMs: 0,
       endMs: 7800,
-      text: "今天我们先看计算机网络中分组交换的基本过程。",
+      text: "今天先看计算机网络中的分组交换。",
       language: language === "auto" ? "zh" : language,
       source: "raw",
     },
@@ -375,7 +375,7 @@ function makeDemoRecord(
       id: "demo-segment-2",
       startMs: 8200,
       endMs: 16400,
-      text: "运输层的核心问题是端到端可靠传输和拥塞控制。",
+      text: "运输层负责端到端的可靠传输和拥塞控制。",
       language: language === "auto" ? "zh" : language,
       source: "raw",
     },
@@ -383,7 +383,7 @@ function makeDemoRecord(
       id: "demo-segment-3",
       startMs: 17100,
       endMs: 25100,
-      text: "需要重点区分 TCP 和 UDP 的服务特点与适用场景。",
+      text: "重点比较 TCP 和 UDP 的服务特点与适用场景。",
       language: language === "auto" ? "zh" : language,
       source: "raw",
     },
@@ -399,7 +399,7 @@ function makeDemoRecord(
       chapterTitle: "未匹配章节",
       title: "分组交换的基本过程",
       detail:
-        "理解分组交换从分组、排队到转发的基本过程，以及它与电路交换的差异。",
+        "理解分组交换中分组、排队和转发的基本过程，以及它与电路交换的差异。",
       segmentIds: ["demo-segment-1"],
       startMs: 0,
       endMs: 7800,
@@ -419,7 +419,7 @@ function makeDemoRecord(
       chapterId: null,
       chapterTitle: "未匹配章节",
       title: "TCP 与 UDP 的区别",
-      detail: "从连接方式、可靠性、开销和适用场景比较 TCP 与 UDP。",
+      detail: "比较 TCP 与 UDP 的连接方式、可靠性、开销和适用场景。",
       segmentIds: ["demo-segment-3"],
       startMs: 17100,
       endMs: 25100,
@@ -645,7 +645,7 @@ export default function App() {
               }
             />
           </div>
-          <button className="icon-button" aria-label="menu">
+          <button className="icon-button" aria-label={t("menu")}>
             <Menu size={19} />
           </button>
         </div>
@@ -724,7 +724,7 @@ export default function App() {
         <div className="toast" role="status">
           <Check size={16} />
           {toast}
-          <button onClick={() => setToast(null)} aria-label="close">
+          <button onClick={() => setToast(null)} aria-label={t("close")}>
             <X size={14} />
           </button>
         </div>
@@ -774,7 +774,7 @@ function Sidebar({
         </div>
       </div>
       <div className="sidebar-rule" />
-      <nav className="main-nav" aria-label="Main navigation">
+      <nav className="main-nav" aria-label={t("mainNavigation")}>
         {items.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
@@ -2493,7 +2493,7 @@ function ProviderForm({
             className="text-field"
             value={modelId}
             onChange={(event) => setModelId(event.target.value)}
-            placeholder="gpt-4o-mini"
+            placeholder={t("modelIdPlaceholder")}
           />
         </label>
         <label className="wide">
@@ -2511,7 +2511,9 @@ function ProviderForm({
             type="password"
             value={apiKey}
             onChange={(event) => setApiKey(event.target.value)}
-            placeholder={initial?.tested ? t("savedKeyPlaceholder") : "sk-…"}
+            placeholder={
+              initial?.tested ? t("savedKeyPlaceholder") : t("apiKeyPlaceholder")
+            }
           />
         </label>
       </div>
@@ -3377,7 +3379,7 @@ function OnboardingProvider({
             type="password"
             value={apiKey}
             onChange={(event) => setApiKey(event.target.value)}
-            placeholder="sk-…"
+            placeholder={t("apiKeyPlaceholder")}
           />
         </label>
       </div>

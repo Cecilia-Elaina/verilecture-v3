@@ -1,0 +1,11 @@
+extends: existence
+message: "Replace this broad marketing phrase with a concrete fact or user action."
+level: warning
+ignorecase: false
+tokens:
+  - 赋能
+  - 智能驱动
+  - 重新定义
+  - 无缝衔接
+  - 真正意义上的
+  - 一站式

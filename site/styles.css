@@ -378,6 +378,16 @@ html[lang="en"] .lang-en {
   font-style: normal;
 }
 
+.hero-motto {
+  margin: -4px 0 16px;
+  color: var(--sage-deep);
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 750;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+}
+
 @media (min-width: 861px) {
   html[lang="en"] .hero h1 {
     font-size: clamp(3.4rem, 4.5vw, 5.4rem);
@@ -577,7 +587,9 @@ html[lang="en"] .lang-en {
 
 #why,
 #workflow,
-#showcase {
+#traceability,
+#showcase,
+#privacy {
   scroll-margin-top: -88px;
 }
 
