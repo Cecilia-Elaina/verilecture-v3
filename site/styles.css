@@ -1294,6 +1294,10 @@ html[lang="en"] .lang-en {
   justify-content: center;
 }
 
+.platform-download {
+  font-size: 13px;
+}
+
 .cta-blob {
   position: absolute;
   background: var(--linen);

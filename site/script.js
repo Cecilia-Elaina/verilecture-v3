@@ -3,6 +3,18 @@ const languageButton = document.querySelector('[data-language-toggle]');
 const menuButton = document.querySelector('[data-menu-toggle]');
 const navigation = document.querySelector('[data-nav]');
 const header = document.querySelector('[data-header]');
+const windowsDownloadLinks = [...document.querySelectorAll('[data-windows-download]')];
+const platformDownloadLinks = [...document.querySelectorAll('[data-platform-download]')];
+const releaseVersionNodes = [...document.querySelectorAll('[data-release-version]')];
+const releasePlatformsZh = document.querySelector('[data-release-platforms-zh]');
+const releasePlatformsEn = document.querySelector('[data-release-platforms-en]');
+
+const releaseApiUrl = 'https://api.github.com/repos/Cecilia-Elaina/verilecture-v3/releases?per_page=10';
+const fallbackRelease = {
+  tag: 'v0.3.0-alpha.1',
+  assetName: 'VeriLecture_0.3.0-alpha.1_x64-setup.exe',
+  url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.1/VeriLecture_0.3.0-alpha.1_x64-setup.exe',
+};
 
 const languageLabels = {
   zh: {
@@ -46,6 +58,141 @@ try {
   storedLanguage = 'zh';
 }
 applyLanguage(storedLanguage);
+
+function isWindowsInstaller(asset) {
+  return /\.exe$/i.test(asset?.name || '') && /(setup|installer)/i.test(asset.name);
+}
+
+function isLinuxPackage(asset) {
+  return /\.appimage$/i.test(asset?.name || '');
+}
+
+function isMacPackage(asset) {
+  return /\.dmg$/i.test(asset?.name || '');
+}
+
+function setReleaseVersion(tag) {
+  releaseVersionNodes.forEach((node) => {
+    node.textContent = tag;
+  });
+}
+
+function setWindowsDownload(asset, tag) {
+  if (!asset?.browser_download_url) return;
+
+  windowsDownloadLinks.forEach((link) => {
+    link.href = asset.browser_download_url;
+    link.download = asset.name;
+    link.dataset.releaseTag = tag;
+  });
+  setReleaseVersion(tag);
+}
+
+function setPlatformDownloads(release) {
+  const assets = Array.isArray(release.assets) ? release.assets : [];
+  const platformMatchers = {
+    linux: isLinuxPackage,
+    macos: isMacPackage,
+  };
+
+  platformDownloadLinks.forEach((link) => {
+    const matcher = platformMatchers[link.dataset.platformDownload];
+    const asset = matcher ? assets.find(matcher) : null;
+    if (!asset?.browser_download_url) {
+      link.hidden = true;
+      return;
+    }
+
+    link.hidden = false;
+    link.href = asset.browser_download_url;
+    link.download = asset.name;
+    link.dataset.releaseTag = release.tag;
+  });
+}
+
+function setPlatformSummary(release) {
+  const assets = Array.isArray(release.assets) ? release.assets : [];
+  const hasWindows = assets.some(isWindowsInstaller);
+  const hasLinux = assets.some(isLinuxPackage);
+  const hasMac = assets.some(isMacPackage);
+  const availableZh = [];
+  const availableEn = [];
+  const pendingZh = [];
+  const pendingEn = [];
+
+  if (hasWindows) {
+    availableZh.push('Windows x64');
+    availableEn.push('Windows x64');
+  } else {
+    pendingZh.push('Windows x64');
+    pendingEn.push('Windows x64');
+  }
+  if (hasLinux) {
+    availableZh.push('Linux AppImage');
+    availableEn.push('Linux AppImage');
+  } else {
+    pendingZh.push('Linux AppImage');
+    pendingEn.push('Linux AppImage');
+  }
+  if (hasMac) {
+    availableZh.push('macOS DMG');
+    availableEn.push('macOS DMG');
+  } else {
+    pendingZh.push('macOS DMG');
+    pendingEn.push('macOS DMG');
+  }
+
+  if (releasePlatformsZh) {
+    releasePlatformsZh.textContent = `当前 Release ${release.tag}：${availableZh.join('、') || '暂无安装包'}${pendingZh.length ? `；${pendingZh.join('、')}尚未发布。` : '。'}`;
+  }
+  if (releasePlatformsEn) {
+    releasePlatformsEn.textContent = `Release ${release.tag}: ${availableEn.join(', ') || 'no installers'} available${pendingEn.length ? `; ${pendingEn.join(' and ')} are not published yet.` : '.'}`;
+  }
+}
+
+async function updateReleaseDownload() {
+  try {
+    const response = await fetch(releaseApiUrl, {
+      headers: { Accept: 'application/vnd.github+json' },
+      cache: 'no-store',
+    });
+    if (!response.ok) throw new Error(`Release API returned ${response.status}`);
+
+    const releases = await response.json();
+    const release = releases.find((candidate) => !candidate.draft && Array.isArray(candidate.assets));
+    if (!release) return;
+
+    setPlatformSummary({
+      tag: release.tag_name,
+      assets: release.assets,
+    });
+    setPlatformDownloads({
+      tag: release.tag_name,
+      assets: release.assets,
+    });
+
+    const windowsAsset = release.assets.find(isWindowsInstaller);
+    if (windowsAsset) setWindowsDownload(windowsAsset, release.tag_name);
+  } catch {
+    // The fallback points to the last known published installer.
+    setWindowsDownload(
+      {
+        browser_download_url: fallbackRelease.url,
+        name: fallbackRelease.assetName,
+      },
+      fallbackRelease.tag,
+    );
+  }
+}
+
+setWindowsDownload(
+  {
+    browser_download_url: fallbackRelease.url,
+    name: fallbackRelease.assetName,
+  },
+  fallbackRelease.tag,
+);
+updateReleaseDownload();
 
 languageButton?.addEventListener('click', () => {
   applyLanguage(root.lang === 'en' ? 'zh' : 'en');

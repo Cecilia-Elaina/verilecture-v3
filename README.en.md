@@ -6,7 +6,7 @@
 
 `Trace every key point back to the lecture.`
 
-[![Version](https://img.shields.io/badge/version-0.3.0--alpha.1-e56b35?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.1)
+[![Version](https://img.shields.io/badge/version-0.3.0--alpha.2-e56b35?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.2)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases)
 [![Privacy](https://img.shields.io/badge/privacy-local--first-2d8065?style=flat-square)](#privacy-by-design)
 [![License](https://img.shields.io/badge/license-MIT-5a716b?style=flat-square)](./LICENSE)
@@ -56,13 +56,13 @@ After class, finding the key sentence can take longer than listening again. Veri
 
 ## Platform status
 
-The desktop application is wired into a native Windows, Linux, and macOS build matrix. The published local transcription runtime is still a Windows x64 build, so Linux and macOS packages currently provide the desktop application; their native local runtimes will be published after separate validation.
+`v0.3.0-alpha.2` publishes Windows, Linux, and macOS desktop packages. The Linux and macOS packages provide the desktop application first; their native local transcription runtimes still need separate validation.
 
 | Platform | Package | Current local transcription status |
 | --- | --- | --- |
 | Windows x64 | NSIS | Fun-ASR and CUDA Runtime paths available |
-| Linux x64 | AppImage | Native desktop package builds; local transcription runtime pending |
-| macOS | DMG | Native desktop package builds; local transcription runtime pending |
+| Linux x64 | AppImage | Desktop package published; local transcription runtime pending |
+| macOS | DMG | Desktop package published; local transcription runtime pending |
 
 ## Product preview
 
@@ -111,7 +111,7 @@ The desktop application is wired into a native Windows, Linux, and macOS build m
 
 ## Local transcription tiers
 
-| Tier | Best for | Acceleration | `v0.3.0-alpha.1` status |
+| Tier | Best for | Acceleration | `v0.3.0-alpha.2` status |
 | --- | --- | --- | --- |
 | **Fun-ASR-Nano-2512** | Machines without a usable NVIDIA CUDA path | CPU | Representative CPU installation and runtime path verified |
 | **Qwen3-ASR-0.6B** | Lower-VRAM CUDA machines | NVIDIA CUDA | Registry and installer path prepared; independent GPU retest deferred |
@@ -131,7 +131,7 @@ See [Privacy and Security](./docs/PRIVACY_AND_SECURITY.md), [Model Sources](./do
 
 ## Download and run
 
-Download the current Windows x64 NSIS installer from the [V3 pre-release](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.1). This is an Alpha build; back up important recordings before installing. Future `v*` tags use the same release workflow to produce Windows, Linux, and macOS packages.
+Download the Windows x64 NSIS installer, Linux x64 AppImage, or macOS DMG from the [V3 pre-release](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.2). This is an Alpha build; back up important recordings before installing.
 
 On first launch:
 
@@ -161,7 +161,7 @@ Linux builds need Tauri's WebKitGTK development dependencies, and macOS builds n
 
 ## Status and license
 
-`v0.3.0-alpha.1` is the first public V3 milestone, not a final stable release. Native builds for all three platforms are included in CI; the local workflow, onboarding, hardware routing, CPU path, and representative CUDA path are complete on Windows x64. Native local transcription runtimes for Linux/macOS, public CUDA Runtime hosting, and clean-machine installation still need separate acceptance.
+`v0.3.0-alpha.2` is the second public V3 milestone, not a final stable release. Windows, Linux, and macOS desktop packages are produced by the release workflow. The local workflow, onboarding, hardware routing, CPU path, and representative CUDA path are complete on Windows x64; native local transcription runtimes for Linux/macOS, public CUDA Runtime hosting, and clean-machine installation still need separate acceptance.
 
 Read [Known Limitations](./docs/KNOWN_LIMITATIONS.md).
 
