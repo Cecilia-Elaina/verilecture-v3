@@ -87,7 +87,10 @@ def main() -> int:
     parser.add_argument(
         "--asset",
         type=Path,
-        default=Path(r"D:\Download\verilecture-v3\output\release-assets\verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip"),
+        default=Path(__file__).resolve().parents[2]
+        / "output"
+        / "release-assets"
+        / "verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip",
     )
     parser.add_argument(
         "--keep",

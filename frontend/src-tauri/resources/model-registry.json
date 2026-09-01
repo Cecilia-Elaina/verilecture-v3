@@ -73,9 +73,9 @@
     {
       "id": "fun-asr-nano-2512",
       "displayName": "Fun-ASR-Nano-2512",
-      "runtime": "Windows CPU",
+      "runtime": "CPU (Windows x64)",
       "runtimeBundleId": null,
-      "requires": ["AVX2 recommended", "official llama.cpp runtime", "VAD segment timestamps"],
+      "requires": ["Windows x64", "AVX2 recommended", "official llama.cpp runtime", "VAD segment timestamps"],
       "sources": [
         {"repository": "FunAudioLLM/Fun-ASR-Nano-GGUF", "commit": "46e849502a867080d66d351b8dfb1018b607e509", "url": "https://huggingface.co/FunAudioLLM/Fun-ASR-Nano-GGUF", "mirrors": ["https://modelscope.cn/models/FunAudioLLM/Fun-ASR-Nano-GGUF"]},
         {"repository": "FunAudioLLM/fsmn-vad-GGUF", "commit": "6840bae4c5c92ee8c04faaf4db23dd0105098d7f", "url": "https://huggingface.co/FunAudioLLM/fsmn-vad-GGUF", "mirrors": ["https://modelscope.cn/models/FunAudioLLM/fsmn-vad-GGUF"]},

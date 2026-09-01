@@ -4,8 +4,10 @@ The application ships a fixed registry at
 `frontend/src-tauri/resources/model-registry.json`. It defines the supported
 ASR tiers and keeps downloads tied to immutable source revisions.
 
-The two Qwen profiles use a shared CUDA Runtime; Fun-ASR-Nano stays on the CPU
-path. Downloads are checked by byte count and SHA-256 before installation.
+The two Qwen profiles use a shared Windows x64 CUDA Runtime; Fun-ASR-Nano stays
+on the Windows x64 CPU path. Linux and macOS package builds do not advertise a
+local ASR tier until native sidecars are published. Downloads are checked by byte
+count and SHA-256 before installation.
 
 Official sources:
 

@@ -69,10 +69,10 @@
           "enum": ["alpha", "stable"]
         },
         "platform": {
-          "const": "windows"
+          "enum": ["windows", "linux", "macos"]
         },
         "architecture": {
-          "const": "x86_64"
+          "enum": ["x86_64", "aarch64"]
         },
         "artifactName": {
           "type": "string",

@@ -28,7 +28,6 @@ hex = "0.4"
 sysinfo = "0.34"
 rusqlite = { version = "0.32", features = ["bundled"] }
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "stream"] }
-keyring = { version = "3.6", features = ["windows-native"] }
 base64 = "0.22"
 zip = { version = "2.4", default-features = false, features = ["deflate"] }
 pdf-extract = "0.8"
@@ -38,5 +37,14 @@ urlencoding = "2.1"
 
 [features]
 custom-protocol = ["tauri/custom-protocol"]
+
+[target.'cfg(target_os = "windows")'.dependencies]
+keyring = { version = "3.6", features = ["windows-native"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring = { version = "3.6", features = ["linux-native-sync-persistent", "crypto-rust"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+keyring = { version = "3.6", features = ["apple-native"] }
 
 [workspace]

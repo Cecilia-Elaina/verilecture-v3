@@ -22,6 +22,8 @@ SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]+$")
 ALLOWED_CHANNELS = {"alpha", "stable"}
 ALLOWED_STATUSES = {"published", "pending-publication", "disabled"}
+ALLOWED_PLATFORMS = {"windows", "linux", "macos"}
+ALLOWED_ARCHITECTURES = {"x86_64", "aarch64"}
 
 
 class ValidationError(Exception):
@@ -56,19 +58,21 @@ def validate_registry(registry: dict) -> list[dict]:
     runtimes = registry.get("runtimes")
     require(isinstance(runtimes, list) and runtimes, "runtimes must be a non-empty array")
 
-    seen_runtime_ids: set[str] = set()
+    seen_runtime_keys: set[tuple[str, str, str]] = set()
     for runtime in runtimes:
         require(isinstance(runtime, dict), "each runtime must be an object")
         runtime_id = runtime.get("id")
         require(isinstance(runtime_id, str) and ID_RE.fullmatch(runtime_id) is not None, f"invalid runtime id: {runtime_id!r}")
-        require(runtime_id not in seen_runtime_ids, f"duplicate runtime id: {runtime_id}")
-        seen_runtime_ids.add(runtime_id)
-
         for field in ("version", "artifactName", "cudaVersion"):
             require(isinstance(runtime.get(field), str) and runtime[field].strip(), f"{runtime_id}: {field} must be a non-empty string")
         require(runtime.get("channel") in ALLOWED_CHANNELS, f"{runtime_id}: invalid channel")
-        require(runtime.get("platform") == "windows", f"{runtime_id}: platform must be windows")
-        require(runtime.get("architecture") == "x86_64", f"{runtime_id}: architecture must be x86_64")
+        platform = runtime.get("platform")
+        architecture = runtime.get("architecture")
+        require(platform in ALLOWED_PLATFORMS, f"{runtime_id}: unsupported platform")
+        require(architecture in ALLOWED_ARCHITECTURES, f"{runtime_id}: unsupported architecture")
+        runtime_key = (runtime_id, platform, architecture)
+        require(runtime_key not in seen_runtime_keys, f"duplicate runtime target: {runtime_id}/{platform}/{architecture}")
+        seen_runtime_keys.add(runtime_key)
         require(runtime["artifactName"].lower().endswith(".zip"), f"{runtime_id}: artifactName must end in .zip")
 
         for field in ("compressedBytes", "installedBytes"):

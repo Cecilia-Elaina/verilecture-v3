@@ -522,10 +522,17 @@ fn locate_python() -> Option<PathBuf> {
         }
     }
     let executable_parent = std::env::current_exe().ok()?.parent()?.to_path_buf();
-    let bundled = [
-        executable_parent.join("resources/asr-runtime/python/python.exe"),
-        executable_parent.join("asr-runtime/python/python.exe"),
-    ];
+    let bundled = crate::models::python_executable_names()
+        .iter()
+        .flat_map(|name| {
+            [
+                executable_parent
+                    .join("resources/asr-runtime/python")
+                    .join(name),
+                executable_parent.join("asr-runtime/python").join(name),
+            ]
+        })
+        .collect::<Vec<_>>();
     if let Some(path) = bundled.into_iter().find(|path| path.is_file()) {
         return Some(path);
     }
@@ -546,19 +553,21 @@ fn locate_sidecar(data_dir: &Path, model_id: &str) -> Option<PathBuf> {
         let cuda_runtime = data_dir
             .join("runtimes")
             .join("cuda-qwen-fun")
-            .join("verilecture-asr-runtime.exe");
+            .join(crate::models::asr_runtime_executable_name());
         if cuda_runtime.is_file() {
             return Some(cuda_runtime);
         }
     }
     let candidates = [
-        PathBuf::from("src-tauri/resources/asr-runtime/verilecture-asr-runtime.exe"),
+        PathBuf::from("src-tauri/resources/asr-runtime")
+            .join(crate::models::asr_runtime_executable_name()),
         PathBuf::from("tools/asr/verilecture_asr_runtime.py"),
         PathBuf::from("../tools/asr/verilecture_asr_runtime.py"),
         std::env::current_exe()
             .ok()?
             .parent()?
-            .join("resources/asr-runtime/verilecture-asr-runtime.exe"),
+            .join("resources/asr-runtime")
+            .join(crate::models::asr_runtime_executable_name()),
         std::env::current_exe()
             .ok()?
             .parent()?
@@ -575,14 +584,19 @@ fn locate_ffmpeg() -> Option<PathBuf> {
         }
     }
     let executable_parent = std::env::current_exe().ok()?.parent()?.to_path_buf();
+    let ffmpeg_name = if cfg!(target_os = "windows") {
+        "ffmpeg.exe"
+    } else {
+        "ffmpeg"
+    };
     let bundled = [
-        executable_parent.join("resources/ffmpeg/ffmpeg.exe"),
-        executable_parent.join("ffmpeg/ffmpeg.exe"),
+        executable_parent.join("resources/ffmpeg").join(ffmpeg_name),
+        executable_parent.join("ffmpeg").join(ffmpeg_name),
     ];
     if let Some(path) = bundled.into_iter().find(|path| path.is_file()) {
         return Some(path);
     }
-    if cfg!(debug_assertions) {
+    if cfg!(debug_assertions) || !cfg!(target_os = "windows") {
         return Some(PathBuf::from("ffmpeg"));
     }
     None
@@ -592,7 +606,7 @@ fn is_sidecar_executable(path: &Path) -> bool {
     path.extension()
         .and_then(|value| value.to_str())
         .map(|value| value.eq_ignore_ascii_case("exe"))
-        .unwrap_or(false)
+        .unwrap_or_else(|| cfg!(unix))
 }
 
 fn calibrate_text(text: &str, lexicon: Option<&LexiconProfile>) -> String {

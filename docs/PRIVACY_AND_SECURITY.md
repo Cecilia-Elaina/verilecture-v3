@@ -7,6 +7,6 @@ changes require reconfirmation.
 
 Model downloads are HTTPS-pinned to immutable revisions and verified before
 atomic install. ZIP extraction rejects paths that escape the staging directory.
-API keys use Windows Credential Manager and are never stored in SQLite, logs or
-exports. User source files are never deleted by import.
-
+API keys use the operating system credential store—Windows Credential Manager,
+macOS Keychain, or the Linux Secret Service/keyring backend—and are never stored
+in SQLite, logs, or exports. User source files are never deleted by import.

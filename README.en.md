@@ -2,10 +2,10 @@
 
 <div align="center">
 
-**A local-first lecture evidence chain for Windows.**
+**A local-first lecture evidence chain for Windows, Linux, and macOS.**
 
 [![Version](https://img.shields.io/badge/version-0.3.0--alpha.1-e56b35?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.1)
-[![Platform](https://img.shields.io/badge/platform-Windows%20x64-1f5f4f?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases)
 [![Privacy](https://img.shields.io/badge/privacy-local--first-2d8065?style=flat-square)](#privacy-by-design)
 [![License](https://img.shields.io/badge/license-MIT-5a716b?style=flat-square)](./LICENSE)
 
@@ -13,6 +13,12 @@
   <a href="./README.md">简体中文</a>
   &nbsp;·&nbsp;
   <strong>English</strong>
+</p>
+
+<p>
+  <a href="https://cecilia-elaina.github.io/verilecture-v3/">Product website</a>
+  &nbsp;·&nbsp;
+  <a href="https://cecilia-elaina.github.io/verilecture-v3/">产品主页</a>
 </p>
 
 <a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="VeriLecture audio import" width="900" /></a>
@@ -39,6 +45,16 @@ It is built for students, teachers, and researchers who want AI-assisted speed w
 - **Evidence-preserving workflow**: original audio and raw transcripts are never overwritten; corrections, calibration, and user edits create new versioned records with provenance.
 - **Teacher-safe structure**: explicit teacher statements remain distinct from repeated emphasis, inferred topics, and textbook topics.
 - **Optional text-model step**: review-point generation is separate and user-controlled; it is not required for local transcription.
+
+## Platform support
+
+The desktop application is wired into a native Windows, Linux, and macOS build matrix. The currently published local ASR runtime is still a Windows x64 build, so the cross-platform packages first provide the shared desktop experience; native ASR runtimes for Linux and macOS will be published after separate validation.
+
+| Platform | Package | Current local ASR status |
+| --- | --- | --- |
+| Windows x64 | NSIS | Fun-ASR and CUDA Runtime paths available |
+| Linux x64 | AppImage | Native desktop package builds; local ASR runtime pending |
+| macOS | DMG | Native desktop package builds; local ASR runtime pending |
 
 ## Product preview
 
@@ -93,7 +109,7 @@ It is built for students, teachers, and researchers who want AI-assisted speed w
 | **Qwen3-ASR-0.6B** | Lower-VRAM CUDA machines | NVIDIA CUDA | Registry and installer path prepared; independent GPU retest deferred |
 | **Qwen3-ASR-1.7B** | Higher-quality local transcription | NVIDIA CUDA | Representative RTX 3060 GPU smoke test passed |
 
-The Qwen tiers share a CUDA Runtime and ForcedAligner. The approximately 4.6 GiB Runtime is intentionally excluded from this Release and from Git. Until it is hosted at a stable HTTPS address and marked `published`, the installer keeps the download gated instead of presenting a broken artifact.
+The Qwen tiers share a CUDA Runtime and ForcedAligner. The approximately 4.6 GB (about 4.3 GiB) Runtime is intentionally excluded from this Release and from Git. Until it is hosted at a stable HTTPS address and marked `published`, the installer keeps the download gated instead of presenting a broken artifact. See [CUDA Runtime publishing](./docs/CUDA_RUNTIME.md) for the release procedure.
 
 ## Privacy by design
 
@@ -107,7 +123,7 @@ See [Privacy and Security](./docs/PRIVACY_AND_SECURITY.md), [Model Sources](./do
 
 ## Download and run
 
-Download the Windows x64 NSIS installer from the [V3 pre-release](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.1). This is an alpha build; back up important recordings before installing.
+Download the currently available Windows x64 NSIS installer from the [V3 pre-release](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.1). This is an alpha build; back up important recordings before installing. Future `v*` tags use the same release workflow to produce Windows, Linux, and macOS packages.
 
 On first launch:
 
@@ -128,14 +144,16 @@ pnpm install --frozen-lockfile
 pnpm typecheck
 pnpm test
 pnpm build
-pnpm tauri:build
+pnpm exec tauri build --ci --bundles nsis      # Windows
+# pnpm exec tauri build --ci --bundles appimage # Linux
+# pnpm exec tauri build --ci --bundles dmg      # macOS
 ```
 
-FFmpeg is fetched and verified with SHA-256 at build time rather than committed as a large third-party binary.
+Linux builds need Tauri's WebKitGTK development dependencies, and macOS builds need Xcode Command Line Tools; see the [Tauri prerequisites](https://tauri.app/start/prerequisites/) and [platform build notes](./docs/PLATFORM_BUILD.md). Windows fetches and verifies FFmpeg at build time; Linux/macOS currently use a system `ffmpeg` and do not commit a large third-party binary.
 
 ## Status and license
 
-`v0.3.0-alpha.1` is the first public V3 milestone, not a final stable release. The core local workflow, onboarding, hardware routing, CPU path, and representative CUDA path are in place. Remaining work focuses on public CUDA Runtime hosting, clean-machine Qwen installation, and broader Windows hardware coverage.
+`v0.3.0-alpha.1` is the first public V3 milestone, not a final stable release. Native builds for all three platforms now run in CI; the local workflow, onboarding, hardware routing, CPU path, and representative CUDA path are validated on Windows x64. Native local ASR runtimes for Linux/macOS, public CUDA Runtime hosting, and clean-machine installation still need separate acceptance.
 
 Read [Known Limitations](./docs/KNOWN_LIMITATIONS.md).
 

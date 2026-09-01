@@ -1,0 +1,15 @@
+{
+  "bundle": {
+    "targets": ["appimage"],
+    "resources": [
+      "resources/README.txt",
+      "resources/hardware-policy.json",
+      "resources/model-registry.json",
+      "resources/provider-presets.json",
+      "resources/runtime_registry.json",
+      "resources/runtime_registry.schema.json",
+      "resources/licenses/**/*",
+      "resources/prompt-templates/**/*"
+    ]
+  }
+}

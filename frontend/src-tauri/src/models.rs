@@ -18,6 +18,50 @@ const RUNTIME_REGISTRY_SCHEMA_VERSION: u64 = 1;
 const RUNTIME_REGISTRY_OVERRIDE_ENV: &str = "VERILECTURE_RUNTIME_REGISTRY_OVERRIDE";
 const EMBEDDED_RUNTIME_REGISTRY: &str = include_str!("../resources/runtime_registry.json");
 
+pub(crate) fn asr_runtime_executable_name() -> &'static str {
+    if cfg!(target_os = "windows") {
+        "verilecture-asr-runtime.exe"
+    } else {
+        "verilecture-asr-runtime"
+    }
+}
+
+fn fun_runtime_executable_name() -> &'static str {
+    if cfg!(target_os = "windows") {
+        "llama-funasr-cli.exe"
+    } else {
+        "llama-funasr-cli"
+    }
+}
+
+pub(crate) fn python_executable_names() -> &'static [&'static str] {
+    if cfg!(target_os = "windows") {
+        &["python.exe"]
+    } else {
+        &["python3", "python"]
+    }
+}
+
+fn native_asr_runtime_available() -> bool {
+    // The current bundled Fun-ASR and CUDA sidecars are Windows x64 builds.
+    // Other targets can compile and launch the desktop shell, but must not
+    // advertise a local ASR tier until a native sidecar is published.
+    cfg!(target_os = "windows") && cfg!(target_arch = "x86_64")
+}
+
+fn host_runtime_matches(runtime: &RuntimeEntry) -> bool {
+    runtime.platform == std::env::consts::OS && runtime.architecture == std::env::consts::ARCH
+}
+
+fn platform_label() -> &'static str {
+    match std::env::consts::OS {
+        "windows" => "Windows",
+        "linux" => "Linux",
+        "macos" => "macOS",
+        _ => "当前平台",
+    }
+}
+
 #[derive(Debug, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct ModelOption {
@@ -132,14 +176,18 @@ fn validate_runtime_registry(registry: &RuntimeRegistry) -> Result<(), String> {
     {
         return Err("MODEL_RUNTIME_REGISTRY_INVALID".to_string());
     }
-    let mut runtime_ids = HashSet::new();
+    let mut runtime_keys = HashSet::new();
     for runtime in &registry.runtimes {
         if runtime.id.trim().is_empty()
-            || !runtime_ids.insert(runtime.id.clone())
+            || !runtime_keys.insert((
+                runtime.id.clone(),
+                runtime.platform.clone(),
+                runtime.architecture.clone(),
+            ))
             || runtime.version.trim().is_empty()
             || runtime.channel != registry.default_channel
-            || runtime.platform != "windows"
-            || runtime.architecture != "x86_64"
+            || !matches!(runtime.platform.as_str(), "windows" | "linux" | "macos")
+            || !matches!(runtime.architecture.as_str(), "x86_64" | "aarch64")
             || runtime.artifact_name.trim().is_empty()
             || !runtime.artifact_name.ends_with(".zip")
             || runtime.artifact_name.contains('/')
@@ -215,7 +263,11 @@ fn runtime_entry_for_model(model_id: &str) -> Result<Option<RuntimeEntry>, Strin
     let runtime = registry
         .runtimes
         .into_iter()
-        .find(|runtime| runtime.id == runtime_id && runtime.models.iter().any(|id| id == model_id))
+        .find(|runtime| {
+            runtime.id == runtime_id
+                && host_runtime_matches(runtime)
+                && runtime.models.iter().any(|id| id == model_id)
+        })
         .ok_or_else(|| "MODEL_RUNTIME_MISSING".to_string())?;
     Ok(Some(runtime))
 }
@@ -225,7 +277,7 @@ fn runtime_entry_for_id(runtime_id: &str) -> Result<RuntimeEntry, String> {
     registry
         .runtimes
         .into_iter()
-        .find(|runtime| runtime.id == runtime_id)
+        .find(|runtime| runtime.id == runtime_id && host_runtime_matches(runtime))
         .ok_or_else(|| "MODEL_RUNTIME_MISSING".to_string())
 }
 
@@ -327,7 +379,7 @@ static DEFINITIONS: &[ModelDefinition] = &[
         id: "fun-asr-nano-2512",
         name: "Fun-ASR-Nano-2512",
         description: "无可用 NVIDIA CUDA 时的 CPU 本地档位；使用 VAD 段级时间范围",
-        runtime: "CPU",
+        runtime: "CPU (Windows x64)",
         runtime_bundle_id: None,
         requires_cuda: false,
         requires_aligner: false,
@@ -613,7 +665,7 @@ fn find_fun_runtime(directory: &Path) -> bool {
         } else {
             path.file_name()
                 .and_then(|name| name.to_str())
-                .map(|name| name.eq_ignore_ascii_case("llama-funasr-cli.exe"))
+                .map(|name| name.eq_ignore_ascii_case(fun_runtime_executable_name()))
                 .unwrap_or(false)
         }
     })
@@ -687,6 +739,9 @@ fn artifacts_for(model_id: &str) -> &'static [Artifact] {
 }
 
 fn recommended_id(profile: Option<&HardwareProfile>) -> Option<&'static str> {
+    if !native_asr_runtime_available() {
+        return None;
+    }
     let profile = profile?;
     if profile.nvidia_detected
         && profile.vram_bytes.unwrap_or(0) >= 8 * GB
@@ -707,6 +762,12 @@ fn support_reason(
     definition: &ModelDefinition,
     profile: Option<&HardwareProfile>,
 ) -> (bool, String) {
+    if !native_asr_runtime_available() {
+        return (
+            false,
+            format!("{} 构建暂未包含可用的本地 ASR 运行时", platform_label()),
+        );
+    }
     let Some(profile) = profile else {
         return (
             definition.id == "fun-asr-nano-2512",
@@ -789,6 +850,9 @@ pub async fn install_model(
     model_dir: &Path,
     model_id: &str,
 ) -> Result<(), String> {
+    if !native_asr_runtime_available() {
+        return Err("MODEL_RUNTIME_UNAVAILABLE".to_string());
+    }
     if definition(model_id).is_none() {
         return Err("MODEL_PROFILE_NOT_SELECTED".to_string());
     }
@@ -1113,7 +1177,7 @@ async fn install_cuda_runtime(
     );
     extract_zip(&part, &staging)?;
     std::fs::remove_file(&part).map_err(|_| "MODEL_RUNTIME_INSTALL_FAILED".to_string())?;
-    let staged_sidecar = staging.join("verilecture-asr-runtime.exe");
+    let staged_sidecar = staging.join(asr_runtime_executable_name());
     if !crate::runtime::manifest_is_valid_for_startup(&staged_sidecar)
         || !probe_cuda_sidecar(&staged_sidecar)
     {
@@ -1609,7 +1673,7 @@ fn locate_cuda_sidecar(data_dir: &Path) -> Option<PathBuf> {
             return Some(path);
         }
     }
-    let path = cuda_runtime_directory(data_dir).join("verilecture-asr-runtime.exe");
+    let path = cuda_runtime_directory(data_dir).join(asr_runtime_executable_name());
     path.is_file().then_some(path)
 }
 
@@ -1636,10 +1700,17 @@ fn locate_python() -> Option<PathBuf> {
         }
     }
     let executable_parent = std::env::current_exe().ok()?.parent()?.to_path_buf();
-    let candidates = [
-        executable_parent.join("resources/asr-runtime/python/python.exe"),
-        executable_parent.join("asr-runtime/python/python.exe"),
-    ];
+    let candidates = python_executable_names()
+        .iter()
+        .flat_map(|name| {
+            [
+                executable_parent
+                    .join("resources/asr-runtime/python")
+                    .join(name),
+                executable_parent.join("asr-runtime/python").join(name),
+            ]
+        })
+        .collect::<Vec<_>>();
     if let Some(path) = candidates.into_iter().find(|path| path.is_file()) {
         return Some(path);
     }
@@ -1658,10 +1729,12 @@ fn locate_sidecar() -> Option<PathBuf> {
     }
     let executable_parent = std::env::current_exe().ok()?.parent()?.to_path_buf();
     let candidates = [
-        PathBuf::from("src-tauri/resources/asr-runtime/verilecture-asr-runtime.exe"),
+        PathBuf::from("src-tauri/resources/asr-runtime").join(asr_runtime_executable_name()),
         PathBuf::from("tools/asr/verilecture_asr_runtime.py"),
         PathBuf::from("../tools/asr/verilecture_asr_runtime.py"),
-        executable_parent.join("resources/asr-runtime/verilecture-asr-runtime.exe"),
+        executable_parent
+            .join("resources/asr-runtime")
+            .join(asr_runtime_executable_name()),
         executable_parent.join("resources/asr-runtime/verilecture_asr_runtime.py"),
         executable_parent.join("asr-runtime/verilecture_asr_runtime.py"),
     ];
@@ -1672,7 +1745,7 @@ fn is_sidecar_executable(path: &Path) -> bool {
     path.extension()
         .and_then(|value| value.to_str())
         .map(|value| value.eq_ignore_ascii_case("exe"))
-        .unwrap_or(false)
+        .unwrap_or_else(|| cfg!(unix))
 }
 
 #[cfg(test)]
@@ -1820,6 +1893,7 @@ mod tests {
         }
     }
 
+    #[cfg(target_os = "windows")]
     #[test]
     fn routes_three_hardware_classes_without_fallback_hiding() {
         let high = model_options(Some(&profile(8, true)), Path::new("target/test-models"));
@@ -1859,6 +1933,7 @@ mod tests {
         );
     }
 
+    #[cfg(target_os = "windows")]
     #[test]
     fn static_nvidia_profile_can_start_runtime_download_gate() {
         let mut profile = profile(12, true);
@@ -1873,6 +1948,7 @@ mod tests {
         assert!(high.reason.contains("runtime will be downloaded"));
     }
 
+    #[cfg(target_os = "windows")]
     #[test]
     fn unknown_vram_conservatively_disables_cuda_tiers() {
         let mut unknown = profile(8, true);
@@ -1899,6 +1975,17 @@ mod tests {
                 .unwrap()
                 .supported
         );
+    }
+
+    #[cfg(not(target_os = "windows"))]
+    #[test]
+    fn non_windows_build_reports_missing_native_asr_runtime() {
+        let options = model_options(Some(&profile(12, true)), Path::new("target/test-models"));
+        assert!(options.iter().all(|model| !model.supported));
+        assert!(options.iter().all(|model| !model.recommended));
+        assert!(options
+            .iter()
+            .all(|model| model.reason.contains("本地 ASR 运行时")));
     }
 
     #[test]

@@ -53,7 +53,11 @@ pub fn manifest_is_valid_for_startup(sidecar: &Path) -> bool {
     };
     let manifest_path = parent.join("runtime-manifest.json");
     let Ok(bytes) = std::fs::read(&manifest_path) else {
-        return cfg!(debug_assertions) && sidecar.extension().is_some_and(|value| value != "exe");
+        return cfg!(debug_assertions)
+            && (cfg!(unix) && sidecar.extension().is_none()
+                || sidecar
+                    .extension()
+                    .is_some_and(|value| !value.eq_ignore_ascii_case("exe")));
     };
     let Ok(manifest) = serde_json::from_slice::<Value>(&bytes) else {
         return false;
@@ -151,15 +155,16 @@ mod tests {
         let root =
             std::env::temp_dir().join(format!("verilecture-runtime-{}", uuid::Uuid::new_v4()));
         std::fs::create_dir_all(&root).unwrap();
-        let sidecar = root.join("verilecture-asr-runtime.exe");
+        let sidecar_name = crate::models::asr_runtime_executable_name();
+        let sidecar = root.join(sidecar_name);
         std::fs::write(&sidecar, b"fixture-runtime").unwrap();
         let hash = sha256_file(&sidecar).unwrap();
         let manifest = serde_json::json!({
             "schemaVersion": 1,
             "runtimeVersion": "fixture",
-            "entrypoint": "verilecture-asr-runtime.exe",
+            "entrypoint": sidecar_name,
             "files": [{
-                "path": "verilecture-asr-runtime.exe",
+                "path": sidecar_name,
                 "bytes": 15,
                 "sha256": hash,
             }]

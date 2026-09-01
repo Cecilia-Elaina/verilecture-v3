@@ -185,10 +185,17 @@ fn locate_python() -> Option<PathBuf> {
         }
     }
     let executable_parent = std::env::current_exe().ok()?.parent()?.to_path_buf();
-    let bundled = [
-        executable_parent.join("resources/asr-runtime/python/python.exe"),
-        executable_parent.join("asr-runtime/python/python.exe"),
-    ];
+    let bundled = crate::models::python_executable_names()
+        .iter()
+        .flat_map(|name| {
+            [
+                executable_parent
+                    .join("resources/asr-runtime/python")
+                    .join(name),
+                executable_parent.join("asr-runtime/python").join(name),
+            ]
+        })
+        .collect::<Vec<_>>();
     if let Some(path) = bundled.into_iter().find(|path| path.is_file()) {
         return Some(path);
     }
@@ -206,18 +213,21 @@ fn locate_sidecar(model_dir: &Path) -> Option<PathBuf> {
         }
     }
     if let Some(data_dir) = model_dir.parent() {
-        let cuda_runtime =
-            crate::models::cuda_runtime_directory(data_dir).join("verilecture-asr-runtime.exe");
+        let cuda_runtime = crate::models::cuda_runtime_directory(data_dir)
+            .join(crate::models::asr_runtime_executable_name());
         if cuda_runtime.is_file() {
             return Some(cuda_runtime);
         }
     }
     let executable_parent = std::env::current_exe().ok()?.parent()?.to_path_buf();
     let candidates = [
-        PathBuf::from("src-tauri/resources/asr-runtime/verilecture-asr-runtime.exe"),
+        PathBuf::from("src-tauri/resources/asr-runtime")
+            .join(crate::models::asr_runtime_executable_name()),
         PathBuf::from("tools/asr/verilecture_asr_runtime.py"),
         PathBuf::from("../tools/asr/verilecture_asr_runtime.py"),
-        executable_parent.join("resources/asr-runtime/verilecture-asr-runtime.exe"),
+        executable_parent
+            .join("resources/asr-runtime")
+            .join(crate::models::asr_runtime_executable_name()),
         executable_parent.join("resources/asr-runtime/verilecture_asr_runtime.py"),
         executable_parent.join("asr-runtime/verilecture_asr_runtime.py"),
     ];
@@ -228,7 +238,7 @@ fn is_sidecar_executable(path: &Path) -> bool {
     path.extension()
         .and_then(|value| value.to_str())
         .map(|value| value.eq_ignore_ascii_case("exe"))
-        .unwrap_or(false)
+        .unwrap_or_else(|| cfg!(unix))
 }
 
 fn test_writable(directory: &Path) -> bool {

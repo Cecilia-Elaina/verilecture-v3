@@ -5,7 +5,7 @@
 **把每一段课堂录音，变成可回听、可校准、可追溯的学习材料。**
 
 [![版本](https://img.shields.io/badge/版本-0.3.0--alpha.1-e56b35?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.1)
-[![平台](https://img.shields.io/badge/平台-Windows%20x64-1f5f4f?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases)
+[![平台](https://img.shields.io/badge/平台-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases)
 [![隐私](https://img.shields.io/badge/隐私-本地优先-2d8065?style=flat-square)](#隐私设计)
 [![许可证](https://img.shields.io/badge/许可证-MIT-5a716b?style=flat-square)](./LICENSE)
 
@@ -13,6 +13,12 @@
   <strong>简体中文</strong>
   &nbsp;·&nbsp;
   <a href="./README.en.md">English</a>
+</p>
+
+<p>
+  <a href="https://cecilia-elaina.github.io/verilecture-v3/">产品主页</a>
+  &nbsp;·&nbsp;
+  <a href="https://cecilia-elaina.github.io/verilecture-v3/">Product website</a>
 </p>
 
 <a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="课溯音频导入界面" width="900" /></a>
@@ -39,6 +45,16 @@
 - **证据不丢失**：原始音频与原始转写不会被覆盖；修订、校准和用户编辑都会产生带来源的新版本。
 - **教师语义安全**：明确陈述、重复强调、推断主题和教材主题保持区分。
 - **文本模型可选**：重点整理是独立且由用户控制的步骤，不影响本地转写。
+
+## 平台支持
+
+桌面应用已接入 Windows、Linux 和 macOS 的原生构建矩阵。当前公开的本地 ASR 运行时仍是 Windows x64 版本，因此跨平台安装包先提供统一的桌面体验；Linux 和 macOS 的原生 ASR 运行时将在单独验证后发布。
+
+| 平台 | 安装包 | 当前本地 ASR 状态 |
+| --- | --- | --- |
+| Windows x64 | NSIS | Fun-ASR 与 CUDA Runtime 路径可用 |
+| Linux x64 | AppImage | 原生桌面包可构建；本地 ASR 运行时待发布 |
+| macOS | DMG | 原生桌面包可构建；本地 ASR 运行时待发布 |
 
 ## 产品预览
 
@@ -93,7 +109,7 @@
 | **Qwen3-ASR-0.6B** | 显存较小的 CUDA 机器 | NVIDIA CUDA | 注册表和安装路径已准备，独立 GPU 复测暂缓 |
 | **Qwen3-ASR-1.7B** | 更高质量的本地转写 | NVIDIA CUDA | 已完成代表性 RTX 3060 GPU 冒烟测试 |
 
-Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GiB 的 Runtime 不包含在本次 Release 中，也不会提交进 Git；在它被放置到稳定 HTTPS 地址并标记为 `published` 前，安装器会保持下载门禁，避免展示失效下载。
+Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GB（约 4.3 GiB）的 Runtime 不包含在本次 Release 中，也不会提交进 Git；在它被放置到稳定 HTTPS 地址并标记为 `published` 前，安装器会保持下载门禁，避免展示失效下载。发布方法见 [CUDA Runtime 说明](./docs/CUDA_RUNTIME.md)。
 
 ## 隐私设计
 
@@ -107,7 +123,7 @@ Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GiB 的 Runtime 不�
 
 ## 下载与运行
 
-从 [V3 预发布版](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.1) 下载 Windows x64 NSIS 安装包。这是 alpha 版本，请先备份重要录音。
+从 [V3 预发布版](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.1) 下载当前可用的 Windows x64 NSIS 安装包。这是 alpha 版本，请先备份重要录音。后续 `v*` 标签会由同一个发布工作流生成 Windows、Linux 和 macOS 安装包。
 
 首次启动建议：
 
@@ -120,7 +136,7 @@ Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GiB 的 Runtime 不�
 
 ## 从源码构建
 
-受支持的应用源码位于 `frontend/`，Windows 构建生成物不会进入 Git。
+受支持的应用源码位于 `frontend/`，构建生成物不会进入 Git。
 
 ```powershell
 Set-Location .\frontend
@@ -128,14 +144,16 @@ pnpm install --frozen-lockfile
 pnpm typecheck
 pnpm test
 pnpm build
-pnpm tauri:build
+pnpm exec tauri build --ci --bundles nsis      # Windows
+# pnpm exec tauri build --ci --bundles appimage # Linux
+# pnpm exec tauri build --ci --bundles dmg      # macOS
 ```
 
-FFmpeg 会在构建时获取并进行 SHA-256 校验，不会把大体积第三方二进制提交进 Git。
+Linux 构建需要 Tauri 的 WebKitGTK 开发依赖，macOS 构建需要 Xcode Command Line Tools；具体依赖见 [Tauri prerequisites](https://tauri.app/start/prerequisites/) 和 [平台构建说明](./docs/PLATFORM_BUILD.md)。Windows 构建会在构建时获取并校验 FFmpeg；Linux/macOS 当前使用系统 `ffmpeg`，不会把大体积第三方二进制提交进 Git。
 
 ## 版本状态与许可
 
-`v0.3.0-alpha.1` 是 V3 的第一个公开里程碑，不是最终稳定版。核心本地工作流、引导、硬件路由、CPU 路径和代表性 CUDA 路径已完成；后续重点是公开 CUDA Runtime、干净环境下的 Qwen 安装验证，以及更多 Windows 硬件覆盖。
+`v0.3.0-alpha.1` 是 V3 的第一个公开里程碑，不是最终稳定版。三平台原生构建已纳入 CI；Windows x64 的本地工作流、引导、硬件路由、CPU 路径和代表性 CUDA 路径已完成。Linux/macOS 的本地 ASR 运行时、CUDA Runtime 公共托管和干净环境安装仍需单独验收。
 
 查看 [已知限制](./docs/KNOWN_LIMITATIONS.md)。
 
