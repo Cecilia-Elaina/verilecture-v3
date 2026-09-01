@@ -11,9 +11,21 @@ const releasePlatformsEn = document.querySelector('[data-release-platforms-en]')
 
 const releaseApiUrl = 'https://api.github.com/repos/Cecilia-Elaina/verilecture-v3/releases?per_page=10';
 const fallbackRelease = {
-  tag: 'v0.3.0-alpha.1',
-  assetName: 'VeriLecture_0.3.0-alpha.1_x64-setup.exe',
-  url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.1/VeriLecture_0.3.0-alpha.1_x64-setup.exe',
+  tag: 'v0.3.0-alpha.3',
+  assets: [
+    {
+      name: 'VeriLecture_0.3.0-alpha.3_x64-setup.exe',
+      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.3/VeriLecture_0.3.0-alpha.3_x64-setup.exe',
+    },
+    {
+      name: 'VeriLecture_0.3.0-alpha.3_amd64.AppImage',
+      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.3/VeriLecture_0.3.0-alpha.3_amd64.AppImage',
+    },
+    {
+      name: 'VeriLecture_0.3.0-alpha.3_aarch64.dmg',
+      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.3/VeriLecture_0.3.0-alpha.3_aarch64.dmg',
+    },
+  ],
 };
 
 const languageLabels = {
@@ -174,24 +186,16 @@ async function updateReleaseDownload() {
     const windowsAsset = release.assets.find(isWindowsInstaller);
     if (windowsAsset) setWindowsDownload(windowsAsset, release.tag_name);
   } catch {
-    // The fallback points to the last known published installer.
-    setWindowsDownload(
-      {
-        browser_download_url: fallbackRelease.url,
-        name: fallbackRelease.assetName,
-      },
-      fallbackRelease.tag,
-    );
+    // The fallback points to the last known published release.
+    setPlatformSummary(fallbackRelease);
+    setPlatformDownloads(fallbackRelease);
+    setWindowsDownload(fallbackRelease.assets.find(isWindowsInstaller), fallbackRelease.tag);
   }
 }
 
-setWindowsDownload(
-  {
-    browser_download_url: fallbackRelease.url,
-    name: fallbackRelease.assetName,
-  },
-  fallbackRelease.tag,
-);
+setPlatformSummary(fallbackRelease);
+setPlatformDownloads(fallbackRelease);
+setWindowsDownload(fallbackRelease.assets.find(isWindowsInstaller), fallbackRelease.tag);
 updateReleaseDownload();
 
 languageButton?.addEventListener('click', () => {
