@@ -33,13 +33,13 @@ const languageLabels = {
     html: 'zh-CN',
     button: '切换为英文',
     navigation: '主要导航',
-    title: '课溯 · VeriLecture｜把课堂录音变成可核对的重点',
+    title: '课溯 · VeriLecture｜把课堂录音变成可核对的复习重点',
   },
   en: {
     html: 'en',
     button: 'Switch to Simplified Chinese',
     navigation: 'Primary navigation',
-    title: 'VeriLecture | Trace every key point back to the lecture',
+    title: '课溯 · VeriLecture | Trace every key point back to the lecture',
   },
 };
 
@@ -156,10 +156,12 @@ function setPlatformSummary(release) {
   }
 
   if (releasePlatformsZh) {
-    releasePlatformsZh.textContent = `当前 Release ${release.tag}：${availableZh.join('、') || '暂无安装包'}${pendingZh.length ? `；${pendingZh.join('、')}尚未发布。` : '。'}`;
+    const availableLabelZh = availableZh.join('、');
+    releasePlatformsZh.textContent = `当前 Release ${release.tag}：${availableZh.length ? `${availableLabelZh}桌面包已发布` : '暂无桌面包已发布'}${pendingZh.length ? `；${pendingZh.join('、')}桌面包尚未发布。` : '。'} 本地 ASR 状态按平台分别说明。`;
   }
   if (releasePlatformsEn) {
-    releasePlatformsEn.textContent = `Release ${release.tag}: ${availableEn.join(', ') || 'no installers'} available${pendingEn.length ? `; ${pendingEn.join(' and ')} are not published yet.` : '.'}`;
+    const availableLabelEn = availableEn.join(', ');
+    releasePlatformsEn.textContent = `Release ${release.tag}: ${availableEn.length ? `${availableLabelEn} desktop package${availableEn.length === 1 ? '' : 's'} are published` : 'No desktop packages are published'}${pendingEn.length ? `; ${pendingEn.join(' and ')} packages are not published yet.` : '.'} Native local ASR status is listed by platform.`;
   }
 }
 
@@ -253,37 +255,37 @@ window.addEventListener(
 );
 
 const shots = {
+  'result-concept': {
+    src: './assets/product-result-concept.png',
+    altZh: '课溯结果页概念示意，非实机截图',
+    altEn: 'VeriLecture result-screen concept mockup, not a real capture',
+    count: '01 / 04',
+    captionZh: '概念示意 · 非实机截图；用于解释重点、转写与回听如何连接。',
+    captionEn: 'Concept mockup · not a real capture; it explains how points, transcripts, and playback connect.',
+  },
   audio: {
     src: './assets/product-audio-import.webp',
     altZh: '课溯导入课堂录音界面',
     altEn: 'VeriLecture lecture audio import screen',
-    count: '01 / 04',
+    count: '02 / 04',
     captionZh: '导入时先说明：哪些内容留在本机，哪些步骤需要授权。',
     captionEn: 'Import starts by showing what stays local and which steps need consent.',
   },
-  records: {
-    src: './assets/product-audio-records.webp',
-    altZh: '课溯音频记录界面',
-    altEn: 'VeriLecture audio records screen',
-    count: '02 / 04',
-    captionZh: '每段录音都保留原始文件和派生版本。',
-    captionEn: 'Each recording keeps its source file and derived versions.',
+  settings: {
+    src: './assets/product-settings.png',
+    altZh: '课溯真实模型与硬件设置界面',
+    altEn: 'VeriLecture real model and hardware settings screen',
+    count: '03 / 04',
+    captionZh: '设备、模型与数据边界集中显示；可用路线按硬件条件决定。',
+    captionEn: 'Device, model, and data boundaries stay together; the available route follows the hardware.',
   },
   lexicon: {
     src: './assets/product-lexicon.webp',
     altZh: '课溯专业词库界面',
     altEn: 'VeriLecture course terminology screen',
-    count: '03 / 04',
+    count: '04 / 04',
     captionZh: '教材先在本机解析；专业词汇可用于后续校准。',
     captionEn: 'Course material is parsed locally first; its terms can guide later calibration.',
-  },
-  onboarding: {
-    src: './assets/product-onboarding.webp',
-    altZh: '课溯首次使用音频导入引导',
-    altEn: 'VeriLecture first-run audio import guide',
-    count: '04 / 04',
-    captionZh: '从一段熟悉的录音开始，不必先配置全部选项。',
-    captionEn: 'Start with a familiar recording; you do not need to configure everything first.',
   },
 };
 

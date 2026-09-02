@@ -1,14 +1,14 @@
-# VeriLecture
+# 课溯 · VeriLecture
 
 <div align="center">
 
 **Turn lecture recordings into review points you can check.**
 
-`Trace every key point back to the lecture.`
+*Trace every key point back to the lecture.*
 
 [![Version](https://img.shields.io/badge/version-0.3.0--alpha.4-e56b35?style=flat-square)](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/xiajiadi/verilecture-v3/releases)
-[![Privacy](https://img.shields.io/badge/privacy-local--first-2d8065?style=flat-square)](#privacy-by-design)
+[![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](#platform-status)
+[![Privacy](https://img.shields.io/badge/privacy-local--first-2d8065?style=flat-square)](#privacy-and-data-boundary)
 [![License](https://img.shields.io/badge/license-MIT-5a716b?style=flat-square)](./LICENSE)
 
 <p>
@@ -20,131 +20,164 @@
 <p>
   <a href="https://xiajiadi.github.io/verilecture-v3/">Product website</a>
   &nbsp;·&nbsp;
-  <a href="https://xiajiadi.github.io/verilecture-v3/">产品主页</a>
+  <a href="https://github.com/xiajiadi/verilecture-v3/releases">Downloads and releases</a>
+  &nbsp;·&nbsp;
+  <a href="./docs/KNOWN_LIMITATIONS.md">Known limitations</a>
 </p>
-
-<a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="VeriLecture audio import" width="900" /></a>
-
-<sub>Local-first by design · original audio, raw transcripts, and derived versions stay on your device</sub>
 
 </div>
 
-## What VeriLecture solves
+> **One-line positioning:** A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.
 
-After class, finding the key sentence can take longer than listening again. VeriLecture turns a lecture recording into review points and keeps each point linked to its source. When something needs checking, jump back to the relevant moment in the audio.
+VeriLecture starts with a classroom recording, preserves the source material, organizes the transcript and review points, and gives you a way back to the moment that needs checking.
 
 <p align="center">
-  <a href="./docs/diagrams/evidence-chain-en.svg"><img src="./docs/diagrams/evidence-chain-en.svg" alt="VeriLecture evidence chain flow" width="900" /></a>
+  <a href="./docs/diagrams/evidence-chain-en.svg">
+    <img src="./docs/diagrams/evidence-chain-en.svg" alt="VeriLecture value chain from lecture audio to review points linked back to source audio" width="900" />
+  </a>
 </p>
 
-## How it works
+<p align="center"><sub>The diagram above is a product value-chain illustration, not a result-screen screenshot. The concept comes first below, followed by current real interface captures; it will be replaced after a real transcription and playback trace is accepted.</sub></p>
 
-1. **Import a lecture recording**: WAV, MP3, M4A, MP4, FLAC, and OGG are supported.
-2. **Keep the raw transcript**: use the local path first and save the original text separately.
-3. **Calibrate with course material**: use a textbook and lexicon to check high-risk terms.
-4. **Organize the key points**: keep explicit teacher statements separate from system inference.
-5. **Return to the source**: jump from a point to its timestamp, then export the result if needed.
+## Start with the result
 
-## Core capabilities
+VeriLecture is not built around producing a polished paragraph and asking you to trust it. The useful result keeps a path back to its evidence:
 
-- **Local-first by default**: audio, raw transcripts, and course files stay on the device.
-- **Route by hardware**: the first launch checks CPU, memory, GPU, CUDA, and storage, then recommends an available local transcription tier.
-- **Several local transcription tiers**: Fun-ASR-Nano-2512 for CPU, and Qwen3-ASR-0.6B or Qwen3-ASR-1.7B for CUDA machines.
-- **The source is never overwritten**: corrections, calibration, and user edits create new versioned records with provenance.
-- **Statements stay separate from inference**: explicit exam points, exclusions, repeated emphasis, and system inference remain distinct.
-- **Optional text model**: point generation is a separate step; necessary text is sent to the selected provider only after consent.
+```text
+Lecture recording
+        ↓
+Raw transcript (kept intact)
+        ↓
+Calibrated transcript (derived, optional)
+        ↓
+Review points (timestamps and source segments)
+        ↓
+Return to the source audio
+```
 
-## Platform status
+One review pass can include:
 
-`v0.3.0-alpha.4` publishes Windows, Linux, and macOS desktop packages. The Linux and macOS packages provide the desktop application first; their native local transcription runtimes still need separate validation.
+- **Raw transcript**: produced by the local ASR route and kept as the source record for later calibration or editing.
+- **Review points**: generated by an authorized text service when you choose to use one, with the related transcript segments and timestamps retained.
+- **Playback entry points**: move from a point or transcript line to its timestamp and check whether the organization matches the lecture.
+- **Portable exports**: export Markdown, JSON, or plain text while keeping source and derived versions separate.
 
-| Platform | Package | Current local transcription status |
-| --- | --- | --- |
-| Windows x64 | NSIS | Fun-ASR and CUDA Runtime paths available |
-| Linux x64 | AppImage | Desktop package published; local transcription runtime pending |
-| macOS | DMG | Desktop package published; local transcription runtime pending |
+## Why VeriLecture
 
-## Product preview
+### Traceability
+
+Each point should answer two questions: which transcript segment supports it, and when was that segment spoken? When something needs checking, return to the source audio instead of relying on a conclusion alone.
+
+### Local-first
+
+Audio, raw transcripts, textbook files, and lexicons stay on the device by default. Local transcription does not upload audio. Text models are optional and send necessary content only after you configure a provider and grant consent.
+
+### Source-preserving
+
+Calibration, corrections, and edits create new versions instead of overwriting the original audio or raw transcript. A failed analysis does not replace the source material.
+
+### Hardware-aware
+
+The first-run flow checks CPU, memory, GPU, CUDA, free storage, and model-directory permissions before it recommends a local transcription route. When hardware is not ready, the interface shows why instead of presenting an unavailable model as ready.
+
+## Interface and result path
+
+The first image is an explicitly labelled result-screen concept mockup that explains the information hierarchy and value chain; it is not a real capture. The next three are real application screenshots already in the repository. A real Windows x64 result capture still depends on an accepted transcription, point-generation, and playback trace.
 
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="./docs/screenshots/onboarding-model-selection.png"><img src="./docs/screenshots/readme/onboarding-model-selection.png" alt="Local transcription tier selection" width="100%" /></a>
-<br /><sub><b>01 · Choose a local transcription tier</b><br />Select an available local route for the hardware.</sub>
+<a href="./site/assets/product-result-concept.png"><img src="./site/assets/product-result-concept.png" alt="VeriLecture result-screen concept mockup, not a real capture" width="100%" /></a>
+<br /><sub><b>01 · Result-screen concept (not a real capture)</b><br />Show how points connect to transcript segments, timestamps, and playback; this is not an accepted interface.</sub>
 </td>
 <td width="50%" valign="top">
-<a href="./docs/screenshots/onboarding-text-model.png"><img src="./docs/screenshots/readme/onboarding-text-model.png" alt="Text model configuration" width="100%" /></a>
-<br /><sub><b>02 · Connect a text model</b><br />Configure text organization only when you need it.</sub>
+<a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="VeriLecture real audio import screen" width="100%" /></a>
+<br /><sub><b>02 · Import a lecture recording (real screen)</b><br />See the local ASR, text service, and data boundary before processing.</sub>
 </td>
 </tr>
 <tr>
 <td valign="top">
-<a href="./docs/screenshots/onboarding-import-audio.png"><img src="./docs/screenshots/readme/onboarding-import-audio.png" alt="Import lecture audio" width="100%" /></a>
-<br /><sub><b>03 · Import lecture audio</b><br />WAV, MP3, and M4A are supported directly.</sub>
+<a href="./docs/screenshots/settings-models-and-text.png"><img src="./docs/screenshots/readme/settings-models-and-text.png" alt="VeriLecture real model and hardware settings screen" width="100%" /></a>
+<br /><sub><b>03 · Check device and runtime status (real screen)</b><br />Keep hardware, local transcription, and text-service status together.</sub>
 </td>
 <td valign="top">
-<a href="./docs/screenshots/audio-records-empty.png"><img src="./docs/screenshots/readme/audio-records-empty.png" alt="Empty audio records state" width="100%" /></a>
-<br /><sub><b>04 · View audio records</b><br />Open a record to read the transcript or listen back.</sub>
-</td>
-</tr>
-<tr>
-<td valign="top">
-<a href="./docs/screenshots/settings-models-and-text.png"><img src="./docs/screenshots/readme/settings-models-and-text.png" alt="Models and text settings" width="100%" /></a>
-<br /><sub><b>05 · Check runtime status</b><br />Hardware, local transcription, and text-model status stay together.</sub>
-</td>
-<td valign="top">
-<a href="./docs/screenshots/lexicon-empty-state.png"><img src="./docs/screenshots/readme/lexicon-empty-state.png" alt="Empty course lexicon state" width="100%" /></a>
-<br /><sub><b>06 · Maintain course terms</b><br />Use course vocabulary to calibrate specialized terms.</sub>
-</td>
-</tr>
-<tr>
-<td valign="top">
-<a href="./docs/screenshots/about-and-licenses.png"><img src="./docs/screenshots/readme/about-and-licenses.png" alt="About and third-party licenses" width="100%" /></a>
-<br /><sub><b>07 · Read the licenses</b><br />Third-party components and licenses are listed in the app.</sub>
-</td>
-<td valign="top">
-<a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="Selected lecture audio" width="100%" /></a>
-<br /><sub><b>08 · Return to the source</b><br />Every derived version stays associated with its recording.</sub>
+<a href="./docs/screenshots/lexicon-empty-state.png"><img src="./docs/screenshots/readme/lexicon-empty-state.png" alt="VeriLecture real course lexicon screen" width="100%" /></a>
+<br /><sub><b>04 · Organize course terminology (real screen)</b><br />Keep course vocabulary local before it is used for calibration.</sub>
 </td>
 </tr>
 </table>
 
-## Local transcription tiers
+The concept image is for public narrative and result information hierarchy only; until a real result capture is accepted, it is not evidence of Windows, model, or playback support. See the [result-capture brief](./docs/brand/SCREENSHOT_BRIEF.md) for the real capture requirements.
 
-| Tier | Best for | Acceleration | `v0.3.0-alpha.4` status |
-| --- | --- | --- | --- |
-| **Fun-ASR-Nano-2512** | Machines without a usable NVIDIA CUDA path | CPU | Representative CPU installation and runtime path verified |
-| **Qwen3-ASR-0.6B** | Lower-VRAM CUDA machines | NVIDIA CUDA | Registry and installer path prepared; independent GPU retest deferred |
-| **Qwen3-ASR-1.7B** | Higher-quality local transcription | NVIDIA CUDA | Representative RTX 3060 GPU smoke test passed |
+## Platform status
 
-The Qwen tiers share a CUDA Runtime and ForcedAligner. The approximately 4.6 GB (about 4.3 GiB) Runtime is intentionally excluded from this Release and from Git. Until it is hosted at a stable HTTPS address and marked `published`, the installer keeps the download gated. See [CUDA Runtime publishing](./docs/CUDA_RUNTIME.md) for the release procedure.
+`v0.3.0-alpha.4` publishes desktop packages for Windows, Linux, and macOS. A published desktop package does not mean that native local transcription has been accepted on every platform.
 
-## Privacy by design
+| Platform | Package | Current status |
+| --- | --- | --- |
+| Windows x64 | NSIS | Desktop app, local Fun-ASR route, and representative CUDA path have the corresponding validation |
+| Linux x64 | AppImage | Desktop package published; native local ASR sidecar still pending publication and validation |
+| macOS | DMG | Desktop package published; native local ASR sidecar still pending publication and validation |
 
-- **Audio, source files, and raw transcripts stay on the device by default.**
-- Local transcription does not upload audio.
-- Text-model requests require explicit consent and a user-configured provider.
-- Source excerpts and structured lexicon data are sent only when the matching permission is enabled.
-- Raw material is immutable; edits create new versions with provenance.
+The Qwen3-ASR tiers also require a separately hosted CUDA Runtime. The approximately 4.6 GB (about 4.3 GiB) Runtime is not committed to Git and is not included in this Release. Until a stable HTTPS artifact is published and accepted, the installer keeps that download gated. See [CUDA Runtime publishing](./docs/CUDA_RUNTIME.md).
 
-See [Privacy and Security](./docs/PRIVACY_AND_SECURITY.md), [Model Sources](./docs/MODEL_REGISTRY.md), and [Third-party notices](./THIRD_PARTY_NOTICES.md).
+## Download and first run
 
-## Download and run
+Current public version: [**v0.3.0-alpha.4**](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4)
 
-Download the Windows x64 NSIS installer, Linux x64 AppImage, or macOS DMG from the [V3 pre-release](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4). This is an Alpha build; back up important recordings before installing.
+- [Windows x64 NSIS installer](https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_x64-setup.exe)
+- [Linux x64 AppImage](https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_amd64.AppImage)
+- [macOS DMG](https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_aarch64.dmg)
+- [Release page and SHA256 files](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4)
+
+Verify the SHA256 file that matches the installer before running it. This is an Alpha release for evaluation and feedback; keep backups of important recordings.
 
 On first launch:
 
 1. Read the privacy boundary and choose the consent scope.
 2. Let VeriLecture scan hardware, CUDA, storage, and the model directory.
-3. Install the recommended local transcription tier.
-4. Run a short audio test before importing a full lecture.
+3. Install a local transcription tier that the device can run.
+4. Test a short recording before importing a full lecture.
 
-Choose **Fun-ASR-Nano-2512** when no usable NVIDIA GPU is available. For Qwen, wait for a Release whose notes explicitly state that the CUDA Runtime is publicly hosted.
+Choose **Fun-ASR-Nano-2512** when no usable NVIDIA GPU is available. For Qwen, wait for a Release that explicitly says the CUDA Runtime is publicly hosted and accepted.
+
+## Privacy and data boundary
+
+- Audio, raw transcripts, textbook files, lexicons, and generated results stay on the device by default.
+- Local transcription does not upload audio.
+- Text-model requests require a user-configured provider and explicit consent.
+- Transcript text, structured lexicon data, and limited textbook excerpts have separate permission controls.
+- Raw material is immutable; calibration and edits create new versions with provenance.
+- The project does not use student names, student IDs, national ID numbers, phone numbers, or personal grades as working data.
+
+See [Privacy and Security](./docs/PRIVACY_AND_SECURITY.md), [Model Sources](./docs/MODEL_REGISTRY.md), and [Third-party notices](./THIRD_PARTY_NOTICES.md).
+
+## Known Alpha limits
+
+These limits are part of the current version and should remain visible beside the download action:
+
+- `v0.3.0-alpha.4` is an Alpha release, not a stable release.
+- Linux and macOS currently provide desktop packages; native local ASR sidecars still need separate publication and validation.
+- Qwen3-ASR-0.6B and Qwen3-ASR-1.7B require a compatible NVIDIA CUDA path and a publicly hosted CUDA Runtime.
+- Model weights are downloaded on first use and require a network connection, free disk space, and a complete integrity check.
+- Long audio runs as a bounded local job; the current interface does not expose durable in-job resume.
+- Text-model features are optional and require a configured provider plus per-category consent; broader provider and long-document coverage is still being expanded.
+- The Windows installer is unsigned unless the release environment supplies signing configuration.
+
+Read the full list in [Known Limitations](./docs/KNOWN_LIMITATIONS.md).
+
+## Documentation and contribution
+
+- [Contributing](./CONTRIBUTING.md): local development, tests, screenshots, and the release workflow.
+- [Security and privacy reports](./SECURITY.md): do not put recordings, transcripts, keys, or sensitive vulnerability details in public Issues.
+- [Changelog](./CHANGELOG.md): version history organized around user-visible changes.
+- [Release narrative template](./docs/releases/RELEASE_TEMPLATE.md): keep platform status, checksums, and limitations visible in future releases.
+- [Platform build notes](./docs/PLATFORM_BUILD.md): desktop packaging and platform dependencies.
+- [Model registry](./docs/MODEL_REGISTRY.md): model sources, revisions, and integrity metadata.
 
 ## Build from source
 
-The supported application source lives under `frontend/`; generated build output stays outside Git. Read [writing/STYLE_GUIDE.md](./writing/STYLE_GUIDE.md) before changing user-facing text.
+The supported application source lives under `frontend/`. Full commands, platform dependencies, and pre-release checks are in [CONTRIBUTING.md](./CONTRIBUTING.md). The smallest local check is:
 
 ```powershell
 Set-Location .\frontend
@@ -152,29 +185,24 @@ pnpm install --frozen-lockfile
 pnpm typecheck
 pnpm test
 pnpm build
-pnpm exec tauri build --ci --bundles nsis      # Windows
-# pnpm exec tauri build --ci --config src-tauri/tauri.linux.conf.json --bundles appimage # Linux
-# pnpm exec tauri build --ci --config src-tauri/tauri.macos.conf.json --bundles dmg      # macOS
 ```
 
-Linux builds need Tauri's WebKitGTK development dependencies, and macOS builds need Xcode Command Line Tools; see the [Tauri prerequisites](https://tauri.app/start/prerequisites/) and [platform build notes](./docs/PLATFORM_BUILD.md). Windows fetches and verifies FFmpeg at build time; Linux/macOS currently use a system `ffmpeg` and do not commit a large third-party binary.
+Read [writing/STYLE_GUIDE.md](./writing/STYLE_GUIDE.md) before changing README, website, or other user-facing copy.
 
-## Status and license
+## Project facts
 
-`v0.3.0-alpha.4` is the second public V3 milestone, not a final stable release. Windows, Linux, and macOS desktop packages are produced by the release workflow. The local workflow, onboarding, hardware routing, CPU path, and representative CUDA path are complete on Windows x64; native local transcription runtimes for Linux/macOS, public CUDA Runtime hosting, and clean-machine installation still need separate acceptance.
-
-Read [Known Limitations](./docs/KNOWN_LIMITATIONS.md).
-
-VeriLecture is released under the [MIT License](./LICENSE). Meetily upstream attribution and third-party licenses remain visible in [NOTICE](./NOTICE) and [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).
-
-**Developed by xiajiadi**
+- Product name: **课溯 · VeriLecture**
+- Current public version: `v0.3.0-alpha.4`
+- Application ID: `app.verilecture.desktop`
+- Application source: `frontend/`
+- Product website source: `site/`
+- License: [MIT License](./LICENSE)
+- Upstream attribution and third-party licenses: [NOTICE](./NOTICE), [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)
 
 <div align="center">
 
-<p>
-  <a href="./README.md">简体中文</a>
-  &nbsp;·&nbsp;
-  <strong>English</strong>
-</p>
+**Keep the points reviewable, with a source for each one.**
+
+*Trace every key point back to the lecture.*
 
 </div>

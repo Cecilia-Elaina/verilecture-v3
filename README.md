@@ -4,11 +4,11 @@
 
 **把课堂录音变成可核对的复习重点。**
 
-`Trace every key point back to the lecture.`
+*Trace every key point back to the lecture.*
 
 [![版本](https://img.shields.io/badge/版本-0.3.0--alpha.4-e56b35?style=flat-square)](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4)
-[![平台](https://img.shields.io/badge/平台-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/xiajiadi/verilecture-v3/releases)
-[![隐私](https://img.shields.io/badge/隐私-本地优先-2d8065?style=flat-square)](#隐私设计)
+[![平台](https://img.shields.io/badge/平台-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](#平台状态)
+[![隐私](https://img.shields.io/badge/隐私-本地优先-2d8065?style=flat-square)](#隐私与数据边界)
 [![许可证](https://img.shields.io/badge/许可证-MIT-5a716b?style=flat-square)](./LICENSE)
 
 <p>
@@ -20,131 +20,164 @@
 <p>
   <a href="https://xiajiadi.github.io/verilecture-v3/">产品主页</a>
   &nbsp;·&nbsp;
-  <a href="https://xiajiadi.github.io/verilecture-v3/">Product website</a>
+  <a href="https://github.com/xiajiadi/verilecture-v3/releases">下载与发行版本</a>
+  &nbsp;·&nbsp;
+  <a href="./docs/KNOWN_LIMITATIONS.md">已知限制</a>
 </p>
-
-<a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="课溯音频导入界面" width="900" /></a>
-
-<sub>本地优先 · 原始音频、原始转写和派生版本留在本机</sub>
 
 </div>
 
-## 课溯解决什么问题
+> **一句话定位**：A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.
 
-课后复习时，找到关键原话往往比重新听一遍更难。课溯把课堂录音整理成复习重点，并保留每条重点的来源。需要确认时，可以直接回到对应的课堂原音。
+课溯从一段课堂录音开始，保留原始材料，整理转写和复习重点；需要确认时，回到老师真正讲过的那一刻。
 
 <p align="center">
-  <a href="./docs/diagrams/evidence-chain-zh.svg"><img src="./docs/diagrams/evidence-chain-zh.svg" alt="课溯可回溯证据链流程图" width="900" /></a>
+  <a href="./docs/diagrams/evidence-chain-zh.svg">
+    <img src="./docs/diagrams/evidence-chain-zh.svg" alt="课溯从课堂录音到可回听复习重点的价值链示意图" width="900" />
+  </a>
 </p>
 
-## 工作方式
+<p align="center"><sub>上图是产品价值链示意，不是结果页 UI 截图。下方先展示结果页概念，再展示当前可用的真实界面；真实结果页实景素材待真实转写与回听验收后替换。</sub></p>
 
-1. **导入课堂录音**：支持 WAV、MP3、M4A、MP4、FLAC 和 OGG。
-2. **保留原始转写**：本地优先处理，原始文字单独保存。
-3. **用课程材料校准**：教材和专业词库帮助检查高风险术语。
-4. **整理课堂重点**：老师明确说的内容与系统推测分开呈现。
-5. **回到原音核对**：从重点跳到对应时间点，也可以导出结果。
+## 先看结果
 
-## 主要能力
+课溯关注的不是“生成一段看起来完整的摘要”，而是让复习结果保留可以核对的来处：
 
-- **本地优先**：音频、原始转写和课程文件默认保留在本机。
-- **按设备选择路线**：首次启动检查 CPU、内存、GPU、CUDA 和存储，再推荐可用的本地转写档位。
-- **多档本地转写**：Fun-ASR-Nano-2512 适用于 CPU；Qwen3-ASR-0.6B 和 Qwen3-ASR-1.7B 适用于 CUDA 机器。
-- **原始内容不覆盖**：修订、校准和用户编辑都会生成带来源的新版本。
-- **老师的话与推测分开**：明确考点、不考内容、重复强调和系统推测分别保留。
-- **文本模型可选**：重点整理是独立步骤；只有在授权后，必要文本才会发送到所选服务商。
+```text
+课堂录音
+   ↓
+原始转写（保留，不覆盖）
+   ↓
+校准转写（派生版本，可选）
+   ↓
+复习重点（带时间点与来源片段）
+   ↓
+回到原音核对
+```
 
-## 平台状态
+一次整理可能包含：
 
-`v0.3.0-alpha.4` 已发布 Windows、Linux 和 macOS 桌面安装包。Linux 和 macOS 包先提供桌面应用；原生本地转写运行时仍待单独验证后发布。
+- **原始转写**：由本地 ASR 路线产生，作为后续校准和编辑的源记录。
+- **复习重点**：在文本整理服务获得授权后生成，保留对应的转写片段和时间点。
+- **回听入口**：从重点或转写句子回到对应位置，检查系统整理是否符合课堂原意。
+- **可导出结果**：支持 Markdown、JSON 和纯文本导出；原始内容与派生版本分开保存。
 
-| 平台 | 安装包 | 当前本地转写状态 |
-| --- | --- | --- |
-| Windows x64 | NSIS | Fun-ASR 与 CUDA Runtime 路径可用 |
-| Linux x64 | AppImage | 桌面包已发布；本地转写运行时待发布 |
-| macOS | DMG | 桌面包已发布；本地转写运行时待发布 |
+## 为什么是课溯
 
-## 产品预览
+### Traceability · 可追溯
+
+每条重点都应该能说明“来自哪一段转写、对应哪一个时间点”。如果整理结果需要确认，回到原音，而不是只相信一个结论。
+
+### Local-first · 本地优先
+
+音频、原始转写、教材文件和词库默认留在本机。本地转写不上传音频；文本模型是可选步骤，只有在你配置服务商并明确授权后才会发送必要内容。
+
+### Source-preserving · 保留源记录
+
+校准、修订和编辑会创建新的版本，不覆盖原始音频和原始转写。失败的分析也不会替换源材料。
+
+### Hardware-aware · 按设备选择路线
+
+首次使用会检查 CPU、内存、GPU、CUDA、磁盘空间和模型目录权限，再决定哪些本地转写路线可以安装或运行。硬件不满足时，界面会显示原因，而不是把不可用的模型当成已就绪。
+
+## 界面与结果路径
+
+第一张是明确标注的结果页概念示意，用来解释信息层级和价值链，不是实机截图；后面三张是仓库中已经存在的真实应用截图。真实 Windows x64 结果页仍待转写、重点生成与回听链验收。
 
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="./docs/screenshots/onboarding-model-selection.png"><img src="./docs/screenshots/readme/onboarding-model-selection.png" alt="选择本地转写档位" width="100%" /></a>
-<br /><sub><b>01 · 选择本地转写档位</b><br />根据硬件选择可用的本地路线。</sub>
+<a href="./site/assets/product-result-concept.png"><img src="./site/assets/product-result-concept.png" alt="课溯结果页概念示意，非实机截图" width="100%" /></a>
+<br /><sub><b>01 · 结果页概念示意（非实机截图）</b><br />展示复习重点如何连接转写片段、时间点和回听动作；不代表已验收界面。</sub>
 </td>
 <td width="50%" valign="top">
-<a href="./docs/screenshots/onboarding-text-model.png"><img src="./docs/screenshots/readme/onboarding-text-model.png" alt="配置文本模型" width="100%" /></a>
-<br /><sub><b>02 · 连接文本模型</b><br />只在需要时配置文本整理服务。</sub>
+<a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="课溯真实音频导入界面" width="100%" /></a>
+<br /><sub><b>02 · 导入课堂录音（真实界面）</b><br />显示本地 ASR、文本服务与数据边界，再开始处理。</sub>
 </td>
 </tr>
 <tr>
 <td valign="top">
-<a href="./docs/screenshots/onboarding-import-audio.png"><img src="./docs/screenshots/readme/onboarding-import-audio.png" alt="导入课堂音频" width="100%" /></a>
-<br /><sub><b>03 · 导入课堂音频</b><br />WAV、MP3 和 M4A 都可直接导入。</sub>
+<a href="./docs/screenshots/settings-models-and-text.png"><img src="./docs/screenshots/readme/settings-models-and-text.png" alt="课溯真实模型与硬件设置界面" width="100%" /></a>
+<br /><sub><b>03 · 查看设备与运行状态（真实界面）</b><br />集中查看硬件、本地转写档位和文本服务状态。</sub>
 </td>
 <td valign="top">
-<a href="./docs/screenshots/audio-records-empty.png"><img src="./docs/screenshots/readme/audio-records-empty.png" alt="音频记录空状态" width="100%" /></a>
-<br /><sub><b>04 · 查看音频记录</b><br />从记录进入原始转写和回听。</sub>
-</td>
-</tr>
-<tr>
-<td valign="top">
-<a href="./docs/screenshots/settings-models-and-text.png"><img src="./docs/screenshots/readme/settings-models-and-text.png" alt="模型与文本设置" width="100%" /></a>
-<br /><sub><b>05 · 查看运行状态</b><br />硬件、本地转写和文本模型状态集中显示。</sub>
-</td>
-<td valign="top">
-<a href="./docs/screenshots/lexicon-empty-state.png"><img src="./docs/screenshots/readme/lexicon-empty-state.png" alt="专业词库空状态" width="100%" /></a>
-<br /><sub><b>06 · 维护课程词库</b><br />用课程词汇校准专业术语。</sub>
-</td>
-</tr>
-<tr>
-<td valign="top">
-<a href="./docs/screenshots/about-and-licenses.png"><img src="./docs/screenshots/readme/about-and-licenses.png" alt="关于与第三方许可" width="100%" /></a>
-<br /><sub><b>07 · 查看许可</b><br />第三方组件和许可列在应用中。</sub>
-</td>
-<td valign="top">
-<a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="已选择的中文课堂音频" width="100%" /></a>
-<br /><sub><b>08 · 回到来源</b><br />每个派生版本保留原始录音关联。</sub>
+<a href="./docs/screenshots/lexicon-empty-state.png"><img src="./docs/screenshots/readme/lexicon-empty-state.png" alt="课溯真实课程词库界面" width="100%" /></a>
+<br /><sub><b>04 · 整理课程词库（真实界面）</b><br />教材和专业词汇先在本机整理，再按权限参与校准。</sub>
 </td>
 </tr>
 </table>
 
-## 本地转写档位
+概念图只用于说明公开叙事和结果信息层级；真实结果页截图完成前，不把它当作 Windows、模型或回听能力的验收证据。具体补图要求见 [结果页截图 brief](./docs/brand/SCREENSHOT_BRIEF.md)。
 
-| 档位 | 适用场景 | 加速方式 | `v0.3.0-alpha.4` 状态 |
-| --- | --- | --- | --- |
-| **Fun-ASR-Nano-2512** | 没有可用 NVIDIA CUDA 的机器 | CPU | CPU 安装和运行路径已完成代表性验证 |
-| **Qwen3-ASR-0.6B** | 显存较小的 CUDA 机器 | NVIDIA CUDA | 注册表和安装路径已准备，独立 GPU 复测暂缓 |
-| **Qwen3-ASR-1.7B** | 更高质量的本地转写 | NVIDIA CUDA | 已完成代表性 RTX 3060 GPU 冒烟测试 |
+## 平台状态
 
-Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GB（约 4.3 GiB）的 Runtime 不包含在本次 Release 中，也不会提交进 Git；在它被放置到稳定 HTTPS 地址并标记为 `published` 前，安装器会保持下载门禁。发布方法见 [CUDA Runtime 说明](./docs/CUDA_RUNTIME.md)。
+`v0.3.0-alpha.4` 已发布 Windows、Linux 和 macOS 桌面安装包。桌面包的发布不等于每个平台都已经完成本地转写运行时验收。
 
-## 隐私设计
+| 平台 | 安装包 | 当前状态 |
+| --- | --- | --- |
+| Windows x64 | NSIS | 桌面应用、本地 Fun-ASR 路线和代表性 CUDA 路径已完成相应验证 |
+| Linux x64 | AppImage | 桌面包已发布；原生本地 ASR sidecar 仍待发布与验证 |
+| macOS | DMG | 桌面包已发布；原生本地 ASR sidecar 仍待发布与验证 |
 
-- **音频、源文件和原始转写默认保留在本机。**
-- 本地转写不上传音频。
-- 文本模型请求需要明确授权和用户配置的服务商。
-- 只有在对应权限开启后，源文本片段或结构化词库内容才会发送。
-- 原始材料不可变；编辑会创建带来源的新版本。
+Qwen3-ASR 档位还需要单独托管的 CUDA Runtime。约 4.6 GB（约 4.3 GiB）的 Runtime 不放进 Git，也不包含在当前 Release；在稳定 HTTPS 地址和完整验收完成前，安装器会保持下载门禁。详见 [CUDA Runtime 发布说明](./docs/CUDA_RUNTIME.md)。
 
-详见 [隐私与安全](./docs/PRIVACY_AND_SECURITY.md)、[模型来源](./docs/MODEL_REGISTRY.md) 和 [第三方声明](./THIRD_PARTY_NOTICES.md)。
+## 下载与首次运行
 
-## 下载与运行
+当前公开版本：[**v0.3.0-alpha.4**](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4)
 
-从 [V3 预发布版](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4) 下载 Windows x64 NSIS、Linux x64 AppImage 或 macOS DMG。这是 Alpha 版本，请先备份重要录音。
+- [Windows x64 NSIS 安装包](https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_x64-setup.exe)
+- [Linux x64 AppImage](https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_amd64.AppImage)
+- [macOS DMG](https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_aarch64.dmg)
+- [Release 页面与 SHA256 校验文件](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4)
 
-首次启动：
+安装前请核对与安装包同名的 SHA256 文件。Alpha 版本用于体验和反馈，请先备份重要录音。
 
-1. 阅读隐私边界并确认授权范围。
+首次启动建议按这个顺序：
+
+1. 阅读隐私边界，确认每类数据的授权范围。
 2. 让课溯扫描硬件、CUDA、存储和模型目录。
-3. 安装推荐的本地转写档位。
+3. 安装当前设备可以运行的本地转写档位。
 4. 先用短音频测试，再导入完整课堂录音。
 
-没有可用 NVIDIA GPU 时请选择 **Fun-ASR-Nano-2512**。Qwen 安装请等待 Release 说明明确写出 CUDA Runtime 已公开发布。
+没有可用 NVIDIA GPU 时，优先选择 **Fun-ASR-Nano-2512**。Qwen 档位请等待 Release 明确说明 CUDA Runtime 已公开托管并通过验收。
+
+## 隐私与数据边界
+
+- 音频、原始转写、教材文件、词库和生成结果默认保留在本机。
+- 本地转写不上传音频。
+- 文本模型请求需要用户配置的服务商和明确授权。
+- 转写文本、结构化词库数据和限定的教材片段分别受权限控制。
+- 原始材料不可变；修订、校准和编辑会创建带来源的新版本。
+- 项目不以学生姓名、学号、身份证号、电话号码或个人成绩等身份信息作为工作数据。
+
+详细边界见 [隐私与安全](./docs/PRIVACY_AND_SECURITY.md)、[模型来源](./docs/MODEL_REGISTRY.md) 和 [第三方声明](./THIRD_PARTY_NOTICES.md)。
+
+## 已知 Alpha 限制
+
+这些限制属于当前版本的一部分，不应被下载按钮或平台徽章隐藏：
+
+- `v0.3.0-alpha.4` 仍是 Alpha 版本，不是稳定版。
+- Linux 和 macOS 目前提供桌面应用包；本地 ASR sidecar 仍需单独发布和验证。
+- Qwen3-ASR-0.6B 与 Qwen3-ASR-1.7B 需要兼容的 NVIDIA CUDA 路径和公开托管的 CUDA Runtime。
+- 模型权重首次使用时下载，需要网络、磁盘空间和完整性检查。
+- 长音频按有界本地任务处理，当前界面没有提供持久化的任务内断点续跑。
+- 文本模型能力是可选的，需要用户配置服务商并逐类授权；更广泛的服务商和长文档覆盖仍在扩展。
+- Windows 安装包默认未签名，除非发布环境提供签名配置。
+
+完整列表见 [已知限制](./docs/KNOWN_LIMITATIONS.md)。
+
+## 文档与开源协作
+
+- [贡献指南](./CONTRIBUTING.md)：本地开发、测试、截图和 Release 工作流。
+- [安全与隐私报告](./SECURITY.md)：不要在公开 Issue 中提交录音、转写、密钥或敏感漏洞细节。
+- [版本记录](./CHANGELOG.md)：按用户可感知变化整理的版本历史。
+- [Release 叙事模板](./docs/releases/RELEASE_TEMPLATE.md)：为后续版本保留平台状态、校验和限制说明。
+- [平台构建说明](./docs/PLATFORM_BUILD.md)：桌面打包与平台依赖。
+- [模型注册表](./docs/MODEL_REGISTRY.md)：模型来源、版本和校验信息。
 
 ## 从源码构建
 
-受支持的应用源码位于 `frontend/`，构建生成物不会进入 Git。修改用户可见文字前，请先阅读 [writing/STYLE_GUIDE.md](./writing/STYLE_GUIDE.md)。
+受支持的应用源码位于 `frontend/`。完整命令、平台依赖和发布前检查见 [CONTRIBUTING.md](./CONTRIBUTING.md)。最小本地检查如下：
 
 ```powershell
 Set-Location .\frontend
@@ -152,29 +185,24 @@ pnpm install --frozen-lockfile
 pnpm typecheck
 pnpm test
 pnpm build
-pnpm exec tauri build --ci --bundles nsis      # Windows
-# pnpm exec tauri build --ci --config src-tauri/tauri.linux.conf.json --bundles appimage # Linux
-# pnpm exec tauri build --ci --config src-tauri/tauri.macos.conf.json --bundles dmg      # macOS
 ```
 
-Linux 构建需要 Tauri 的 WebKitGTK 开发依赖，macOS 构建需要 Xcode Command Line Tools；具体依赖见 [Tauri prerequisites](https://tauri.app/start/prerequisites/) 和 [平台构建说明](./docs/PLATFORM_BUILD.md)。Windows 构建会在构建时获取并校验 FFmpeg；Linux/macOS 当前使用系统 `ffmpeg`，不会把大体积第三方二进制提交进 Git。
+修改 README、官网或其他用户可见文字前，请先阅读 [writing/STYLE_GUIDE.md](./writing/STYLE_GUIDE.md)。
 
-## 版本状态与许可
+## 项目事实
 
-`v0.3.0-alpha.4` 是 V3 的第二个公开里程碑，不是最终稳定版。Windows、Linux 和 macOS 桌面安装包已由发布工作流生成。Windows x64 的本地工作流、引导、硬件路由、CPU 路径和代表性 CUDA 路径已完成；Linux/macOS 的本地转写运行时、CUDA Runtime 公共托管和干净环境安装仍需单独验收。
-
-查看 [已知限制](./docs/KNOWN_LIMITATIONS.md)。
-
-课溯采用 [MIT License](./LICENSE)。项目保留 Meetily 上游归属和第三方软件许可，请阅读 [NOTICE](./NOTICE) 与 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
-
-**开发者：xiajiadi**
+- 产品名：**课溯 · VeriLecture**
+- 当前公开版本：`v0.3.0-alpha.4`
+- 应用 ID：`app.verilecture.desktop`
+- 主要源码：`frontend/`
+- 官网源码：`site/`
+- 许可证：[MIT License](./LICENSE)
+- 上游归属与第三方许可：[NOTICE](./NOTICE)、[THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)
 
 <div align="center">
 
-<p>
-  <strong>简体中文</strong>
-  &nbsp;·&nbsp;
-  <a href="./README.en.md">English</a>
-</p>
+**让重点可复习，也让核对有出处。**
+
+*Trace every key point back to the lecture.*
 
 </div>

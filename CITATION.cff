@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "课溯 · VeriLecture"
+message: "If you use 课溯 · VeriLecture in research, teaching practice, or another project, please cite this software."
+type: software
+authors:
+  - name: "xiajiadi"
+repository-code: "https://github.com/xiajiadi/verilecture-v3"
+url: "https://xiajiadi.github.io/verilecture-v3/"
+license: MIT
+version: "0.3.0-alpha.4"
+date-released: 2026-09-02
+keywords:
+  - education technology
+  - lecture transcription
+  - local-first
+  - speech-to-text
+  - study tools
+abstract: >-
+  A local-first desktop app that turns lecture recordings into traceable review
+  points linked back to source audio. It preserves raw transcripts, supports
+  consent-controlled text organization, and routes local transcription by
+  available hardware.

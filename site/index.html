@@ -5,25 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="课溯 VeriLecture 把课堂录音整理成可核对的复习重点；每条重点都能回到原音。Windows、Linux 与 macOS 桌面版，本地优先。"
+      content="课溯 · VeriLecture 是一款本地优先桌面应用：把课堂录音变成可追溯的复习重点，并连回原始音频。Windows、Linux 与 macOS 桌面包已发布；本地 ASR 状态按平台分别说明。"
     />
     <meta name="theme-color" content="#faf6f1" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh_CN" />
-    <meta property="og:title" content="课溯 · VeriLecture｜把课堂录音变成可核对的重点" />
+    <meta property="og:title" content="课溯 · VeriLecture｜把课堂录音变成可核对的复习重点" />
     <meta
       property="og:description"
-      content="导入课堂录音，得到按课程整理的复习重点；需要确认时，回到老师讲过的原音。原始内容保留在本机。"
+      content="A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio. 原始内容默认保留在本机。"
     />
     <meta
       property="og:image"
-      content="https://xiajiadi.github.io/verilecture-v3/assets/product-audio-import.webp"
+      content="https://xiajiadi.github.io/verilecture-v3/assets/social-preview.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="课溯 · VeriLecture：把课堂录音变成可核对的复习重点，并回到原音核对。"
     />
     <meta property="og:url" content="https://xiajiadi.github.io/verilecture-v3/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="课溯 · VeriLecture｜把课堂录音变成可核对的复习重点" />
+    <meta
+      name="twitter:description"
+      content="Trace every key point back to the lecture. A local-first desktop app for source-linked review."
+    />
+    <meta name="twitter:image" content="https://xiajiadi.github.io/verilecture-v3/assets/social-preview.png" />
     <link rel="canonical" href="https://xiajiadi.github.io/verilecture-v3/" />
     <link rel="icon" href="./assets/brand-mark.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
-    <title>课溯 · VeriLecture｜把课堂录音变成可核对的重点</title>
+    <title>课溯 · VeriLecture｜把课堂录音变成可核对的复习重点</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -32,7 +43,7 @@
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Windows 10, Windows 11, Linux, macOS",
         "softwareVersion": "0.3.0-alpha.4",
-        "description": "A local-first desktop app that turns lecture recordings into review points linked to source audio.",
+        "description": "A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.",
         "license": "https://opensource.org/license/mit",
         "codeRepository": "https://github.com/xiajiadi/verilecture-v3"
       }
@@ -49,13 +60,13 @@
         <a
           class="brand"
           href="#top"
-          aria-label="课溯 VeriLecture 首页"
-          data-aria-zh="课溯 VeriLecture 首页"
-          data-aria-en="VeriLecture home"
+          aria-label="课溯 · VeriLecture 首页"
+          data-aria-zh="课溯 · VeriLecture 首页"
+          data-aria-en="课溯 · VeriLecture home"
         >
           <img src="./assets/brand-mark.svg" alt="" width="46" height="46" />
           <span class="brand-type">
-            <strong><span class="lang-zh">课溯</span><span class="lang-en">VeriLecture</span></strong>
+            <strong>课溯 <span aria-hidden="true">·</span> VeriLecture</strong>
             <small>VERILECTURE · LOCAL FIRST</small>
           </span>
         </a>
@@ -101,8 +112,8 @@
           </button>
           <details class="download-picker download-picker-header" data-download-picker>
             <summary class="button button-compact button-earth">
-              <span class="lang-zh">下载 Alpha</span>
-              <span class="lang-en">Download Alpha</span>
+            <span class="lang-zh">下载 Alpha</span>
+            <span class="lang-en">Download Alpha</span>
               <svg class="download-picker-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
             </summary>
             <div class="download-menu">
@@ -180,15 +191,15 @@
           </div>
 
           <h1>
-            <span class="lang-zh">把课堂录音<br /><em>变成可核对的重点</em></span>
-            <span class="lang-en">Turn lecture audio<br /><em>into traceable review points</em></span>
+            <span class="lang-zh">把课堂录音<br /><em>变成可核对的复习重点。</em></span>
+            <span class="lang-en">Turn lecture recordings<br /><em>into review points you can check.</em></span>
           </h1>
           <p class="hero-motto">Trace every key point back to the lecture.</p>
           <p class="hero-lede lang-zh">
-            导入课堂录音，课溯整理复习重点；每条重点都能回到老师讲过的原音。
+            课溯是一款本地优先桌面应用：把课堂录音变成可追溯的复习重点，并连回原始音频。
           </p>
           <p class="hero-lede lang-en">
-            Import a lecture recording. VeriLecture organizes the key points and links each one back to the moment it was said.
+            A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.
           </p>
 
           <div class="hero-actions">
@@ -256,8 +267,8 @@
 
           <p class="alpha-note">
             <span aria-hidden="true">✦</span>
-            <span class="lang-zh">Alpha 版本用于体验和反馈。重要录音请保留备份。</span>
-            <span class="lang-en">This Alpha is for evaluation and feedback. Keep backups of important recordings.</span>
+            <span class="lang-zh">Alpha 版本用于体验和反馈；真实结果页实机截图将在转写与回听链验收后补充。重要录音请保留备份。</span>
+            <span class="lang-en">This Alpha is for evaluation and feedback. A real result-screen capture will follow a real transcription and playback check. Keep backups of important recordings.</span>
           </p>
         </div>
 
@@ -298,32 +309,37 @@
         >
           <div>
             <strong>01</strong>
-            <span class="lang-zh">原始内容留在本机</span>
-            <span class="lang-en">Source stays local</span>
+            <span class="lang-zh">Traceable · 可追溯</span>
+            <span class="lang-en">Traceable</span>
           </div>
           <div>
             <strong>02</strong>
-            <span class="lang-zh">每条重点都有来源</span>
-            <span class="lang-en">Every point has a source</span>
+            <span class="lang-zh">Local-first · 本地优先</span>
+            <span class="lang-en">Local-first</span>
           </div>
           <div>
             <strong>03</strong>
-            <span class="lang-zh">云端步骤先授权</span>
-            <span class="lang-en">Cloud steps ask first</span>
+            <span class="lang-zh">Source-preserving · 保留源记录</span>
+            <span class="lang-en">Source-preserving</span>
+          </div>
+          <div>
+            <strong>04</strong>
+            <span class="lang-zh">Hardware-aware · 按设备选择</span>
+            <span class="lang-en">Hardware-aware</span>
           </div>
         </div>
       </section>
 
-      <section id="why" class="story-section">
-        <div class="section-shell story-grid">
+      <section class="story-section">
+        <div id="why" class="section-shell story-grid">
           <div class="section-heading reveal">
             <div class="section-heading-top">
               <span class="chapter-mark">01</span>
               <p class="section-kicker lang-zh">你遇到的问题</p>
               <p class="section-kicker lang-en">The problem</p>
             </div>
-            <h2 class="lang-zh">课堂讲得太快<br />重点不能只靠记忆</h2>
-            <h2 class="lang-en">When lectures move fast<br />the key points should stay</h2>
+            <h2 class="lang-zh">有录音<br />不等于有证据</h2>
+            <h2 class="lang-en">A recording is not yet<br />a review path</h2>
           </div>
           <div class="story-copy reveal" data-delay="1">
             <p class="story-lede lang-zh">
@@ -333,10 +349,10 @@
               When a teacher reaches a key point or exam cue, the lecture can move faster than notes can keep up. A recording preserves the moment, but noise, distance, and overlapping voices can pull a transcript away from what was actually said.
             </p>
             <p class="story-lede lang-zh">
-              课溯从原始录音开始：本地转写结合课程材料和专业词库整理重点，需要确认时，仍能回到老师当时说的原音。
+              课溯从原始录音开始：本地转写结合课程材料和专业词库整理重点，需要确认时，仍能回到老师当时说的原音。重点不是终点，能核对才有用。
             </p>
             <p class="story-lede lang-en">
-              VeriLecture starts from the original audio: local transcription, course material, and subject vocabulary organize the points while the source remains available for review.
+              VeriLecture starts from the original audio: local transcription, course material, and subject vocabulary organize the points while the source remains available for review. A point is useful when it can still be checked.
             </p>
             <div class="hand-note">
               <svg viewBox="0 0 120 54" aria-hidden="true">
@@ -412,8 +428,8 @@
         </div>
       </section>
 
-      <section id="workflow" class="workflow-section">
-        <div class="section-shell">
+      <section class="workflow-section">
+        <div id="workflow" class="section-shell">
           <div class="workflow-intro reveal">
             <div class="section-heading">
               <div class="section-heading-top">
@@ -421,11 +437,11 @@
                 <p class="section-kicker lang-zh">工作方式</p>
                 <p class="section-kicker lang-en">How it works</p>
               </div>
-              <h2 class="lang-zh">导入录音，得到可核对的重点</h2>
+              <h2 class="lang-zh">导入录音，得到可核对的复习重点</h2>
               <h2 class="lang-en">Import a recording. Get reviewable points.</h2>
             </div>
-            <p class="lang-zh">五步完成一次课堂整理，每一步都留下可回看的记录。</p>
-            <p class="lang-en">Five steps turn a recording into review points, with a record of what happened at each step.</p>
+            <p class="lang-zh">从录音到原音，五步完成一次课堂整理；每一步都留下可回看的记录。</p>
+            <p class="lang-en">Five steps move from recording to source audio, with a record of what happened at each step.</p>
           </div>
 
           <div
@@ -477,23 +493,23 @@
         </div>
       </section>
 
-      <section id="traceability" class="story-section traceability-section">
-        <div class="section-shell story-grid">
+      <section class="story-section traceability-section">
+        <div id="traceability" class="section-shell story-grid">
           <div class="section-heading reveal">
             <div class="section-heading-top">
               <span class="chapter-mark">03</span>
               <p class="section-kicker lang-zh">可追溯性</p>
               <p class="section-kicker lang-en">Traceability</p>
             </div>
-            <h2 class="lang-zh">每条重点<br />都有来处</h2>
-            <h2 class="lang-en">Every point<br />has a source</h2>
+            <h2 class="lang-zh">复习重点不是终点<br />原音才是证据</h2>
+            <h2 class="lang-en">A review point is not the end<br />the source is the evidence</h2>
           </div>
           <div class="story-copy reveal" data-delay="1">
             <p class="story-lede lang-zh">
-              课溯不会只给一个结论。原始内容、修正版本和课堂重点各自留存，点击重点就能回到对应时间点。
+              课溯不会只给一个结论。原始内容、修正版本和课堂重点各自留存；重点带着转写片段和时间点，需要确认时回到对应原音。
             </p>
             <p class="story-lede lang-en">
-              VeriLecture does not leave you with a conclusion alone. The source, revised versions, and review points stay connected, so each point leads back to its timestamp.
+              VeriLecture does not leave you with a conclusion alone. The source, revised versions, and review points stay connected; each point keeps its transcript evidence and timestamp for a return to the audio.
             </p>
             <div class="hand-note">
               <svg viewBox="0 0 120 54" aria-hidden="true">
@@ -505,7 +521,65 @@
             </div>
           </div>
 
-          <article class="principle-card card-source reveal">
+          <figure
+            class="trace-map traceability-map reveal"
+            role="img"
+            aria-label="课溯从课堂录音到复习重点再回到原音的价值链示意"
+            data-aria-zh="课溯从课堂录音到复习重点再回到原音的价值链示意"
+            data-aria-en="VeriLecture value-chain map from lecture recording to review points and back to source audio"
+            data-delay="2"
+          >
+            <div class="trace-map-topline">
+              <span>TRACEABILITY MAP</span>
+              <span class="trace-map-status"><i></i><span class="lang-zh">每一步都留痕</span><span class="lang-en">Evidence stays connected</span></span>
+            </div>
+            <div class="trace-map-heading">
+              <span class="lang-zh">每条重点，<em>都有回去的路。</em></span>
+              <span class="lang-en">Every point has <em>a way back.</em></span>
+            </div>
+            <div class="trace-map-flow">
+              <div class="trace-node trace-node-source">
+                <span class="trace-node-index">01</span>
+                <span class="trace-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16.5V7.8c0-1 .8-1.8 1.8-1.8h5.1c.6 0 1.1.2 1.5.7l1.1 1.2c.4.4.9.6 1.5.6h2.2c1 0 1.8.8 1.8 1.8v6.2c0 1-.8 1.8-1.8 1.8H5.8c-1 0-1.8-.8-1.8-1.8Z" /><path d="M7.5 13.3h5M10 10.8v5" /></svg></span>
+                <strong class="lang-zh">课堂录音</strong>
+                <strong class="lang-en">Lecture audio</strong>
+                <small>00:00:00 → 01:35:27</small>
+              </div>
+              <span class="trace-connector" aria-hidden="true">↘</span>
+              <div class="trace-node trace-node-transcript">
+                <span class="trace-node-index">02</span>
+                <span class="trace-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5.5h14v13H5z" /><path d="M8 9h8M8 12h6M8 15h8" /></svg></span>
+                <strong class="lang-zh">原始转写</strong>
+                <strong class="lang-en">Raw transcript</strong>
+                <small class="lang-zh">保留，不覆盖</small>
+                <small class="lang-en">Kept intact</small>
+              </div>
+              <span class="trace-connector trace-connector-low" aria-hidden="true">↙</span>
+              <div class="trace-node trace-node-point">
+                <span class="trace-node-index">03</span>
+                <span class="trace-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6.5h14v11H5z" /><path d="M8 10h8M8 13h5" /><path d="m15.5 17.5 2 2 3-3" /></svg></span>
+                <strong class="lang-zh">复习重点</strong>
+                <strong class="lang-en">Review point</strong>
+                <small class="lang-zh">带时间点与来源</small>
+                <small class="lang-en">Timestamp + source</small>
+              </div>
+              <span class="trace-connector trace-connector-return" aria-hidden="true">↩</span>
+              <div class="trace-node trace-node-return">
+                <span class="trace-node-index">04</span>
+                <span class="trace-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7" /><path d="M4 5v5h5" /><path d="M12 8v4l2.7 1.7" /></svg></span>
+                <strong class="lang-zh">回到原音</strong>
+                <strong class="lang-en">Back to source</strong>
+                <small>↳ 00:43:12</small>
+              </div>
+            </div>
+            <figcaption>
+              <span class="lang-zh">从源记录到复习重点，再回到对应时间点 · 这是价值链示意，不是结果页截图</span>
+              <span class="lang-en">From source record to review point and back to its timestamp · value-chain illustration, not a result-screen capture</span>
+            </figcaption>
+          </figure>
+
+          <div class="trace-principles" role="list" aria-label="可追溯性原则" data-aria-zh="可追溯性原则" data-aria-en="Traceability principles">
+          <article class="principle-card card-source reveal" role="listitem">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M4 6.5c2.6-1.1 5.3-1 8 .4 2.7-1.4 5.4-1.5 8-.4v12c-2.6-1.1-5.3-1-8 .4-2.7-1.4-5.4-1.5-8-.4v-12Z" /><path d="M12 7v12" /></svg>
             </div>
@@ -516,7 +590,7 @@
             <p class="lang-en">Original audio and raw transcripts stay intact. Corrections and edits create new versions.</p>
           </article>
 
-          <article class="principle-card card-teacher reveal" data-delay="1">
+          <article class="principle-card card-teacher reveal" data-delay="1" role="listitem">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M5 18.5h14M7 15V6.5c3-2 7-2 10 0V15c-3-2-7-2-10 0Z" /><path d="M9.5 9h5M9.5 11.5h3" /></svg>
             </div>
@@ -527,7 +601,7 @@
             <p class="lang-en">Exam points, exclusions, repeated emphasis, and system inference stay separate.</p>
           </article>
 
-          <article class="principle-card card-consent reveal" data-delay="2">
+          <article class="principle-card card-consent reveal" data-delay="2" role="listitem">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.8 8.1 7 10 4.2-1.9 7-5.4 7-10V6l-7-3Z" /><path d="M9 12h6M12 9v6" /></svg>
             </div>
@@ -537,23 +611,39 @@
             <p class="lang-zh">音频、转写或教材片段发送前，会先说明内容和用途。</p>
             <p class="lang-en">Before audio, transcripts, or excerpts leave the device, you see what is sent and why.</p>
           </article>
+          </div>
+
+          <aside class="traceability-disclosure reveal" data-delay="3">
+            <span class="disclosure-mark" aria-hidden="true">↗</span>
+            <div>
+              <strong class="lang-zh">结果页实机截图仍待补</strong>
+              <strong class="lang-en">A real result capture is still pending</strong>
+              <p class="lang-zh">当前页面用流程图解释“重点如何回到原音”，产品实景区另有明确标注的概念结果页。真实转写、重点生成和回听链通过验收后，再替换为实机截图。</p>
+              <p class="lang-en">This page uses a flow illustration to explain how a point returns to audio. The Product tour includes a clearly labelled result concept; it will be replaced by a real capture after transcription, point generation, and playback are accepted together.</p>
+            </div>
+            <a href="https://github.com/xiajiadi/verilecture-v3/blob/main/docs/brand/SCREENSHOT_BRIEF.md">
+              <span class="lang-zh">查看 brief</span>
+              <span class="lang-en">Read the brief</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+            </a>
+          </aside>
         </div>
       </section>
 
-      <section id="showcase" class="showcase-section">
-        <div class="section-shell">
+      <section class="showcase-section">
+        <div id="showcase" class="section-shell">
           <div class="showcase-heading reveal">
             <div class="section-heading">
               <div class="section-heading-top">
                 <span class="chapter-mark">04</span>
-                <p class="section-kicker lang-zh">产品实景</p>
+                <p class="section-kicker lang-zh">产品路径</p>
                 <p class="section-kicker lang-en">Product tour</p>
               </div>
-              <h2 class="lang-zh">打开就知道<br />下一步做什么</h2>
-              <h2 class="lang-en">Open the app<br />and see the next step</h2>
+              <h2 class="lang-zh">先看结果概念<br />再看真实界面</h2>
+              <h2 class="lang-en">Start with the result concept<br />then see real screens</h2>
             </div>
-            <p class="lang-zh">界面只保留当前任务：导入、记录、词库和回听。</p>
-            <p class="lang-en">The interface keeps the current task in view: import, record, organize, and listen back.</p>
+            <p class="lang-zh">第一张是明确标注的结果页概念示意，用来解释信息层级；后面三张是仓库里已经存在的真实界面。真实结果页实机截图仍待转写与回听验收。</p>
+            <p class="lang-en">The first image is a clearly labelled result concept that explains the information hierarchy; the next three are real screens already in the repository. A real result capture still depends on an accepted transcription and playback trace.</p>
           </div>
 
           <div class="showcase-layout reveal" data-delay="1">
@@ -569,9 +659,24 @@
                 role="tab"
                 aria-selected="true"
                 aria-controls="product-stage"
-                data-shot="audio"
+                data-shot="result-concept"
               >
                 <span class="tab-number">01</span>
+                <span>
+                  <strong class="lang-zh">结果页概念示意</strong>
+                  <strong class="lang-en">Result-screen concept</strong>
+                  <small class="lang-zh">非实机截图 · 先看信息层级</small>
+                  <small class="lang-en">Not a real capture · see the hierarchy</small>
+                </span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="product-stage"
+                data-shot="audio"
+              >
+                <span class="tab-number">02</span>
                 <span>
                   <strong class="lang-zh">导入课堂录音</strong>
                   <strong class="lang-en">Import lecture audio</strong>
@@ -584,14 +689,14 @@
                 role="tab"
                 aria-selected="false"
                 aria-controls="product-stage"
-                data-shot="records"
+                data-shot="settings"
               >
-                <span class="tab-number">02</span>
+                <span class="tab-number">03</span>
                 <span>
-                  <strong class="lang-zh">管理音频记录</strong>
-                  <strong class="lang-en">Manage audio records</strong>
-                  <small class="lang-zh">每堂课都有入口</small>
-                  <small class="lang-en">Keep an entry for each lecture</small>
+                  <strong class="lang-zh">查看设备与状态</strong>
+                  <strong class="lang-en">Check device and status</strong>
+                  <small class="lang-zh">按设备选择本地路线</small>
+                  <small class="lang-en">Route by available hardware</small>
                 </span>
               </button>
               <button
@@ -601,27 +706,12 @@
                 aria-controls="product-stage"
                 data-shot="lexicon"
               >
-                <span class="tab-number">03</span>
-                <span>
-                  <strong class="lang-zh">建立专业词库</strong>
-                  <strong class="lang-en">Build course terminology</strong>
-                  <small class="lang-zh">先在本机整理课程词汇</small>
-                  <small class="lang-en">Organize course terms locally</small>
-                </span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected="false"
-                aria-controls="product-stage"
-                data-shot="onboarding"
-              >
                 <span class="tab-number">04</span>
                 <span>
-                  <strong class="lang-zh">从一段音频开始</strong>
-                  <strong class="lang-en">Begin with one recording</strong>
-                  <small class="lang-zh">按步骤完成首次设置</small>
-                  <small class="lang-en">Follow the first-run steps</small>
+                  <strong class="lang-zh">整理课程词库</strong>
+                  <strong class="lang-en">Organize course terms</strong>
+                  <small class="lang-zh">先在本机整理专业词</small>
+                  <small class="lang-en">Keep subject terms local first</small>
                 </span>
               </button>
             </div>
@@ -630,29 +720,34 @@
               <div class="stage-tape tape-left" aria-hidden="true"></div>
               <div class="stage-tape tape-right" aria-hidden="true"></div>
               <img
-                src="./assets/product-audio-import.webp"
-                alt="课溯导入课堂录音界面"
-                data-alt-zh="课溯导入课堂录音界面"
-                data-alt-en="VeriLecture lecture audio import screen"
-                width="1800"
-                height="1200"
+                src="./assets/product-result-concept.png"
+                alt="课溯结果页概念示意，非实机截图"
+                data-alt-zh="课溯结果页概念示意，非实机截图"
+                data-alt-en="VeriLecture result-screen concept mockup, not a real capture"
+                width="1536"
+                height="1024"
                 loading="lazy"
                 data-showcase-image
               />
               <figcaption>
                 <span class="stage-count" data-stage-count>01 / 04</span>
-                <span class="lang-zh" data-caption-zh>导入时先说明：哪些内容留在本机，哪些步骤需要授权。</span>
-                <span class="lang-en" data-caption-en>Import starts by showing what stays local and which steps need consent.</span>
+                <span class="lang-zh" data-caption-zh>概念示意 · 非实机截图；用于解释重点、转写与回听如何连接。</span>
+                <span class="lang-en" data-caption-en>Concept mockup · not a real capture; it explains how points, transcripts, and playback connect.</span>
               </figcaption>
             </figure>
           </div>
+          <p class="showcase-disclosure reveal" data-delay="2">
+            <span class="disclosure-dot" aria-hidden="true"></span>
+            <span class="lang-zh">当前结果图是概念示意（非实机截图）；真实结果页仍待 Windows x64 转写与回听验收。<a href="https://github.com/xiajiadi/verilecture-v3/blob/main/docs/brand/SCREENSHOT_BRIEF.md">查看补图要求</a>。</span>
+            <span class="lang-en">The current result image is a concept mockup, not a real capture; the real result view still needs Windows x64 transcription and playback acceptance. <a href="https://github.com/xiajiadi/verilecture-v3/blob/main/docs/brand/SCREENSHOT_BRIEF.md">Read the capture brief</a>.</span>
+          </p>
         </div>
       </section>
 
-      <section id="privacy" class="privacy-section">
+      <section class="privacy-section">
         <div class="privacy-leaf leaf-a" aria-hidden="true"></div>
         <div class="privacy-leaf leaf-b" aria-hidden="true"></div>
-        <div class="section-shell privacy-grid">
+        <div id="privacy" class="section-shell privacy-grid">
           <div class="privacy-heading reveal">
             <div class="soft-label soft-label-light">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.8 8.1 7 10 4.2-1.9 7-5.4 7-10V6l-7-3Z" /></svg>
@@ -800,15 +895,21 @@
     <footer class="site-footer">
       <div class="section-shell footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="#top">
+          <a
+            class="brand"
+            href="#top"
+            aria-label="课溯 · VeriLecture 首页"
+            data-aria-zh="课溯 · VeriLecture 首页"
+            data-aria-en="课溯 · VeriLecture home"
+          >
             <img src="./assets/brand-mark.svg" alt="" width="46" height="46" />
             <span class="brand-type">
-              <strong><span class="lang-zh">课溯</span><span class="lang-en">VeriLecture</span></strong>
+              <strong>课溯 <span aria-hidden="true">·</span> VeriLecture</strong>
               <small>VERILECTURE · LOCAL FIRST</small>
             </span>
           </a>
-          <p class="lang-zh">让课堂重点可回听，也让每条重点有出处。</p>
-          <p class="lang-en">Keep the points reviewable, with a source for each one.</p>
+          <p class="lang-zh">把课堂录音变成可核对的复习重点，也让每条重点有出处。</p>
+          <p class="lang-en">Turn lecture recordings into review points you can check, with a source for each one.</p>
         </div>
         <div class="footer-nav">
           <div class="footer-links">
