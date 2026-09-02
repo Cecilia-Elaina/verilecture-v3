@@ -11,19 +11,19 @@ const releasePlatformsEn = document.querySelector('[data-release-platforms-en]')
 
 const releaseApiUrl = 'https://api.github.com/repos/Cecilia-Elaina/verilecture-v3/releases?per_page=10';
 const fallbackRelease = {
-  tag: 'v0.3.0-alpha.3',
+  tag: 'v0.3.0-alpha.4',
   assets: [
     {
-      name: 'VeriLecture_0.3.0-alpha.3_x64-setup.exe',
-      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.3/VeriLecture_0.3.0-alpha.3_x64-setup.exe',
+      name: 'VeriLecture_0.3.0-alpha.4_x64-setup.exe',
+      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_x64-setup.exe',
     },
     {
-      name: 'VeriLecture_0.3.0-alpha.3_amd64.AppImage',
-      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.3/VeriLecture_0.3.0-alpha.3_amd64.AppImage',
+      name: 'VeriLecture_0.3.0-alpha.4_amd64.AppImage',
+      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_amd64.AppImage',
     },
     {
-      name: 'VeriLecture_0.3.0-alpha.3_aarch64.dmg',
-      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.3/VeriLecture_0.3.0-alpha.3_aarch64.dmg',
+      name: 'VeriLecture_0.3.0-alpha.4_aarch64.dmg',
+      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_aarch64.dmg',
     },
   ],
 };
