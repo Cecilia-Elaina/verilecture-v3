@@ -2,11 +2,11 @@
 name = "verilecture-v3"
 version = "0.3.0-alpha.4"
 description = "VeriLecture / 课溯 local-first audio study tool"
-authors = ["Cecilia-Elaina"]
+authors = ["xiajiadi"]
 edition = "2021"
 rust-version = "1.77"
 license = "MIT"
-repository = "https://github.com/Cecilia-Elaina/verilecture-v3"
+repository = "https://github.com/xiajiadi/verilecture-v3"
 build = "build.rs"
 
 [lib]

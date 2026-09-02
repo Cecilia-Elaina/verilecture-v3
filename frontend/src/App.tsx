@@ -2573,7 +2573,7 @@ function AboutView({ t }: { t: (key: string) => string }) {
       <div className="about-grid">
         <div>
           <span className="eyebrow">{t("maintainer")}</span>
-          <h2>Cecilia-Elaina</h2>
+          <h2>xiajiadi</h2>
         </div>
         <div>
           <span className="eyebrow">{t("license")}</span>

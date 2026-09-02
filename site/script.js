@@ -9,21 +9,21 @@ const releaseVersionNodes = [...document.querySelectorAll('[data-release-version
 const releasePlatformsZh = document.querySelector('[data-release-platforms-zh]');
 const releasePlatformsEn = document.querySelector('[data-release-platforms-en]');
 
-const releaseApiUrl = 'https://api.github.com/repos/Cecilia-Elaina/verilecture-v3/releases?per_page=10';
+const releaseApiUrl = 'https://api.github.com/repos/xiajiadi/verilecture-v3/releases?per_page=10';
 const fallbackRelease = {
   tag: 'v0.3.0-alpha.4',
   assets: [
     {
       name: 'VeriLecture_0.3.0-alpha.4_x64-setup.exe',
-      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_x64-setup.exe',
+      browser_download_url: 'https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_x64-setup.exe',
     },
     {
       name: 'VeriLecture_0.3.0-alpha.4_amd64.AppImage',
-      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_amd64.AppImage',
+      browser_download_url: 'https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_amd64.AppImage',
     },
     {
       name: 'VeriLecture_0.3.0-alpha.4_aarch64.dmg',
-      browser_download_url: 'https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_aarch64.dmg',
+      browser_download_url: 'https://github.com/xiajiadi/verilecture-v3/releases/download/v0.3.0-alpha.4/VeriLecture_0.3.0-alpha.4_aarch64.dmg',
     },
   ],
 };
@@ -103,6 +103,7 @@ function setWindowsDownload(asset, tag) {
 function setPlatformDownloads(release) {
   const assets = Array.isArray(release.assets) ? release.assets : [];
   const platformMatchers = {
+    windows: isWindowsInstaller,
     linux: isLinuxPackage,
     macos: isMacPackage,
   };
@@ -213,6 +214,27 @@ document.addEventListener('keydown', (event) => {
   menuButton.setAttribute('aria-expanded', 'false');
   navigation?.classList.remove('is-open');
   menuButton.focus();
+});
+
+document.addEventListener('click', (event) => {
+  if (!(event.target instanceof Element)) return;
+  document.querySelectorAll('[data-download-picker][open]').forEach((picker) => {
+    if (!picker.contains(event.target)) picker.removeAttribute('open');
+  });
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return;
+  const openPicker = document.querySelector('[data-download-picker][open]');
+  if (!openPicker) return;
+  openPicker.removeAttribute('open');
+  openPicker.querySelector('summary')?.focus();
+});
+
+document.querySelectorAll('[data-platform-download]').forEach((link) => {
+  link.addEventListener('click', () => {
+    link.closest('[data-download-picker]')?.removeAttribute('open');
+  });
 });
 
 navigation?.querySelectorAll('a').forEach((link) => {

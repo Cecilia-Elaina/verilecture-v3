@@ -6,8 +6,8 @@
 
 `Trace every key point back to the lecture.`
 
-[![Version](https://img.shields.io/badge/version-0.3.0--alpha.4-e56b35?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.4)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases)
+[![Version](https://img.shields.io/badge/version-0.3.0--alpha.4-e56b35?style=flat-square)](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/xiajiadi/verilecture-v3/releases)
 [![Privacy](https://img.shields.io/badge/privacy-local--first-2d8065?style=flat-square)](#privacy-by-design)
 [![License](https://img.shields.io/badge/license-MIT-5a716b?style=flat-square)](./LICENSE)
 
@@ -18,9 +18,9 @@
 </p>
 
 <p>
-  <a href="https://cecilia-elaina.github.io/verilecture-v3/">Product website</a>
+  <a href="https://xiajiadi.github.io/verilecture-v3/">Product website</a>
   &nbsp;·&nbsp;
-  <a href="https://cecilia-elaina.github.io/verilecture-v3/">产品主页</a>
+  <a href="https://xiajiadi.github.io/verilecture-v3/">产品主页</a>
 </p>
 
 <a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="VeriLecture audio import" width="900" /></a>
@@ -131,7 +131,7 @@ See [Privacy and Security](./docs/PRIVACY_AND_SECURITY.md), [Model Sources](./do
 
 ## Download and run
 
-Download the Windows x64 NSIS installer, Linux x64 AppImage, or macOS DMG from the [V3 pre-release](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.4). This is an Alpha build; back up important recordings before installing.
+Download the Windows x64 NSIS installer, Linux x64 AppImage, or macOS DMG from the [V3 pre-release](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4). This is an Alpha build; back up important recordings before installing.
 
 On first launch:
 
@@ -167,7 +167,7 @@ Read [Known Limitations](./docs/KNOWN_LIMITATIONS.md).
 
 VeriLecture is released under the [MIT License](./LICENSE). Meetily upstream attribution and third-party licenses remain visible in [NOTICE](./NOTICE) and [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).
 
-**Developed by Cecilia-Elaina**
+**Developed by xiajiadi**
 
 <div align="center">
 

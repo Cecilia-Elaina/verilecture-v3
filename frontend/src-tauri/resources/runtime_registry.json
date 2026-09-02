@@ -29,7 +29,7 @@
         {
           "id": "github-release",
           "priority": 10,
-          "url": "https://github.com/Cecilia-Elaina/verilecture-v3/releases/download/runtime/verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip",
+          "url": "https://github.com/xiajiadi/verilecture-v3/releases/download/runtime/verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip",
           "status": "pending-publication"
         }
       ]

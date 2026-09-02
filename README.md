@@ -6,8 +6,8 @@
 
 `Trace every key point back to the lecture.`
 
-[![版本](https://img.shields.io/badge/版本-0.3.0--alpha.4-e56b35?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.4)
-[![平台](https://img.shields.io/badge/平台-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/Cecilia-Elaina/verilecture-v3/releases)
+[![版本](https://img.shields.io/badge/版本-0.3.0--alpha.4-e56b35?style=flat-square)](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4)
+[![平台](https://img.shields.io/badge/平台-Windows%20%7C%20Linux%20%7C%20macOS-1f5f4f?style=flat-square)](https://github.com/xiajiadi/verilecture-v3/releases)
 [![隐私](https://img.shields.io/badge/隐私-本地优先-2d8065?style=flat-square)](#隐私设计)
 [![许可证](https://img.shields.io/badge/许可证-MIT-5a716b?style=flat-square)](./LICENSE)
 
@@ -18,9 +18,9 @@
 </p>
 
 <p>
-  <a href="https://cecilia-elaina.github.io/verilecture-v3/">产品主页</a>
+  <a href="https://xiajiadi.github.io/verilecture-v3/">产品主页</a>
   &nbsp;·&nbsp;
-  <a href="https://cecilia-elaina.github.io/verilecture-v3/">Product website</a>
+  <a href="https://xiajiadi.github.io/verilecture-v3/">Product website</a>
 </p>
 
 <a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="课溯音频导入界面" width="900" /></a>
@@ -131,7 +131,7 @@ Qwen 档位共用 CUDA Runtime 与 ForcedAligner。约 4.6 GB（约 4.3 GiB）�
 
 ## 下载与运行
 
-从 [V3 预发布版](https://github.com/Cecilia-Elaina/verilecture-v3/releases/tag/v0.3.0-alpha.4) 下载 Windows x64 NSIS、Linux x64 AppImage 或 macOS DMG。这是 Alpha 版本，请先备份重要录音。
+从 [V3 预发布版](https://github.com/xiajiadi/verilecture-v3/releases/tag/v0.3.0-alpha.4) 下载 Windows x64 NSIS、Linux x64 AppImage 或 macOS DMG。这是 Alpha 版本，请先备份重要录音。
 
 首次启动：
 
@@ -167,7 +167,7 @@ Linux 构建需要 Tauri 的 WebKitGTK 开发依赖，macOS 构建需要 Xcode C
 
 课溯采用 [MIT License](./LICENSE)。项目保留 Meetily 上游归属和第三方软件许可，请阅读 [NOTICE](./NOTICE) 与 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
 
-**开发者：Cecilia-Elaina**
+**开发者：xiajiadi**
 
 <div align="center">
 
