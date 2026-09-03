@@ -27,7 +27,7 @@
 
 </div>
 
-> **一句话定位**：A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.
+> A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.
 
 课溯从课堂录音开始，保留原始材料，整理转写和复习重点；需要确认时，回到对应时间点听原音。
 
@@ -37,7 +37,6 @@
   </a>
 </p>
 
-<p align="center"><sub>上图是产品价值链示意，不是结果页 UI 截图。下方先展示已验收的 Windows x64 结果页，再展示当前可用的真实界面；结果页补充证据来自同一次实机运行。</sub></p>
 
 ## 先看结果
 
