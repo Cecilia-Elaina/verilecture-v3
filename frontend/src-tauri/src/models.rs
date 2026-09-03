@@ -360,7 +360,7 @@ static DEFINITIONS: &[ModelDefinition] = &[
     ModelDefinition {
         id: "qwen3-asr-1.7b",
         name: "Qwen3-ASR-1.7B",
-        description: "高质量本地识别，配套 Qwen3 Forced Aligner 时间戳",
+        description: "本地识别质量更高，提供 Qwen3 Forced Aligner 时间戳",
         runtime: "NVIDIA CUDA",
         runtime_bundle_id: Some(CUDA_RUNTIME_ID),
         requires_cuda: true,
@@ -369,7 +369,7 @@ static DEFINITIONS: &[ModelDefinition] = &[
     ModelDefinition {
         id: "qwen3-asr-0.6b",
         name: "Qwen3-ASR-0.6B",
-        description: "较低显存占用，配套 Qwen3 Forced Aligner 时间戳",
+        description: "显存占用较低，提供 Qwen3 Forced Aligner 时间戳",
         runtime: "NVIDIA CUDA",
         runtime_bundle_id: Some(CUDA_RUNTIME_ID),
         requires_cuda: true,
@@ -378,7 +378,7 @@ static DEFINITIONS: &[ModelDefinition] = &[
     ModelDefinition {
         id: "fun-asr-nano-2512",
         name: "Fun-ASR-Nano-2512",
-        description: "无可用 NVIDIA CUDA 时的 CPU 本地档位；使用 VAD 段级时间范围",
+        description: "没有可用 NVIDIA CUDA 时使用 CPU 本地转写；时间范围按 VAD 语音段记录",
         runtime: "CPU (Windows x64)",
         runtime_bundle_id: None,
         requires_cuda: false,
@@ -765,16 +765,16 @@ fn support_reason(
     if !native_asr_runtime_available() {
         return (
             false,
-            format!("{} 构建暂未包含可用的本地 ASR 运行时", platform_label()),
+            format!("{} 构建暂未提供可用的本地 ASR 运行时", platform_label()),
         );
     }
     let Some(profile) = profile else {
         return (
             definition.id == "fun-asr-nano-2512",
             if definition.id == "fun-asr-nano-2512" {
-                "等待完成硬件扫描后确认 CPU 档位".to_string()
+                "请先完成硬件扫描，再确认 CPU 档位".to_string()
             } else {
-                "等待完成硬件扫描".to_string()
+                "请先完成硬件扫描".to_string()
             },
         );
     };
@@ -816,9 +816,9 @@ fn support_reason(
     (
         true,
         if definition.id == "fun-asr-nano-2512" {
-            "支持 CPU 推理；速度通常较慢".to_string()
+            "支持 CPU 推理，速度通常较慢".to_string()
         } else {
-            "满足静态硬件条件，安装时仍需通过真实模型 Smoke Test".to_string()
+            "静态硬件条件满足；安装时仍需通过模型 Smoke Test".to_string()
         },
     )
 }

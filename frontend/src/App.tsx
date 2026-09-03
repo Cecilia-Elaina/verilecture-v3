@@ -168,12 +168,12 @@ function analysisErrorMessage(
   return t(messages[errorCode(error)] ?? "analysisFailed");
 }
 
-function demoHardware(): HardwareProfile {
+function demoHardware(locale: Locale = "zh-CN"): HardwareProfile {
   return {
     os: "Windows 10/11",
     osVersion: "Windows 10/11 (preview)",
     architecture: "x86_64",
-    cpuName: "Hardware scan required",
+    cpuName: locale === "zh-CN" ? "需先扫描硬件" : "Hardware scan required",
     logicalCores: 8,
     avx2: true,
     totalRamBytes: 16 * 1024 ** 3,
@@ -194,12 +194,15 @@ function demoHardware(): HardwareProfile {
   };
 }
 
-function demoModels(): ModelOption[] {
+function demoModels(locale: Locale = "zh-CN"): ModelOption[] {
+  const isZh = locale === "zh-CN";
   return [
     {
       id: "qwen3-asr-1.7b",
       name: "Qwen3-ASR-1.7B",
-      description: "高质量本地转写，带 Forced Aligner 时间戳",
+      description: isZh
+        ? "本地识别质量更高，提供 Forced Aligner 时间戳"
+        : "Higher-quality local recognition with Forced Aligner timestamps",
       runtime: "NVIDIA CUDA",
       downloadBytes: 6_543_068_817,
       diskBytes: 7_500_000_000,
@@ -208,12 +211,14 @@ function demoModels(): ModelOption[] {
       status: "not_installed",
       supported: false,
       recommended: false,
-      reason: "等待真实硬件扫描",
+      reason: isZh ? "请先完成硬件扫描" : "Scan hardware first",
     },
     {
       id: "qwen3-asr-0.6b",
       name: "Qwen3-ASR-0.6B",
-      description: "较低显存占用，带 Forced Aligner 时间戳",
+      description: isZh
+        ? "显存占用较低，提供 Forced Aligner 时间戳"
+        : "Lower VRAM use with Forced Aligner timestamps",
       runtime: "NVIDIA CUDA",
       downloadBytes: 3_720_574_187,
       diskBytes: 4_300_000_000,
@@ -222,12 +227,14 @@ function demoModels(): ModelOption[] {
       status: "not_installed",
       supported: false,
       recommended: false,
-      reason: "等待真实硬件扫描",
+      reason: isZh ? "请先完成硬件扫描" : "Scan hardware first",
     },
     {
       id: "fun-asr-nano-2512",
       name: "Fun-ASR-Nano-2512",
-      description: "没有可用 NVIDIA CUDA 时使用的 CPU 转写档位",
+      description: isZh
+        ? "没有可用 NVIDIA CUDA 时使用 CPU 本地转写"
+        : "CPU local transcription for machines without usable NVIDIA CUDA",
       runtime: "CPU",
       downloadBytes: 1_280_490_277,
       diskBytes: 1_600_000_000,
@@ -236,7 +243,9 @@ function demoModels(): ModelOption[] {
       status: "not_installed",
       supported: true,
       recommended: true,
-      reason: "支持 CPU 转写；速度通常较慢",
+      reason: isZh
+        ? "支持 CPU 转写，速度通常较慢"
+        : "CPU transcription is supported but usually slower",
     },
   ];
 }
@@ -408,8 +417,8 @@ function makeDemoRecord(
       id: "demo-point-2",
       chapterId: null,
       chapterTitle: "未匹配章节",
-      title: "运输层的核心任务",
-      detail: "掌握端到端可靠传输、流量控制和拥塞控制在运输层中的作用。",
+      title: "运输层的职责",
+      detail: "掌握端到端可靠传输、流量控制和拥塞控制的作用。",
       segmentIds: ["demo-segment-2"],
       startMs: 8200,
       endMs: 16400,
@@ -2767,8 +2776,8 @@ function OnboardingModal({
       setStep(2);
     } catch {
       if (!isTauri) {
-        const hardware = demoHardware();
-        const models = demoModels();
+        const hardware = demoHardware(locale);
+        const models = demoModels(locale);
         setSnapshot((current) => ({ ...current, hardware, models }));
         setSelectedModel(models.find((model) => model.supported)?.id ?? null);
         setStep(2);
