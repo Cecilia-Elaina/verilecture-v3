@@ -110,7 +110,7 @@
 - [转写文本与原始转写](./docs/screenshots/result-transcript-source.png)：同一条记录的转写视图与原音控制。<br />
 - [重点与回听时间点](./docs/screenshots/result-points-trace.png)：重点列表、来源时间点和回听入口。<br />
 
-以上结果页证据仅覆盖 Windows x64 当前运行路径，不代表 Linux/macOS 已完成相同的本地转写验收。原概念图仍保留在 `site/assets/product-result-concept.png` 作为设计参考，不再作为产品主展示或运行证据。
+
 
 ## 平台状态
 
