@@ -87,21 +87,21 @@
 <tr>
 <td width="50%" valign="top">
 <a href="./docs/screenshots/result-points-trace.png"><img src="./docs/screenshots/result-points-trace.png" alt="课溯 Windows x64 实机重点与回听界面" width="100%" /></a>
-<br /><sub><b>01 · 重点与回听（Windows x64 实机）</b><br />复习重点保留来源时间点，并可回到原音核对。</sub>
+<br /><sub><b>01 · 重点与回听</b><br />复习重点保留来源时间点，并可回到原音核对。</sub>
 </td>
 <td width="50%" valign="top">
 <a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="课溯真实音频导入界面" width="100%" /></a>
-<br /><sub><b>02 · 导入课堂录音（真实界面）</b><br />显示本地 ASR、文本服务与数据边界，再开始处理。</sub>
+<br /><sub><b>02 · 导入课堂录音</b><br />显示本地 ASR、文本服务与数据边界，再开始处理。</sub>
 </td>
 </tr>
 <tr>
 <td valign="top">
 <a href="./docs/screenshots/settings-models-and-text.png"><img src="./docs/screenshots/readme/settings-models-and-text.png" alt="课溯真实模型与硬件设置界面" width="100%" /></a>
-<br /><sub><b>03 · 查看设备与运行状态（真实界面）</b><br />集中查看硬件、本地转写档位和文本服务状态。</sub>
+<br /><sub><b>03 · 查看设备与运行状态</b><br />集中查看硬件、本地转写档位和文本服务状态。</sub>
 </td>
 <td valign="top">
 <a href="./docs/screenshots/lexicon-empty-state.png"><img src="./docs/screenshots/readme/lexicon-empty-state.png" alt="课溯真实课程词库界面" width="100%" /></a>
-<br /><sub><b>04 · 整理课程词库（真实界面）</b><br />教材和专业词汇先在本机整理，再按权限参与校准。</sub>
+<br /><sub><b>04 · 整理课程词库</b><br />教材和专业词汇先在本机整理，再按权限参与校准。</sub>
 </td>
 </tr>
 </table>
