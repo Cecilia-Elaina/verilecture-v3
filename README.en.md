@@ -1,4 +1,4 @@
-# 课溯 · VeriLecture
+<h1 align="center">课溯 · VeriLecture</h1>
 
 <div align="center">
 
