@@ -6,8 +6,8 @@ All notable user-facing changes to 课溯 · VeriLecture are recorded here. This
 
 ### Documentation
 
-- Keep the README and product site centered on traceable review points, local-first storage, source preservation, and hardware-aware setup.
-- Add a clearly labelled result-screen concept mockup and capture brief so public visuals do not imply an unverified UI state.
+- Keep the README and product site focused on traceable review points, local-first storage, source preservation, and hardware-aware setup.
+- Keep the concept mockup labelled as a reference and document the accepted Windows x64 result capture.
 
 ## [0.3.0-alpha.4] - 2026-09-02
 

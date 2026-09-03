@@ -33,7 +33,7 @@
 html {
   overflow-x: clip;
   scroll-behavior: smooth;
-  scroll-padding-top: 82px;
+  scroll-padding-top: 94px;
 }
 
 body {
@@ -1759,7 +1759,7 @@ html[lang="en"] .lang-en {
 
 @media (max-width: 860px) {
   html {
-    scroll-padding-top: 74px;
+    scroll-padding-top: 86px;
   }
 
   #privacy {
@@ -2307,11 +2307,21 @@ html[lang="en"] .lang-en {
   padding-left: 16px;
 }
 
+#why > .section-heading {
+  position: relative;
+  top: 30px;
+  left: 26px;
+}
+
+#why .problem-board {
+  margin-top: 18px;
+}
+
 .traceability-map {
   grid-column: 1 / -1;
   width: 100%;
   margin-top: 12px;
-  transform: rotate(-0.35deg);
+  transform: none;
 }
 
 .traceability-map .trace-map-heading {
@@ -2351,10 +2361,6 @@ html[lang="en"] .lang-en {
   height: 45px;
 }
 
-.traceability-section .traceability-disclosure {
-  margin-top: 2px;
-}
-
 .trace-map {
   min-height: 514px;
   padding: 30px 30px 22px;
@@ -2367,7 +2373,7 @@ html[lang="en"] .lang-en {
     radial-gradient(circle at 92% 8%, rgba(239, 221, 202, 0.76) 0 19%, transparent 20%),
     linear-gradient(135deg, #fffdf8 0%, #f7efe6 100%);
   box-shadow: 0 22px 46px rgba(92, 64, 51, 0.15), 0 3px 0 rgba(92, 64, 51, 0.08);
-  transform: rotate(1deg);
+  transform: none;
 }
 
 .trace-map::before {
@@ -2520,12 +2526,35 @@ html[lang="en"] .lang-en {
 }
 
 .trace-connector {
+  position: relative;
   display: grid;
+  min-width: 0;
+  min-height: 28px;
   color: var(--terracotta);
-  font-family: var(--serif);
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 0;
   place-items: center;
+}
+
+.trace-connector::before {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  left: 4px;
+  border-top: 1px solid rgba(216, 109, 59, 0.5);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.trace-connector::after {
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  content: "";
+  background: var(--terracotta);
+  transform: translateY(-50%);
 }
 
 .trace-connector:not(.trace-connector-low):not(.trace-connector-return) {
@@ -2534,12 +2563,38 @@ html[lang="en"] .lang-en {
 
 .trace-connector-low {
   grid-area: connector-low;
-  transform: rotate(11deg);
+}
+
+.trace-connector-low::before {
+  top: 2px;
+  right: auto;
+  bottom: 2px;
+  left: 50%;
+  border-top: 0;
+  border-left: 1px solid rgba(216, 109, 59, 0.5);
+  transform: translateX(-50%);
+}
+
+.trace-connector-low::after {
+  top: auto;
+  right: auto;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .trace-connector-return {
   grid-area: connector-return;
-  transform: rotate(-5deg);
+}
+
+.trace-connector-return::before {
+  right: 4px;
+  left: 4px;
+}
+
+.trace-connector-return::after {
+  right: auto;
+  left: 1px;
 }
 
 .trace-map figcaption {
@@ -2567,48 +2622,6 @@ html[lang="en"] .lang-en {
   line-height: 1.45;
 }
 
-.traceability-disclosure {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 18px;
-  margin-top: 22px;
-  padding: 22px 24px;
-  border: 1px dashed var(--stone-300);
-  border-radius: 22px 36px 24px 31px;
-  background: var(--stone-100);
-}
-
-.disclosure-mark {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px 20px 15px 18px;
-  color: var(--terracotta);
-  background: var(--paper);
-  font-family: var(--serif);
-  font-size: 24px;
-  place-items: center;
-}
-
-.traceability-disclosure strong {
-  display: block;
-  color: var(--earth);
-  font-family: var(--serif);
-  font-size: 18px;
-  line-height: 1.35;
-}
-
-.traceability-disclosure p {
-  max-width: 68ch;
-  margin: 5px 0 0;
-  color: var(--stone-600);
-  font-size: 13px;
-  line-height: 1.75;
-}
-
-.traceability-disclosure > a,
 .showcase-disclosure a {
   color: var(--sage-deep);
   font-size: 12px;
@@ -2616,21 +2629,6 @@ html[lang="en"] .lang-en {
   text-decoration-color: rgba(63, 96, 71, 0.35);
   text-underline-offset: 4px;
   white-space: nowrap;
-}
-
-.traceability-disclosure > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.traceability-disclosure > a svg {
-  width: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 .showcase-disclosure {
@@ -2659,6 +2657,11 @@ html[lang="en"] .lang-en {
 }
 
 @media (max-width: 860px) {
+  #why > .section-heading {
+    top: auto;
+    left: auto;
+  }
+
   .hero-proof {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2667,16 +2670,13 @@ html[lang="en"] .lang-en {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .traceability-disclosure {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .traceability-disclosure > a {
-    grid-column: 2;
-  }
 }
 
 @media (max-width: 620px) {
+  #why .problem-board {
+    margin-top: 6px;
+  }
+
   .site-header .brand-type strong {
     font-size: 16px;
   }
@@ -2766,30 +2766,34 @@ html[lang="en"] .lang-en {
   .trace-connector-low,
   .trace-connector-return {
     min-height: 20px;
-    font-size: 22px;
-    transform: rotate(90deg);
+    font-size: 0;
+  }
+
+  .trace-connector::before,
+  .trace-connector-low::before,
+  .trace-connector-return::before {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    border-top: 0;
+    border-left: 1px solid rgba(216, 109, 59, 0.5);
+    transform: translateX(-50%);
+  }
+
+  .trace-connector::after,
+  .trace-connector-low::after,
+  .trace-connector-return::after {
+    top: auto;
+    right: auto;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .trace-map figcaption {
     margin-top: 13px;
-  }
-
-  .traceability-disclosure {
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 12px;
-    padding: 18px 16px;
-  }
-
-  .traceability-disclosure strong {
-    font-size: 16px;
-  }
-
-  .traceability-disclosure p {
-    font-size: 12px;
-  }
-
-  .traceability-disclosure > a {
-    grid-column: 2;
   }
 
   .showcase-disclosure {
@@ -2801,7 +2805,7 @@ html[lang="en"] .lang-en {
 .traceability-section .traceability-map {
   min-width: 0;
   margin: 12px 0 0;
-  transform: rotate(-0.35deg);
+  transform: none;
 }
 
 @media (max-width: 620px) {

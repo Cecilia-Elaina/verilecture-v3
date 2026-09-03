@@ -13,7 +13,7 @@
 - Long audio is processed as a bounded local job; durable in-job resume is not
   exposed in the current interface.
 - Text-model features are optional and require a user-configured provider plus
-  explicit consent. Broader provider and long-document coverage is still being
-  expanded.
+  explicit consent. Support for more providers and longer documents is not
+  complete.
 - The Windows installer is unsigned unless a signing configuration is supplied
   by the release environment.

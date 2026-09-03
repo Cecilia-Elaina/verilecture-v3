@@ -33,13 +33,13 @@ const languageLabels = {
     html: 'zh-CN',
     button: '切换为英文',
     navigation: '主要导航',
-    title: '课溯 · VeriLecture｜把课堂录音变成可核对的复习重点',
+    title: '课溯 · VeriLecture｜让复习重点回到课堂原音',
   },
   en: {
     html: 'en',
-    button: 'Switch to Simplified Chinese',
+    button: 'Switch to Chinese',
     navigation: 'Primary navigation',
-    title: '课溯 · VeriLecture | Trace every key point back to the lecture',
+    title: '课溯 · VeriLecture | Review points tied to lecture audio',
   },
 };
 
@@ -157,11 +157,23 @@ function setPlatformSummary(release) {
 
   if (releasePlatformsZh) {
     const availableLabelZh = availableZh.join('、');
-    releasePlatformsZh.textContent = `当前 Release ${release.tag}：${availableZh.length ? `${availableLabelZh}桌面包已发布` : '暂无桌面包已发布'}${pendingZh.length ? `；${pendingZh.join('、')}桌面包尚未发布。` : '。'} 本地 ASR 状态按平台分别说明。`;
+    const availableStatusZh = availableZh.length
+      ? `已发布 ${availableLabelZh}。`
+      : '暂无可下载的桌面包。';
+    const pendingStatusZh = pendingZh.length
+      ? `尚未发布 ${pendingZh.join('、')}。`
+      : '';
+    releasePlatformsZh.textContent = [
+      `版本 ${release.tag}：${availableStatusZh}`,
+      pendingStatusZh,
+      '本地 ASR 状态见平台说明。',
+    ]
+      .filter(Boolean)
+      .join('');
   }
   if (releasePlatformsEn) {
     const availableLabelEn = availableEn.join(', ');
-    releasePlatformsEn.textContent = `Release ${release.tag}: ${availableEn.length ? `${availableLabelEn} desktop package${availableEn.length === 1 ? '' : 's'} are published` : 'No desktop packages are published'}${pendingEn.length ? `; ${pendingEn.join(' and ')} packages are not published yet.` : '.'} Native local ASR status is listed by platform.`;
+    releasePlatformsEn.textContent = `Release ${release.tag}: ${availableEn.length ? `${availableLabelEn} package${availableEn.length === 1 ? '' : 's'} available` : 'No desktop package is available'}${pendingEn.length ? `; not published yet: ${pendingEn.join(' and ')}.` : '.'} Local ASR support is shown for each platform.`;
   }
 }
 
@@ -255,37 +267,37 @@ window.addEventListener(
 );
 
 const shots = {
-  'result-concept': {
-    src: './assets/product-result-concept.png',
-    altZh: '课溯结果页概念示意，非实机截图',
-    altEn: 'VeriLecture result-screen concept mockup, not a real capture',
+  'result-points': {
+    src: './assets/product-trace-result.webp',
+    altZh: '课溯 Windows x64 实机结果页：复习重点与回听',
+    altEn: 'VeriLecture Windows x64 result screen with review points and playback',
     count: '01 / 04',
-    captionZh: '概念示意 · 非实机截图；用于解释重点、转写与回听如何连接。',
-    captionEn: 'Concept mockup · not a real capture; it explains how points, transcripts, and playback connect.',
+    captionZh: 'Windows x64 实机运行 · 重点带有来源时间点，可回听原音。',
+    captionEn: 'Windows x64 run · review points include timestamps for playback.',
   },
   audio: {
     src: './assets/product-audio-import.webp',
     altZh: '课溯导入课堂录音界面',
-    altEn: 'VeriLecture lecture audio import screen',
+    altEn: 'VeriLecture screen for importing lecture audio',
     count: '02 / 04',
-    captionZh: '导入时先说明：哪些内容留在本机，哪些步骤需要授权。',
-    captionEn: 'Import starts by showing what stays local and which steps need consent.',
+    captionZh: '导入前先说明哪些内容留在本机，哪些步骤需要授权。',
+    captionEn: 'Before import, the screen shows what stays local and what needs consent.',
   },
   settings: {
     src: './assets/product-settings.png',
-    altZh: '课溯真实模型与硬件设置界面',
-    altEn: 'VeriLecture real model and hardware settings screen',
+    altZh: '课溯模型与硬件设置界面',
+    altEn: 'VeriLecture model and hardware settings screen',
     count: '03 / 04',
-    captionZh: '设备、模型与数据边界集中显示；可用路线按硬件条件决定。',
-    captionEn: 'Device, model, and data boundaries stay together; the available route follows the hardware.',
+    captionZh: '设备、模型和数据边界集中显示；可用路线由硬件条件决定。',
+    captionEn: 'Device, model, and data settings appear together; hardware determines the local route.',
   },
   lexicon: {
     src: './assets/product-lexicon.webp',
     altZh: '课溯专业词库界面',
-    altEn: 'VeriLecture course terminology screen',
+    altEn: 'VeriLecture course terms screen',
     count: '04 / 04',
-    captionZh: '教材先在本机解析；专业词汇可用于后续校准。',
-    captionEn: 'Course material is parsed locally first; its terms can guide later calibration.',
+    captionZh: '教材先在本机解析；专业术语可用于后续校准。',
+    captionEn: 'Course material is parsed locally first; its terms can guide later checks.',
   },
 };
 

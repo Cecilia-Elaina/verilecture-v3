@@ -29,7 +29,7 @@
 
 > **一句话定位**：A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.
 
-课溯从一段课堂录音开始，保留原始材料，整理转写和复习重点；需要确认时，回到老师真正讲过的那一刻。
+课溯从课堂录音开始，保留原始材料，整理转写和复习重点；需要确认时，回到对应时间点听原音。
 
 <p align="center">
   <a href="./docs/diagrams/evidence-chain-zh.svg">
@@ -37,11 +37,11 @@
   </a>
 </p>
 
-<p align="center"><sub>上图是产品价值链示意，不是结果页 UI 截图。下方先展示结果页概念，再展示当前可用的真实界面；真实结果页实景素材待真实转写与回听验收后替换。</sub></p>
+<p align="center"><sub>上图是产品价值链示意，不是结果页 UI 截图。下方先展示已验收的 Windows x64 结果页，再展示当前可用的真实界面；结果页补充证据来自同一次实机运行。</sub></p>
 
 ## 先看结果
 
-课溯关注的不是“生成一段看起来完整的摘要”，而是让复习结果保留可以核对的来处：
+课溯保留复习结果的来源，方便回到原音核对：
 
 ```text
 课堂录音
@@ -55,18 +55,18 @@
 回到原音核对
 ```
 
-一次整理可能包含：
+一次整理可得到：
 
-- **原始转写**：由本地 ASR 路线产生，作为后续校准和编辑的源记录。
-- **复习重点**：在文本整理服务获得授权后生成，保留对应的转写片段和时间点。
-- **回听入口**：从重点或转写句子回到对应位置，检查系统整理是否符合课堂原意。
-- **可导出结果**：支持 Markdown、JSON 和纯文本导出；原始内容与派生版本分开保存。
+- **原始转写**：由本地 ASR 路线产生，供后续校准和编辑使用。
+- **复习重点**：获得授权后由文本整理服务生成，保留对应的转写片段和时间点。
+- **回听入口**：从重点或转写句子回到对应时间点，核对整理结果是否符合课堂原意。
+- **可导出结果**：可导出 Markdown、JSON 和纯文本；源记录与派生版本分开保存。
 
 ## 为什么是课溯
 
 ### Traceability · 可追溯
 
-每条重点都应该能说明“来自哪一段转写、对应哪一个时间点”。如果整理结果需要确认，回到原音，而不是只相信一个结论。
+每条重点都标明来自哪一段转写、对应哪一个时间点。如果整理结果需要确认，回到原音，而不是只相信一个结论。
 
 ### Local-first · 本地优先
 
@@ -82,13 +82,13 @@
 
 ## 界面与结果路径
 
-第一张是明确标注的结果页概念示意，用来解释信息层级和价值链，不是实机截图；后面三张是仓库中已经存在的真实应用截图。真实 Windows x64 结果页仍待转写、重点生成与回听链验收。
+第一张是已经完成 Windows x64 实机验收的结果页，展示重点、来源时间点与回听；后面三张是仓库中已经存在的真实应用截图。同一次运行的转写页也作为结果页补充证据保存。
 
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="./site/assets/product-result-concept.png"><img src="./site/assets/product-result-concept.png" alt="课溯结果页概念示意，非实机截图" width="100%" /></a>
-<br /><sub><b>01 · 结果页概念示意（非实机截图）</b><br />展示复习重点如何连接转写片段、时间点和回听动作；不代表已验收界面。</sub>
+<a href="./docs/screenshots/result-points-trace.png"><img src="./docs/screenshots/result-points-trace.png" alt="课溯 Windows x64 实机重点与回听界面" width="100%" /></a>
+<br /><sub><b>01 · 重点与回听（Windows x64 实机）</b><br />复习重点保留来源时间点，并可回到原音核对。</sub>
 </td>
 <td width="50%" valign="top">
 <a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="课溯真实音频导入界面" width="100%" /></a>
@@ -107,7 +107,11 @@
 </tr>
 </table>
 
-概念图只用于说明公开叙事和结果信息层级；真实结果页截图完成前，不把它当作 Windows、模型或回听能力的验收证据。具体补图要求见 [结果页截图 brief](./docs/brand/SCREENSHOT_BRIEF.md)。
+补充结果页实机证据：<br />
+- [转写文本与原始转写](./docs/screenshots/result-transcript-source.png)：同一条记录的转写视图与原音控制。<br />
+- [重点与回听时间点](./docs/screenshots/result-points-trace.png)：重点列表、来源时间点和回听入口。<br />
+
+以上结果页证据仅覆盖 Windows x64 当前运行路径，不代表 Linux/macOS 已完成相同的本地转写验收。原概念图仍保留在 `site/assets/product-result-concept.png` 作为设计参考，不再作为产品主展示或运行证据。
 
 ## 平台状态
 
@@ -132,7 +136,7 @@ Qwen3-ASR 档位还需要单独托管的 CUDA Runtime。约 4.6 GB（约 4.3 GiB
 
 安装前请核对与安装包同名的 SHA256 文件。Alpha 版本用于体验和反馈，请先备份重要录音。
 
-首次启动建议按这个顺序：
+首次启动可以按以下顺序：
 
 1. 阅读隐私边界，确认每类数据的授权范围。
 2. 让课溯扫描硬件、CUDA、存储和模型目录。
@@ -161,7 +165,7 @@ Qwen3-ASR 档位还需要单独托管的 CUDA Runtime。约 4.6 GB（约 4.3 GiB
 - Qwen3-ASR-0.6B 与 Qwen3-ASR-1.7B 需要兼容的 NVIDIA CUDA 路径和公开托管的 CUDA Runtime。
 - 模型权重首次使用时下载，需要网络、磁盘空间和完整性检查。
 - 长音频按有界本地任务处理，当前界面没有提供持久化的任务内断点续跑。
-- 文本模型能力是可选的，需要用户配置服务商并逐类授权；更广泛的服务商和长文档覆盖仍在扩展。
+- 文本模型能力是可选的，需要用户配置服务商并逐类授权；目前尚未覆盖所有服务商和长文档场景。
 - Windows 安装包默认未签名，除非发布环境提供签名配置。
 
 完整列表见 [已知限制](./docs/KNOWN_LIMITATIONS.md)。
