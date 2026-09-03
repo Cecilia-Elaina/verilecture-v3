@@ -27,7 +27,7 @@
 
 </div>
 
-> **One-line positioning:** A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.
+> A local-first desktop app that turns lecture recordings into traceable review points linked back to source audio.
 
 VeriLecture starts with a classroom recording, preserves the source material, organizes the transcript and review points, and gives you a way back to the timestamp that needs checking.
 
@@ -37,11 +37,7 @@ VeriLecture starts with a classroom recording, preserves the source material, or
   </a>
 </p>
 
-<p align="center"><sub>The diagram above is a product value-chain illustration, not a result-screen screenshot. The accepted Windows x64 result view comes first below, followed by current real interface captures; supporting result evidence comes from the same application run.</sub></p>
-
-## Start with the result
-
-VeriLecture does not ask you to trust a polished paragraph. The useful result keeps a path back to its evidence:
+VeriLecture keeps each review point tied to its source, so you can return to the original audio when you need to check it:
 
 ```text
 Lecture recording
@@ -82,27 +78,25 @@ The first-run flow checks CPU, memory, GPU, CUDA, free storage, and model-direct
 
 ## Interface and result path
 
-The first image is an accepted Windows x64 result capture showing review points, source timestamps, and playback. The next three are real application screenshots already in the repository. The transcript view from the same run is retained as supporting result evidence.
-
 <table>
 <tr>
 <td width="50%" valign="top">
 <a href="./docs/screenshots/result-points-trace.png"><img src="./docs/screenshots/result-points-trace.png" alt="VeriLecture Windows x64 result screen with review points and playback" width="100%" /></a>
-<br /><sub><b>01 · Review points and playback (Windows x64)</b><br />Review points keep source timestamps and return to the original audio.</sub>
+<br /><sub><b>01 · Review points and playback</b><br />Review points keep source timestamps and return to the original audio.</sub>
 </td>
 <td width="50%" valign="top">
 <a href="./docs/screenshots/audio-import-selected.png"><img src="./docs/screenshots/readme/audio-import-selected.png" alt="VeriLecture real audio import screen" width="100%" /></a>
-<br /><sub><b>02 · Import a lecture recording (real screen)</b><br />See the local ASR, text service, and data boundary before processing.</sub>
+<br /><sub><b>02 · Import a lecture recording</b><br />See the local ASR, text service, and data boundary before processing.</sub>
 </td>
 </tr>
 <tr>
 <td valign="top">
 <a href="./docs/screenshots/settings-models-and-text.png"><img src="./docs/screenshots/readme/settings-models-and-text.png" alt="VeriLecture real model and hardware settings screen" width="100%" /></a>
-<br /><sub><b>03 · Check device and runtime status (real screen)</b><br />Keep hardware, local transcription, and text-service status together.</sub>
+<br /><sub><b>03 · Check device and runtime status</b><br />Keep hardware, local transcription, and text-service status together.</sub>
 </td>
 <td valign="top">
 <a href="./docs/screenshots/lexicon-empty-state.png"><img src="./docs/screenshots/readme/lexicon-empty-state.png" alt="VeriLecture real course lexicon screen" width="100%" /></a>
-<br /><sub><b>04 · Organize course terminology (real screen)</b><br />Keep course vocabulary local before it is used for calibration.</sub>
+<br /><sub><b>04 · Organize course terminology</b><br />Keep course vocabulary local before it is used for calibration.</sub>
 </td>
 </tr>
 </table>
@@ -110,8 +104,6 @@ The first image is an accepted Windows x64 result capture showing review points,
 Supporting result captures:<br />
 - [Transcript and raw source](./docs/screenshots/result-transcript-source.png): the transcript view and source-audio control from the same run.<br />
 - [Review points and playback timestamps](./docs/screenshots/result-points-trace.png): review points, source timestamps, and the playback entry point.<br />
-
-This result evidence covers the current Windows x64 path only; it does not mean Linux/macOS local transcription has passed the same acceptance. The original concept image remains at `site/assets/product-result-concept.png` as a design reference, but is no longer the primary product showcase or runtime evidence.
 
 ## Platform status
 
