@@ -115,7 +115,7 @@ Supporting result captures:<br />
 | Linux x64 | AppImage | Desktop package published; native local ASR sidecar still pending publication and validation |
 | macOS | DMG | Desktop package published; native local ASR sidecar still pending publication and validation |
 
-The Qwen3-ASR tiers also require a separately hosted CUDA Runtime. The approximately 4.6 GB (about 4.3 GiB) Runtime is not committed to Git and is not included in this Release. Until a stable HTTPS artifact is published and accepted, the installer keeps that download gated. See [CUDA Runtime publishing](./docs/CUDA_RUNTIME.md).
+The Qwen3-ASR tiers also require a separately hosted CUDA Runtime. The approximately 4.6 GB (about 4.3 GiB) Runtime is not committed to Git and is not included in the desktop Release. The Windows x64 Runtime is published on [Hugging Face](https://huggingface.co/moyuling/verilecture-asr-runtime); the installer checks its size and SHA-256 before downloading and installing it. See [CUDA Runtime publishing](./docs/CUDA_RUNTIME.md).
 
 ## Download and first run
 
@@ -135,7 +135,7 @@ On first launch:
 3. Install a local transcription tier that the device can run.
 4. Test a short recording before importing a full lecture.
 
-Choose **Fun-ASR-Nano-2512** when no usable NVIDIA GPU is available. For Qwen, wait for a Release that explicitly says the CUDA Runtime is publicly hosted and accepted.
+Choose **Fun-ASR-Nano-2512** when no usable NVIDIA GPU is available. On first use, the Qwen tiers download the Windows x64 CUDA Runtime from Hugging Face and verify its integrity before installation.
 
 ## Privacy and data boundary
 
@@ -154,7 +154,7 @@ These limits are part of the current version and should remain visible beside th
 
 - `v0.3.0-alpha.4` is an Alpha release, not a stable release.
 - Linux and macOS currently provide desktop packages; native local ASR sidecars still need separate publication and validation.
-- Qwen3-ASR-0.6B and Qwen3-ASR-1.7B require a compatible NVIDIA CUDA path and a publicly hosted CUDA Runtime.
+- Qwen3-ASR-0.6B and Qwen3-ASR-1.7B require a compatible NVIDIA CUDA path; the Windows x64 CUDA Runtime is downloaded separately from Hugging Face.
 - Model weights are downloaded on first use and require a network connection, free disk space, and a complete integrity check.
 - Long audio runs as a bounded local job; the current interface does not expose durable in-job resume.
 - Text-model features are optional and require a configured provider plus per-category consent; support does not yet cover all providers or long documents.

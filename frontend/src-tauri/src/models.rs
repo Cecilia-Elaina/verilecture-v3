@@ -1989,7 +1989,7 @@ mod tests {
     }
 
     #[test]
-    fn runtime_registry_rejects_pending_publication_sources() {
+    fn runtime_registry_accepts_published_huggingface_source() {
         let registry: RuntimeRegistry =
             serde_json::from_str(EMBEDDED_RUNTIME_REGISTRY).expect("embedded runtime registry");
         validate_runtime_registry(&registry).unwrap();
@@ -1998,10 +1998,12 @@ mod tests {
             .iter()
             .find(|runtime| runtime.id == CUDA_RUNTIME_ID)
             .unwrap();
-        assert_eq!(runtime.status, "pending-publication");
+        assert_eq!(runtime.status, "published");
+        let artifact = published_runtime_artifact(runtime).unwrap();
+        assert_eq!(artifact.urls.len(), 1);
         assert_eq!(
-            published_runtime_artifact(runtime).unwrap_err(),
-            "MODEL_RUNTIME_SOURCE_UNAVAILABLE"
+            artifact.urls[0],
+            "https://huggingface.co/moyuling/verilecture-asr-runtime/resolve/main/verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip"
         );
         assert_eq!(runtime.compressed_bytes, 4_617_121_514);
         assert_eq!(

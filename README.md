@@ -122,7 +122,7 @@
 | Linux x64 | AppImage | 桌面包已发布；原生本地 ASR sidecar 仍待发布与验证 |
 | macOS | DMG | 桌面包已发布；原生本地 ASR sidecar 仍待发布与验证 |
 
-Qwen3-ASR 档位还需要单独托管的 CUDA Runtime。约 4.6 GB（约 4.3 GiB）的 Runtime 不放进 Git，也不包含在当前 Release；在稳定 HTTPS 地址和完整验收完成前，安装器会保持下载门禁。详见 [CUDA Runtime 发布说明](./docs/CUDA_RUNTIME.md)。
+Qwen3-ASR 档位需要单独托管的 CUDA Runtime。约 4.6 GB（约 4.3 GiB）的 Runtime 不放进 Git，也不包含在桌面 Release 中。Windows x64 Runtime 已发布到 [Hugging Face](https://huggingface.co/moyuling/verilecture-asr-runtime)，安装器会先校验文件大小和 SHA-256，再下载并安装。详见 [CUDA Runtime 发布说明](./docs/CUDA_RUNTIME.md)。
 
 ## 下载与首次运行
 
@@ -142,7 +142,7 @@ Qwen3-ASR 档位还需要单独托管的 CUDA Runtime。约 4.6 GB（约 4.3 GiB
 3. 安装当前设备可以运行的本地转写档位。
 4. 先用短音频测试，再导入完整课堂录音。
 
-没有可用 NVIDIA GPU 时，优先选择 **Fun-ASR-Nano-2512**。Qwen 档位请等待 Release 明确说明 CUDA Runtime 已公开托管并通过验收。
+没有可用 NVIDIA GPU 时，优先选择 **Fun-ASR-Nano-2512**。Qwen 档位会在首次使用时从 Hugging Face 下载 Windows x64 CUDA Runtime，并在安装前校验文件完整性。
 
 ## 隐私与数据边界
 
@@ -161,7 +161,7 @@ Qwen3-ASR 档位还需要单独托管的 CUDA Runtime。约 4.6 GB（约 4.3 GiB
 
 - `v0.3.0-alpha.4` 仍是 Alpha 版本，不是稳定版。
 - Linux 和 macOS 目前提供桌面应用包；本地 ASR sidecar 仍需单独发布和验证。
-- Qwen3-ASR-0.6B 与 Qwen3-ASR-1.7B 需要兼容的 NVIDIA CUDA 路径和公开托管的 CUDA Runtime。
+- Qwen3-ASR-0.6B 与 Qwen3-ASR-1.7B 需要兼容的 NVIDIA CUDA 路径；Windows x64 CUDA Runtime 通过 Hugging Face 单独下载。
 - 模型权重首次使用时下载，需要网络、磁盘空间和完整性检查。
 - 长音频按有界本地任务处理，当前界面没有提供持久化的任务内断点续跑。
 - 文本模型能力是可选的，需要用户配置服务商并逐类授权；目前尚未覆盖所有服务商和长文档场景。

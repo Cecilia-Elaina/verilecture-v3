@@ -6,8 +6,8 @@
   macOS packages can build and launch the desktop shell, but local ASR remains
   unavailable until native sidecars are published and tested.
 - Qwen3-ASR-0.6B and Qwen3-ASR-1.7B require a compatible NVIDIA CUDA path and a
-  separately hosted CUDA Runtime. The runtime registry remains gated until its
-  public HTTPS artifact is verified.
+  separately hosted CUDA Runtime. The Windows x64 Runtime is published through
+  Hugging Face and is verified by size and SHA-256 before installation.
 - Model weights are not bundled. First use requires a network connection, free
   disk space, and a complete integrity check.
 - Long audio is processed as a bounded local job; durable in-job resume is not

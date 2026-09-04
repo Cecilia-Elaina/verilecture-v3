@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "registryVersion": "0.3.0-alpha.1",
-  "generatedAt": "2026-08-01",
+  "generatedAt": "2026-09-04",
   "defaultChannel": "alpha",
   "runtimes": [
     {
@@ -24,13 +24,13 @@
         "minVramBytes": 6442450944,
         "minRamBytes": 17179869184
       },
-      "status": "pending-publication",
+      "status": "published",
       "mirrors": [
         {
-          "id": "github-release",
+          "id": "huggingface",
           "priority": 10,
-          "url": "https://github.com/xiajiadi/verilecture-v3/releases/download/runtime/verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip",
-          "status": "pending-publication"
+          "url": "https://huggingface.co/moyuling/verilecture-asr-runtime/resolve/main/verilecture-asr-runtime-cuda-qwen-fun-windows-x64.zip",
+          "status": "published"
         }
       ]
     }

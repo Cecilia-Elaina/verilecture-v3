@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Exercise the real CUDA runtime archive through the local Range server.
 
-The public Registry remains ``pending-publication``. This script is an explicit
-test-only local source override: it reads the Registry metadata, serves the
-already-built archive from localhost, resumes an interrupted download, verifies
-size/SHA-256, performs an atomic staging rename, and runs the real sidecar
-probe. It never changes the production Registry and never contacts GitHub.
+This script is an explicit test-only local source override: it reads the
+Registry metadata, serves the already-built archive from localhost, resumes an
+interrupted download, verifies size/SHA-256, performs an atomic staging rename,
+and runs the real sidecar probe. It never changes the production Registry and
+never contacts a public runtime source.
 """
 
 from __future__ import annotations
@@ -102,8 +102,6 @@ def main() -> int:
     registry_path = Path(__file__).parents[1] / "src-tauri" / "resources" / "runtime_registry.json"
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     runtime = next(item for item in registry["runtimes"] if item["id"] == "cuda-qwen-fun")
-    if runtime["status"] != "pending-publication":
-        raise RuntimeError("the local acceptance must not silently replace a published source")
     if not args.asset.is_file():
         raise FileNotFoundError(args.asset)
 

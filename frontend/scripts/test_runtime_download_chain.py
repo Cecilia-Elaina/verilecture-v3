@@ -64,10 +64,13 @@ def main() -> int:
     registry_path = Path(__file__).parents[1] / "src-tauri" / "resources" / "runtime_registry.json"
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     runtime = next(item for item in registry["runtimes"] if item["id"] == "cuda-qwen-fun")
-    assert runtime["status"] == "pending-publication"
-    assert not any(mirror["status"] == "published" for mirror in runtime["mirrors"])
+    assert runtime["status"] == "published"
+    published_mirrors = [mirror for mirror in runtime["mirrors"] if mirror["status"] == "published"]
+    assert len(published_mirrors) == 1
+    assert published_mirrors[0]["id"] == "huggingface"
+    assert published_mirrors[0]["url"].startswith("https://huggingface.co/")
     print("MOCK_RUNTIME_CHAIN_OK")
-    print("FULL_DOWNLOAD_OK RANGE_OK RESUME_OK SHA_ERROR_OK HTTP_404_OK PENDING_REJECT_OK")
+    print("FULL_DOWNLOAD_OK RANGE_OK RESUME_OK SHA_ERROR_OK HTTP_404_OK HF_SOURCE_OK")
     return 0
 
 
