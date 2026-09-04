@@ -1759,6 +1759,7 @@ html[lang="en"] .lang-en {
 
 @media (max-width: 860px) {
   html {
+    scroll-behavior: auto;
     scroll-padding-top: 86px;
   }
 

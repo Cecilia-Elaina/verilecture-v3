@@ -71,6 +71,129 @@ try {
 }
 applyLanguage(storedLanguage);
 
+const sameDocumentHashLinks = [...document.querySelectorAll('a[href^="#"]:not(.skip-link)')];
+let pendingHashFrame = 0;
+let instantScrollTimer = 0;
+let previousScrollBehavior = null;
+
+function getLocalHash(link) {
+  const url = new URL(link.href, window.location.href);
+  if (
+    url.origin !== window.location.origin ||
+    url.pathname !== window.location.pathname ||
+    url.search !== window.location.search ||
+    !url.hash
+  ) {
+    return null;
+  }
+
+  return url.hash;
+}
+
+function getHashTarget(hash) {
+  if (!hash) return null;
+
+  try {
+    return document.getElementById(decodeURIComponent(hash.slice(1)));
+  } catch {
+    return null;
+  }
+}
+
+function closeNavigation() {
+  menuButton?.setAttribute('aria-expanded', 'false');
+  navigation?.classList.remove('is-open');
+}
+
+function getAnchorOffset() {
+  const headerHeight = header?.getBoundingClientRect().height || 0;
+  const configuredOffset = Number.parseFloat(getComputedStyle(root).scrollPaddingTop);
+  const safeConfiguredOffset = Number.isFinite(configuredOffset) ? configuredOffset : 0;
+
+  return Math.max(headerHeight + 11, safeConfiguredOffset);
+}
+
+function scrollToPosition(top) {
+  if (!instantScrollTimer) previousScrollBehavior = root.style.scrollBehavior;
+  root.style.scrollBehavior = 'auto';
+  window.scrollTo(0, top);
+  window.clearTimeout(instantScrollTimer);
+  instantScrollTimer = window.setTimeout(() => {
+    root.style.scrollBehavior = previousScrollBehavior || '';
+    previousScrollBehavior = null;
+    instantScrollTimer = 0;
+  }, 160);
+}
+
+function scrollToHash(hash) {
+  const target = getHashTarget(hash);
+  if (!target) return;
+
+  const targetTop = target.getBoundingClientRect().top + window.scrollY;
+  const maxScrollTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const nextScrollTop = Math.min(
+    maxScrollTop,
+    Math.max(0, targetTop - getAnchorOffset()),
+  );
+
+  scrollToPosition(nextScrollTop);
+}
+
+function queueHashNavigation(hash = window.location.hash) {
+  window.cancelAnimationFrame(pendingHashFrame);
+  pendingHashFrame = window.requestAnimationFrame(() => {
+    pendingHashFrame = window.requestAnimationFrame(() => {
+      if (hash) {
+        scrollToHash(hash);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    });
+  });
+}
+
+function applyHashNavigation(hash = window.location.hash) {
+  if (hash) {
+    scrollToHash(hash);
+  } else {
+    scrollToPosition(0);
+  }
+  queueHashNavigation(hash);
+}
+
+sameDocumentHashLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    const hash = getLocalHash(link);
+    if (!hash || !getHashTarget(hash)) return;
+
+    event.preventDefault();
+    closeNavigation();
+    if (window.location.hash !== hash) {
+      window.history.pushState(null, '', hash);
+    }
+    applyHashNavigation(hash);
+  });
+});
+
+try {
+  window.history.scrollRestoration = 'manual';
+} catch {}
+
+const handleHistoryNavigation = () => {
+  closeNavigation();
+  applyHashNavigation(window.location.hash);
+};
+
+window.addEventListener('popstate', handleHistoryNavigation);
+window.addEventListener('hashchange', handleHistoryNavigation);
+window.addEventListener('pageshow', () => {
+  if (window.location.hash) applyHashNavigation(window.location.hash);
+});
+
+if (window.location.hash) applyHashNavigation(window.location.hash);
+
 function isWindowsInstaller(asset) {
   return /\.exe$/i.test(asset?.name || '') && /(setup|installer)/i.test(asset.name);
 }
@@ -225,8 +348,7 @@ menuButton?.addEventListener('click', () => {
 
 document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return;
-  menuButton.setAttribute('aria-expanded', 'false');
-  navigation?.classList.remove('is-open');
+  closeNavigation();
   menuButton.focus();
 });
 
@@ -248,13 +370,6 @@ document.addEventListener('keydown', (event) => {
 document.querySelectorAll('[data-platform-download]').forEach((link) => {
   link.addEventListener('click', () => {
     link.closest('[data-download-picker]')?.removeAttribute('open');
-  });
-});
-
-navigation?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    menuButton?.setAttribute('aria-expanded', 'false');
-    navigation.classList.remove('is-open');
   });
 });
 
