@@ -96,7 +96,7 @@
 </tr>
 <tr>
 <td valign="top">
-<a href="./docs/screenshots/settings-models-and-text.png"><img src="./docs/screenshots/readme/settings-models-and-text.png" alt="课溯真实模型与硬件设置界面" width="100%" /></a>
+<a href="./docs/screenshots/settings-models-and-text.png"><img src="./site/assets/product-settings.png" alt="课溯真实模型与硬件设置界面" width="100%" /></a>
 <br /><sub><b>03 · 查看设备与运行状态</b><br />集中查看硬件、本地转写档位和文本服务状态。</sub>
 </td>
 <td valign="top">

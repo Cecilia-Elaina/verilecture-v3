@@ -91,7 +91,7 @@ The first-run flow checks CPU, memory, GPU, CUDA, free storage, and model-direct
 </tr>
 <tr>
 <td valign="top">
-<a href="./docs/screenshots/settings-models-and-text.png"><img src="./docs/screenshots/readme/settings-models-and-text.png" alt="VeriLecture real model and hardware settings screen" width="100%" /></a>
+<a href="./docs/screenshots/settings-models-and-text.png"><img src="./site/assets/product-settings.png" alt="VeriLecture real model and hardware settings screen" width="100%" /></a>
 <br /><sub><b>03 · Check device and runtime status</b><br />Keep hardware, local transcription, and text-service status together.</sub>
 </td>
 <td valign="top">

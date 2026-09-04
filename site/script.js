@@ -421,6 +421,14 @@ const stageCount = document.querySelector('[data-stage-count]');
 const captionZh = document.querySelector('[data-caption-zh]');
 const captionEn = document.querySelector('[data-caption-en]');
 const shotButtons = [...document.querySelectorAll('[data-shot]')];
+const showcasePreloads = new Map();
+
+Object.values(shots).forEach((shot) => {
+  const image = new Image();
+  image.decoding = 'async';
+  image.src = shot.src;
+  showcasePreloads.set(shot.src, image);
+});
 
 shotButtons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -432,18 +440,16 @@ shotButtons.forEach((button) => {
     });
 
     showcaseImage.classList.add('is-changing');
-    window.setTimeout(() => {
-      const finishChange = () => showcaseImage.classList.remove('is-changing');
-      showcaseImage.addEventListener('load', finishChange, { once: true });
-      showcaseImage.dataset.altZh = shot.altZh;
-      showcaseImage.dataset.altEn = shot.altEn;
-      showcaseImage.alt = root.lang === 'en' ? shot.altEn : shot.altZh;
-      showcaseImage.src = shot.src;
-      if (stageCount) stageCount.textContent = shot.count;
-      if (captionZh) captionZh.textContent = shot.captionZh;
-      if (captionEn) captionEn.textContent = shot.captionEn;
-      if (showcaseImage.complete) finishChange();
-    }, 180);
+    const finishChange = () => showcaseImage.classList.remove('is-changing');
+    showcaseImage.addEventListener('load', finishChange, { once: true });
+    showcaseImage.dataset.altZh = shot.altZh;
+    showcaseImage.dataset.altEn = shot.altEn;
+    showcaseImage.alt = root.lang === 'en' ? shot.altEn : shot.altZh;
+    showcaseImage.src = shot.src;
+    if (stageCount) stageCount.textContent = shot.count;
+    if (captionZh) captionZh.textContent = shot.captionZh;
+    if (captionEn) captionEn.textContent = shot.captionEn;
+    if (showcaseImage.complete) finishChange();
   });
 
   button.addEventListener('keydown', (event) => {

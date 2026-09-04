@@ -43,7 +43,7 @@ The public product site lives under `site/` and is deployed by `.github/workflow
 2. Keep the Chinese slogan as **把课堂录音变成可核对的复习重点。**
 3. Keep the English slogan as **Trace every key point back to the lecture.**
 4. State whether a claim is current, representative, pending, or not yet verified.
-5. Use real screenshots when making evidence claims. If a result screen is not accepted, a clearly labelled concept mockup may explain the intended hierarchy, but it must never be called a capture; update [the screenshot brief](./docs/brand/SCREENSHOT_BRIEF.md).
+5. Use real screenshots when making evidence claims. If a result screen is not accepted, a clearly labelled concept mockup may explain the intended hierarchy, but it must never be called a capture; keep the release, platform, and validation scope with the evidence.
 6. Check both Chinese and English pages at desktop and mobile widths.
 
 For changed prose, use the repository's writing sequence:
